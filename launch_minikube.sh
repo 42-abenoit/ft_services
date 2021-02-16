@@ -33,3 +33,7 @@ fi
 
 minikube start --driver=docker
 kubectl apply -f metallb_setup.yaml
+eval $(minikube docker-env)
+docker build -t nginx-local nginx
+kubectl apply -f nginx.yaml
+kubectl apply -f nginx-svc.yaml

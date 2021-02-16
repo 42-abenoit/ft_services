@@ -1,5 +1,5 @@
 FROM alpine
 
-COPY nginx_setup.sh nginx_setup.sh 
+COPY nginx_config /nginx_config
 
-CMD sh nginx_setup.sh
+CMD sh nginx_config/nginx_setup.sh

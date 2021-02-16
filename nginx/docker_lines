@@ -1,5 +1,5 @@
 docker build -t lol .      
-docker run -d --name xd lol
+docker run -p 80:80 -d --name xd lol
 docker rm xd
 docker kill xd             
 docker exec -i xd sh    

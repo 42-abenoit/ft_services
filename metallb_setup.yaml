@@ -9,4 +9,4 @@ data:
             - name: ip-pools
             protocol: layer2
             addresses:
-                - 192.168.0.1-192.168.0.1
+                - 192.168.52.123-192.168.75.128
