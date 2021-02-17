@@ -13,7 +13,6 @@ set_global_cluster_ip () {
 MINI_IP=$(minikube ip)
 cp -f metallb_config.yml config.yml
 sed -i "s/MINI_IP/$MINI_IP/g" config.yml
-kubectl apply -f config.yml
 #alternate method :
 #kubectl get node -o=custom-columns='DATA:status.addresses[0].address'
 }

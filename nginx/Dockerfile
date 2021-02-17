@@ -5,4 +5,4 @@ RUN sh nginx_config/nginx_setup.sh
 
 ENTRYPOINT nginx -g "daemon off;"
 
-EXPOSE 80
+EXPOSE 80 443
