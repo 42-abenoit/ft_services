@@ -9,9 +9,9 @@ kubectl_latest () {
 curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
 }
 
-set_global_cluser_ip () {
+set_global_cluster_ip () {
 MINI_IP=$(minikube ip)
-cp metallb_config.yml config.yml
+cp -f metallb_config.yml config.yml
 sed -i "s/MINI_IP/$MINI_IP/g" config.yml
 kubectl apply -f config.yml
 #alternate method :
@@ -38,6 +38,7 @@ if [ "$(kubectl get secrets --namespace metallb-system | grep memberlist)" = "" 
 	then
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 fi
+set_global_cluster_ip
 kubectl apply -f config.yml
 }
 

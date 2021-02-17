@@ -11,4 +11,3 @@ mv -f /nginx_config/host_setup /etc/nginx/conf.d/default.conf
 cp -f /nginx_config/index.css /home/www/
 cp -f nginx_config/index.html /home/www/
 nginx
-chmod +x nginx_config/run.sh
