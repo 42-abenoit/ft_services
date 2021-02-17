@@ -1,5 +1,3 @@
-!#/bin/bash
-
 apk update
 apk add nginx
 echo "1234\n1234\n" | adduser -D -g 'www' www
@@ -13,4 +11,4 @@ mv -f /nginx_config/host_setup /etc/nginx/conf.d/default.conf
 cp -f /nginx_config/index.css /home/www/
 cp -f nginx_config/index.html /home/www/
 nginx
-tail -f /dev/null
+chmod +x nginx_config/run.sh

@@ -1,4 +1,3 @@
-
 dl_mini_bin () {
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo mkdir -p /usr/local/bin/
@@ -6,7 +5,48 @@ sudo install minikube /usr/local/bin/
 rm minikube
 }
 
-if [[ -z $(minikube addons list | grep metallb) ]]
+kubectl_latest () {
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+}
+
+set_global_cluser_ip () {
+MINI_IP=$(minikube ip)
+cp metallb_config.yml config.yml
+sed -i "s/MINI_IP/$MINI_IP/g" config.yml
+kubectl apply -f config.yml
+#alternate method :
+#kubectl get node -o=custom-columns='DATA:status.addresses[0].address'
+}
+
+metallb_mini_enable () {
+if [[ -z $(minikube addons list | grep metallb | grep enabled) ]]
+then
+	echo "Enabling Metallb"
+	minikube addons enable metallb
+	kubectl apply -f config.yml
+#	echo "$MINI_IP\n$MINI_IP\n" | minikube addons configure metallb
+fi
+}
+
+metallb_manual_enable () {
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl apply -f - -n kube-system
+if [ "$(kubectl get secrets --namespace metallb-system | grep memberlist)" = "" ]
+	then
+	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+fi
+kubectl apply -f config.yml
+}
+
+clean () {
+minikube delete
+rm -rf ~/.minikube
+}
+
+if [[ $(minikube version | grep version | tr -d ':-z' | tr -d ' ' | tr -d '.') -lt 1100 ]]
 then
 	echo "Current minikube version doesn't support metallb."
 	echo "Updating:"
@@ -25,14 +65,9 @@ then
 	service docker start
 fi
 
-if [[ -z $(minikube addons list | grep metallb | grep enabled) ]]
-then
-	echo "Enabling Metallb"
-	minikube addons enable metallb
-fi
+minikube start --vm-driver=docker
+metallb_manual_enable
 
-minikube start --driver=docker
-kubectl apply -f metallb_setup.yaml
 eval $(minikube docker-env)
 docker build -t nginx-local nginx
 kubectl apply -f nginx.yaml

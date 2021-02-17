@@ -6,7 +6,7 @@ metadata:
 data:
     config: |
         address-pools:
-            - name: ip-pools
+            - name: default
             protocol: layer2
             addresses:
-                - 192.168.52.123-192.168.75.128
+                - MINI_IP-MINI_IP
