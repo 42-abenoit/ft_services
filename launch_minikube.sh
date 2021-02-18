@@ -10,7 +10,14 @@ curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s http
 }
 
 set_global_cluster_ip () {
-MINI_IP=$(minikube ip)
+if [[ $(uname) == "Linux" ]]
+#then
+#	MINI_IP=172.17.0.10
+then
+	MINI_IP=192.168.49.3
+else
+	MINI_IP=$(minikube ip)
+fi
 cp -f metallb_config.yml config.yml
 sed -i "s/MINI_IP/$MINI_IP/g" config.yml
 #alternate method :
