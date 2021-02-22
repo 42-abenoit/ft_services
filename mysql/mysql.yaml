@@ -7,10 +7,10 @@ metadata:
 spec:
   ports:
     - port: 3306
+      name: mysql
   selector:
     app: mysql-app
-    tier: mysql
-  type: ClusterIP
+  clusterIP: None
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -35,14 +35,12 @@ spec:
   selector:
     matchLabels:
       app: mysql-app
-      tier: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
         app: mysql-app
-        tier: mysql
     spec:
       containers:
       - image: mysql-local
@@ -51,7 +49,7 @@ spec:
         env:
         ports:
         - containerPort: 3306
-          name: mysql-container
+          name: mysql
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
