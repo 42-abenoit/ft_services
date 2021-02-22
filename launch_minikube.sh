@@ -18,8 +18,8 @@ then
 else
 	MINI_IP=$(minikube ip)
 fi
-cp -f metallb_config.yml config.yml
-sed -i "s/MINI_IP/$MINI_IP/g" config.yml
+cp -f metallb/metallb_config.yaml metallb/config.yaml
+sed -i "s/MINI_IP/$MINI_IP/g" metallb/config.yaml
 #alternate method :
 #kubectl get node -o=custom-columns='DATA:status.addresses[0].address'
 }
@@ -29,7 +29,7 @@ if [[ -z $(minikube addons list | grep metallb | grep enabled) ]]
 then
 	echo "Enabling Metallb"
 	minikube addons enable metallb
-	kubectl apply -f config.yml
+	kubectl apply -f metallb/config.yaml
 #	echo "$MINI_IP\n$MINI_IP\n" | minikube addons configure metallb
 fi
 }
@@ -45,12 +45,27 @@ if [ "$(kubectl get secrets --namespace metallb-system | grep memberlist)" = "" 
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 fi
 set_global_cluster_ip
-kubectl apply -f config.yml
+kubectl apply -f metallb/config.yaml
 }
 
 clean () {
 minikube delete
 rm -rf ~/.minikube
+}
+
+nginx_setup () {
+docker build -t nginx-local nginx
+kubectl apply -f nginx/nginx.yaml
+}
+
+pma_setup () {
+docker build -t pma-local pma
+kubectl apply -f pma/pma.yaml
+}
+
+mysql_setup () {
+docker build -t mysql-local mysql
+kubectl apply -f mysql/mysql.yaml
 }
 
 if [[ $(minikube version | grep version | tr -d ':-z' | tr -d ' ' | tr -d '.') -lt 1100 ]]
@@ -76,6 +91,6 @@ minikube start --vm-driver=docker
 metallb_manual_enable
 
 eval $(minikube docker-env)
-docker build -t nginx-local nginx
-kubectl apply -f nginx.yaml
-kubectl apply -f nginx-svc.yaml
+#nginx_setup
+pma_setup
+mysql_setup

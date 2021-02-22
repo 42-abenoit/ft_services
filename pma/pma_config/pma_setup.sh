@@ -53,3 +53,6 @@ sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php7/php.i
 sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= ${PHP_CGI_FIX_PATHINFO}|i" /etc/php7/php.ini
 
 mkdir /run/php
+mkdir /mnt/var
+mkdir /mnt/var/lib
+mkdir /mnt/var/lib/mysql
