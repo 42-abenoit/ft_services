@@ -10,20 +10,20 @@ spec:
   selector:
     app: mysql-app
     tier: mysql
-  clusterIP: None
+  type: ClusterIP
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-claim
   labels:
-    app: mysql-appp
+    app: mysql-app
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 20Gi
+      storage: 2Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -59,4 +59,3 @@ spec:
       - name: mysql-persistent-storage
         persistentVolumeClaim:
           claimName: mysql-claim
-
