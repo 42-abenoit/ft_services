@@ -1,18 +1,10 @@
 server {
-    listen 80;
-    listen [::]:80;
+    listen 5000;
 	server_name _;
-	root /home/www;
-	index index.html;
+	root /home/www/phpmyadmin;
+	index index.php;
 
-	location ~ \.php$ {
-			fastcgi_pass		unix:/run/php/php-fpm7.sock;
-			fastcgi_index		index.php;
-        }
-
-	location /phpmyadmin {
-    	index index.php index.html index.htm;
-    	location ~ /phpmyadmin/(.+\.php)$ {
+    	location ~ \.php$ {
         	fastcgi_pass		unix:/run/php/php-fpm7.sock;
         	fastcgi_index		index.php;
 			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;

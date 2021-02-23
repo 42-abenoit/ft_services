@@ -24,8 +24,8 @@ $cfg['Servers'][1]['compress'] = false;
 $cfg['Servers'][1]['AllowNoPassword'] = true;
 
 $cfg['Servers'][1]['port'] = '3306';
-$cfg['Servers'][1]['user'] = 'my-user';
-$cfg['Servers'][1]['password'] = 'my-pass';
+$cfg['Servers'][1]['user'] = 'myuser';
+$cfg['Servers'][1]['password'] = 'mypass';
 
 /* Directories for saving/loading files from server */
 $cfg['UploadDir'] = '';

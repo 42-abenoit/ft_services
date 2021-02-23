@@ -19,3 +19,8 @@ server	{
     location / {
     	}
 	}
+
+	location /phpmyadmin {
+
+		proxy_pass 192.168.49.2:5000;
+		}

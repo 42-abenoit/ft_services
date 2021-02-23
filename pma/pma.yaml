@@ -4,19 +4,18 @@ metadata:
   name: pma-svc
   labels:
     app: pma-app
-#  annotations:
-#    metallb.universe.tf/allow-shared-ip: minikube
+  annotations:
+    metallb.universe.tf/allow-shared-ip: share-ip
 spec:
   selector:
     app: pma-app
   type: LoadBalancer
-#  loadBalancerIP: 192.168.49.4
-  externalTrafficPolicy: Cluster
+  loadBalancerIP: None
   ports:
-  - name: http
+  - name: pma
     protocol: TCP
-    port: 80
-    targetPort: 80
+    port: 5000
+    targetPort: 5000
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -38,5 +37,5 @@ spec:
         image: pma-local
         imagePullPolicy: Never
         ports:
-        - containerPort: 80
-          name: http
+        - containerPort: 5000
+          name: pma

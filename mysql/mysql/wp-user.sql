@@ -1,6 +1,6 @@
-CREATE USER 'my-user'@'%' IDENTIFIED BY 'my-pass';
-GRANT ALL PRIVILEGES ON *.* TO 'my-user'@'%'WITH GRANT OPTION;
+CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
+GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%'WITH GRANT OPTION;
 CREATE DATABASE wordpress;
-CREATE USER 'wp-user'@'%' IDENTIFIED BY 'wp-pass';
-GRANT ALL PRIVILEGES ON wordpress.* TO 'wp-user'@'%' WITH GRANT OPTION;
+CREATE USER 'wpuser'@'%' IDENTIFIED BY 'wppass';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;

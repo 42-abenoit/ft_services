@@ -5,4 +5,4 @@ RUN sh /pma_config/pma_setup.sh
 
 ENTRYPOINT sh pma_config/run.sh
 
-EXPOSE 80
+EXPOSE 5000
