@@ -4,15 +4,11 @@ metadata:
   name: pma-svc
   labels:
     app: pma-app
-  annotations:
-    metallb.universe.tf/allow-shared-ip: share-ip
 spec:
   selector:
     app: pma-app
-  type: LoadBalancer
-  loadBalancerIP: None
   ports:
-  - name: pma
+  - name: pma-port
     protocol: TCP
     port: 5000
     targetPort: 5000
@@ -25,7 +21,6 @@ spec:
   selector:
     matchLabels:
       app: pma-app
-  replicas: 1 # tells deployment to run 1 pods matching the template
   template:
     metadata:
       name: pma-pod
@@ -33,9 +28,9 @@ spec:
         app: pma-app
     spec:
       containers:
-      - name: pma
+      - name: pma-container
         image: pma-local
         imagePullPolicy: Never
         ports:
         - containerPort: 5000
-          name: pma
+          name: pma-port

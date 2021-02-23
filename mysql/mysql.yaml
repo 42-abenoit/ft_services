@@ -8,11 +8,10 @@ spec:
   ports:
     - port: 3306
       targetPort: 3306
-      name: mysql
+      name: mysql-port
       protocol: TCP
   selector:
     app: mysql-app
-  clusterIP: None
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -51,7 +50,7 @@ spec:
         env:
         ports:
         - containerPort: 3306
-          name: mysql
+          name: mysql-port
         volumeMounts:
         - name: mysql-persistent-storage
           mountPath: /var/lib/mysql
