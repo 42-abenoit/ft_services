@@ -23,6 +23,8 @@ $cfg['Servers'][1]['host'] = 'mysql-svc';
 $cfg['Servers'][1]['compress'] = false;
 $cfg['Servers'][1]['AllowNoPassword'] = true;
 
+
+
 $cfg['Servers'][1]['port'] = '3306';
 $cfg['Servers'][1]['user'] = 'myuser';
 $cfg['Servers'][1]['password'] = 'mypass';

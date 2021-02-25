@@ -1,6 +1,6 @@
-openssl genrsa -des3 -passout pass:nginx -out /etc/nginx/ssl/localhost.key
-cp /etc/nginx/ssl/localhost.key /etc/nginx/ssl/localhost.key.local
-openssl rsa -in /etc/nginx/ssl/localhost.key.local -passin pass:nginx -out /etc/nginx/ssl/localhost.key
+openssl genrsa -des3 -passout pass:nginx -out /etc/nginx/ssl/phpmyadmin.key
+cp /etc/nginx/ssl/phpmyadmin.key /etc/nginx/ssl/phpmyadmin.key.local
+openssl rsa -in /etc/nginx/ssl/phpmyadmin.key.local -passin pass:nginx -out /etc/nginx/ssl/phpmyadmin.key
 echo "FR
 IDF
 Paris
@@ -9,5 +9,5 @@ IT
 abenoit
 abenoit@student.42.fr
 1234
-" | openssl req -new -key /etc/nginx/ssl/localhost.key -out /etc/nginx/ssl/localhost.csr
-openssl x509 -req -days 365 -in /etc/nginx/ssl/localhost.csr -signkey /etc/nginx/ssl/localhost.key -out /etc/nginx/ssl/localhost.crt
+" | openssl req -new -key /etc/nginx/ssl/phpmyadmin.key -out /etc/nginx/ssl/phpmyadmin.csr
+openssl x509 -req -days 365 -in /etc/nginx/ssl/phpmyadmin.csr -signkey /etc/nginx/ssl/phpmyadmin.key -out /etc/nginx/ssl/phpmyadmin.crt

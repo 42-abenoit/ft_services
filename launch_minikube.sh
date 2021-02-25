@@ -92,6 +92,6 @@ metallb_manual_enable
 
 eval $(minikube docker-env)
 
-nginx_setup
 pma_setup
-#mysql_setup
+nginx_setup
+mysql_setup
