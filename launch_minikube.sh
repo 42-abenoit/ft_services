@@ -94,4 +94,4 @@ eval $(minikube docker-env)
 
 nginx_setup
 pma_setup
-mysql_setup
+#mysql_setup

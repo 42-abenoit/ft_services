@@ -28,5 +28,6 @@ $cfg['Servers'][1]['user'] = 'myuser';
 $cfg['Servers'][1]['password'] = 'mypass';
 
 /* Directories for saving/loading files from server */
+$cfg['PmaAbsoluteUri'] = './';
 $cfg['UploadDir'] = '';
 $cfg['SaveDir'] = '';

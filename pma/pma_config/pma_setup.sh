@@ -3,6 +3,7 @@ apk add nginx
 apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli \
     php7-zlib php7-curl php7-mbstring php7-json php7-session
 apk add phpmyadmin
+apk add openssl
 
 #nginx user setup
 echo "1234\n1234\n" | adduser -D -g 'www' www
@@ -54,3 +55,7 @@ sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= ${PHP_CGI_FIX_PATHINFO}|i" /et
 
 mkdir /run/php
 cp /pma_config/config.inc.php /home/www/phpmyadmin/config.inc.php
+
+#ssl key generation
+mkdir /etc/nginx/ssl
+sh /pma_config/ssl_setup.sh

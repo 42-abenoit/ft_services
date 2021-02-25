@@ -23,8 +23,15 @@ server	{
     location / {
     	}
 
-	location ~ /phpmyadmin {
+	location /phpmyadmin/ {
 
-		proxy_pass https://pma;
+			proxy_pass https://pma;
+			rewrite ^/phpmyadmin(/.*)$ $1 break;
+			proxy_redirect          off;
+			proxy_set_header    Host $host;
+			proxy_set_header    X-Real-IP $remote_addr;
+			proxy_set_header    X-Forwarded-For $proxy_add_x_forwarded_for;
+			proxy_set_header    X-Forwarded-Host $server_name;
+			proxy_set_header    X-Forwarded-Proto https;
 		}
 	}
