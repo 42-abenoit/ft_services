@@ -21,9 +21,8 @@ $cfg['Servers'][1]['auth_type'] = 'cookie';
 /* Server parameters */
 $cfg['Servers'][1]['host'] = 'mysql-svc';
 $cfg['Servers'][1]['compress'] = false;
+$cfg['Servers'][1]['extension'] = 'mysqli';
 $cfg['Servers'][1]['AllowNoPassword'] = true;
-
-
 
 $cfg['Servers'][1]['port'] = '3306';
 $cfg['Servers'][1]['user'] = 'myuser';

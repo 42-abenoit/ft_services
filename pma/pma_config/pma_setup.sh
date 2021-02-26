@@ -57,7 +57,4 @@ sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= ${PHP_CGI_FIX_PATHINFO}|i" /et
 
 mkdir /run/php
 cp /pma_config/config.inc.php /home/www/phpmyadmin/config.inc.php
-
-#ssl key generation
-mkdir /etc/nginx/ssl
-sh /pma_config/ssl_setup.sh
+chown -R www:www /home/www/phpmyadmin

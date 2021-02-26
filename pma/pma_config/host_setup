@@ -5,6 +5,8 @@ server {
 	root /home/www/phpmyadmin;
 	index	index.php;
 
+	rewrite ^/phpmyadmin(/.*)$ $1 break;
+
 	ssl_certificate		/etc/nginx/ssl/phpmyadmin.crt;
 	ssl_certificate_key	/etc/nginx/ssl/phpmyadmin.key;
 
