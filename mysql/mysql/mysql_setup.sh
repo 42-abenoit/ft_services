@@ -1,20 +1,37 @@
 apk update
 apk add mariadb mariadb-client
-sed -i 's/skip-networking/#skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf
+#sed -i 's/skip-networking/#skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf
 #sed -i "/\[mysqld\]/a skip-grant-tables\n" /etc/my.cnf
-mariadb-install-db --user=mysql --datadir=/var/lib/mysql
-cd '/usr' ; /usr/bin/mariadbd-safe --datadir='/var/lib/mysql' &
+mkdir -p /run/mysqld
+chown -R mysql:mysql /run/mysqld/
+chown -R mysql:mysql /var/lib/mysql
+cp /mysql/my.cnf /etc/my.cnf.d/mariadb-server.cnf
+mariadb-install-db --datadir=/var/lib/mysql
+mariadbd &
 
-sleep 0.1
+sleep 0.5
+
 echo -n "Waiting for mariadb to launch"
-cmp=$(ps | grep mariadb | wc -l)
-while [ ! $cmp -eq 3 ]
+until mariadb
 do
-cmp=$(ps | grep mariadb | wc -l)
-sleep 0.2
-echo -n .
+sleep 0.1
+echo -n '.'
 done
-echo
+
+mariadb < /mysql/wp-user.sql
+
+#sleep 0.1
+#echo -n "Waiting for mariadb to launch"
+#cmp=$(ps | grep mariadb | wc -l)
+#while [ ! $cmp -eq 3 ]
+#do
+#cmp=$(ps | grep mariadb | wc -l)
+#sleep 0.2
+#echo -n .
+#done
+#echo
+
+#mysql < /mysql/wp-user.sql
 
 #sleep 0.5 && echo "
 #n
@@ -25,7 +42,6 @@ echo
 #Y
 #" | mysql_secure_installation
 
-sleep 1
-mysqladmin -u root password root-pass
-mysql -u root
-mysql < /mysql/wp-user.sql
+#sleep 1
+#mysqladmin -u root password root-pass
+#mysql -u root

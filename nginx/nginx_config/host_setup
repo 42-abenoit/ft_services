@@ -1,11 +1,13 @@
-upstream pma {
-    server pma-svc:5000;
-}
-
 server {
     listen 80;
     listen [::]:80;
 	server_name _;
+
+	location /phpmyadmin/ {
+	
+			rewrite ^/phpmyadmin(/.*)$ $1 break;
+			proxy_pass http://192.168.49.3:5000;
+		}
 
 	location / {
 
@@ -23,11 +25,6 @@ server	{
 
 	ssl_certificate		/etc/nginx/ssl/localhost.crt;
 	ssl_certificate_key	/etc/nginx/ssl/localhost.key;
-
-	location /phpmyadmin/ {
-
-			proxy_pass http://pma;
-		}
 
     location / {
     	}

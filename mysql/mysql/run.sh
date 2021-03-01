@@ -1,2 +1,2 @@
-/usr/bin/mariadbd-safe &
+mariadbd &
 tail -f /dev/null
