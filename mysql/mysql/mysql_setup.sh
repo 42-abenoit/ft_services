@@ -5,20 +5,19 @@ apk add mariadb mariadb-client
 mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld/
 chown -R mysql:mysql /var/lib/mysql
-cp /mysql/my.cnf /etc/my.cnf.d/mariadb-server.cnf
-mariadb-install-db --datadir=/var/lib/mysql
-mariadbd &
+#cp /mysql/my.cnf /etc/my.cnf.d/mariadb-server.cnf
+#cp /mysql/my.cnf /var/lib/my.cnf
 
-sleep 0.5
+#sleep 0.5
 
-echo -n "Waiting for mariadb to launch"
-until mariadb
-do
-sleep 0.1
-echo -n '.'
-done
+#echo -n "Waiting for mariadb to launch"
+#until mariadb
+#do
+#sleep 0.1
+#echo -n '.'
+#done
 
-mariadb < /mysql/wp-user.sql
+#mariadb --user=root < /mysql/wp-user.sql
 
 #sleep 0.1
 #echo -n "Waiting for mariadb to launch"

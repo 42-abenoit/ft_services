@@ -66,6 +66,22 @@ kubectl apply -f pma/pma.yaml
 mysql_setup () {
 docker build -t mysql-local mysql
 kubectl apply -f mysql/mysql.yaml
+until [[ ! -z $mysql_pod ]]
+do
+mysql_pod=$(kubectl get pods | grep mysql-deployment | awk '{print $1}')
+done
+
+kubectl exec $mysql_pod -- sh -c "mariadb-install-db --user=root --datadir=/var/lib/mysql && \
+							mariadbd --user=root --datadir=/var/lib/mysql"
+kubectl exec $mysql_pod -- 	mariadb --user=root <<EOF 
+							use mysql
+							CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
+							GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%'WITH GRANT OPTION;
+							CREATE DATABASE wordpress;
+							CREATE USER 'wpuser'@'%' IDENTIFIED BY 'wppass';
+							GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'%' WITH GRANT OPTION;
+							FLUSH PRIVILEGES;
+							EOF
 }
 
 if [[ $(minikube version | grep version | tr -d ':-z' | tr -d ' ' | tr -d '.') -lt 1100 ]]
