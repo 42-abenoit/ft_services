@@ -5,7 +5,7 @@ server {
 	root /home/www/phpmyadmin;
 	index	index.php;
 
-   	location / {
+   	location ~ \.php$ {
 
         	fastcgi_pass		unix:/run/php/php-fpm7.sock;
         	fastcgi_index		index.php;
