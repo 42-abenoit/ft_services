@@ -21,6 +21,57 @@ while :; do
 done
 }
 
+print_pma_anim () {
+echo -e "\e[93m"
+while :; do
+	for (( i=0; i<4; i++ )); do
+		cat ./ascii/pma/pma_$i.ascii
+		sleep 0.2
+		echo -en "\033[5A"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -en "\033[5A"
+	done
+done
+}
+
+print_nginx_anim () {
+echo -e "\e[93m"
+while :; do
+	for (( i=0; i<4; i++ )); do
+		cat ./ascii/nginx/nginx_$i.ascii
+		sleep 0.2
+		echo -en "\033[5A"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -en "\033[5A"
+	done
+done
+}
+
+print_init_anim () {
+echo -e "\e[93m"
+while :; do
+	for (( i=0; i<4; i++ )); do
+		cat ./ascii/initdb/init_$i.ascii
+		sleep 0.2
+		echo -en "\033[5A"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -en "\033[5A"
+	done
+done
+}
+
 dl_mini_bin () {
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo mkdir -p /usr/local/bin/
@@ -77,18 +128,21 @@ rm -rf ~/.minikube
 }
 
 nginx_setup () {
-docker build -t nginx-local nginx
-kubectl apply -f nginx/nginx.yaml
+docker build -t nginx-local nginx > ./logs/nginx.log 2> ./logs/nginx.err
+kubectl apply -f nginx/nginx.yaml > ./logs/nginx.log 2> ./logs/nginx.err
+return 0
 }
 
 pma_setup () {
-docker build -t pma-local pma
-kubectl apply -f pma/pma.yaml
+docker build -t pma-local pma > ./logs/pma.log 2> ./logs/pma.err
+kubectl apply -f pma/pma.yaml > ./logs/pma.log 2> ./logs/pma.err
+return 0
 }
 
 mysql_setup () {
-docker build -t mysql-local mysql
-kubectl apply -f mysql/mysql.yaml
+docker build -t mysql-local mysql > ./logs/mysql.log 2> ./logs/mysql.err
+kubectl apply -f mysql/mysql.yaml > ./logs/mysql.log 2> ./logs/mysql.err
+return 0
 }
 
 mysql_initdb () {
@@ -106,7 +160,7 @@ done
 
 mysql_pod=$(kubectl get pods | grep mysql-deployment | awk '{print $1}')
 kubectl exec $mysql_pod -- sh -c "mariadb-install-db --user=root --datadir=/var/lib/mysql --skip-networking=0 --bind-address=0.0.0.0 --port=3306"						
-kubectl exec $mysql_pod -- sh -c "mariadbd --user=root --datadir=/var/lib/mysql &"
+kubectl exec $mysql_pod -- sh -c "mariadbd --user=root --datadir=/var/lib/mysql --skip-networking=0 --bind-address=0.0.0.0 --port=3306 &"
 kubectl exec $mysql_pod -- sh -c "mariadb --user=root <<- EOF
 							use mysql;
 							CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
@@ -117,6 +171,7 @@ kubectl exec $mysql_pod -- sh -c "mariadb --user=root <<- EOF
 							DROP DATABASE test;
 							FLUSH PRIVILEGES;
 							EOF"
+return 0
 }
 
 print_title
@@ -152,14 +207,6 @@ wait $INIT_PID
 ret=$?
 kill $MYSQL_PID
 wait $MYSQL_PID 2> /dev/null
-echo -en "\033[5A"
-echo -e "\r\033[K"
-echo -e "\r\033[K"
-echo -e "\r\033[K"
-echo -e "\r\033[K"
-echo -e "\r\033[K"
-echo -en "\033[5A"
-
 if [ $ret -eq 0 ]
 then
 echo -en "\e[32m"
@@ -171,7 +218,56 @@ cat ascii/print_fail
 echo -e "\e[0m"
 fi
 
-pma_setup
-nginx_setup
-mysql_initdb 
+#pma pod setup
+pma_setup & INIT_PID=$!
+print_pma_anim & PMA_PID=$!
+wait $INIT_PID
+ret=$?
+kill $PMA_PID
+wait $PMA_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
 
+#nginx pod setup
+nginx_setup & INIT_PID=$!
+print_nginx_anim & NGINX_PID=$!
+wait $INIT_PID
+ret=$?
+kill $NGINX_PID
+wait $NGINX_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
+#mysql db init
+mysql_initdb > ./logs/init.log 2> ./logs/init.err & INIT_PID=$!
+print_init_anim & MYDB_PID=$!
+wait $INIT_PID
+ret=$?
+kill $MYDB_PID
+wait $MYDB_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi

@@ -1,0 +1,2 @@
+service/pma-svc created
+deployment.apps/pma-deployment created

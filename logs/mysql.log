@@ -1,0 +1,3 @@
+service/mysql-svc created
+persistentvolumeclaim/mysql-claim created
+deployment.apps/mysql-deployment created
