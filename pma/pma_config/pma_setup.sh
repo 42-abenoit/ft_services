@@ -15,7 +15,9 @@ touch /var/log/nginx/access.log
 
 #nginx configuration
 mv -f /pma_config/nginx.conf /etc/nginx/nginx.conf
+chown www:www /etc/nginx/nginx.conf
 mv -f /pma_config/host_setup /etc/nginx/conf.d/default.conf
+chown www:www /etc/nginx/conf.d/default.conf
 cp -f /pma_config/index.css /home/www/
 cp -f /pma_config/index.html /home/www/
 

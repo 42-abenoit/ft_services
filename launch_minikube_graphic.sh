@@ -1,3 +1,26 @@
+print_title () {
+echo -en "\e[36m"
+cat ./ascii/title/title.ascii
+echo -e "\e[0m"
+}
+
+print_mysql_anim () {
+echo -e "\e[93m"
+while :; do
+	for (( i=0; i<4; i++ )); do
+		cat ./ascii/mysql/mysql_$i.ascii
+		sleep 0.2
+		echo -en "\033[5A"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -en "\033[5A"
+	done
+done
+}
+
 dl_mini_bin () {
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo mkdir -p /usr/local/bin/
@@ -96,6 +119,8 @@ kubectl exec $mysql_pod -- sh -c "mariadb --user=root <<- EOF
 							EOF"
 }
 
+print_title
+
 if [[ $(minikube version | grep version | tr -d ':-z' | tr -d ' ' | tr -d '.') -lt 1100 ]]
 then
 	echo "Current minikube version doesn't support metallb."
@@ -120,7 +145,33 @@ metallb_manual_enable
 
 eval $(minikube docker-env)
 
-mysql_setup
+#mysql pod setup
+mysql_setup & INIT_PID=$!
+print_mysql_anim & MYSQL_PID=$!
+wait $INIT_PID
+ret=$?
+kill $MYSQL_PID
+wait $MYSQL_PID 2> /dev/null
+echo -en "\033[5A"
+echo -e "\r\033[K"
+echo -e "\r\033[K"
+echo -e "\r\033[K"
+echo -e "\r\033[K"
+echo -e "\r\033[K"
+echo -en "\033[5A"
+
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
 pma_setup
 nginx_setup
-mysql_initdb
+mysql_initdb 
+
