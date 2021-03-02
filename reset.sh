@@ -27,6 +27,15 @@ kubectl delete deployment mysql-deployment
 kubectl delete svc mysql-svc
 kubectl apply -f mysql/mysql.yaml 
 #kubectl get svc
+elif [[ $pod == "wp" ]]
+then
+eval $(minikube docker-env)
+docker build -t wordpress-local wordpress
+
+kubectl delete deployment wordpress-deployment
+kubectl delete svc wordpress-svc
+kubectl apply -f wordpress/wordpress.yaml 
+#kubectl get svc
 else
 echo nope
 fi

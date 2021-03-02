@@ -145,6 +145,12 @@ kubectl apply -f mysql/mysql.yaml > ./logs/mysql.log 2> ./logs/mysql.err
 return 0
 }
 
+wordpress_setup () {
+docker build -t wordpress-local wordpress > ./logs/wordpress.log 2> ./logs/wordpress.err
+kubectl apply -f wordpress/wordpress.yaml > ./logs/wordpress.log 2> ./logs/wordpress.err
+return 0
+}
+
 mysql_initdb () {
 run_mysql=$(kubectl get pods | grep mysql-deployment | awk '{print $3}')
 until [[ $rdy_mysql=="Running" ]]
@@ -271,3 +277,5 @@ echo -en "\e[31m"
 cat ascii/print_fail
 echo -e "\e[0m"
 fi
+
+wordpress_setup

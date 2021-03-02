@@ -1,0 +1,2 @@
+service/wordpress-svc created
+deployment.apps/wordpress-deployment created
