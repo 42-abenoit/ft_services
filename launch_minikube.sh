@@ -66,22 +66,33 @@ kubectl apply -f pma/pma.yaml
 mysql_setup () {
 docker build -t mysql-local mysql
 kubectl apply -f mysql/mysql.yaml
-until [[ ! -z $mysql_pod ]]
+}
+
+mysql_initdb () {
+run_mysql=$(kubectl get pods | grep mysql-deployment | awk '{print $3}')
+until [[ $rdy_mysql=="Running" ]]
 do
-mysql_pod=$(kubectl get pods | grep mysql-deployment | awk '{print $1}')
+run_mysql=$(kubectl get pods | grep mysql-deployment | awk '{print $3}')
 done
 
-kubectl exec $mysql_pod -- sh -c "mariadb-install-db --user=root --datadir=/var/lib/mysql && \
-							mariadbd --user=root --datadir=/var/lib/mysql"
-kubectl exec $mysql_pod -- 	mariadb --user=root <<EOF 
-							use mysql
+rdy_mysql=$(kubectl get pods | grep mysql-deployment | awk '{print $2}')
+until [[ $rdy_mysql=="1/1" ]]
+do
+rdy_mysql=$(kubectl get pods | grep mysql-deployment | awk '{print $2}')
+done
+
+mysql_pod=$(kubectl get pods | grep mysql-deployment | awk '{print $1}')
+kubectl exec $mysql_pod -- sh -c "mariadb-install-db --user=root --datadir=/var/lib/mysql"						
+kubectl exec $mysql_pod -- sh -c "mariadbd --user=root --datadir=/var/lib/mysql &"
+kubectl exec $mysql_pod -- sh -c "mariadb --user=root <<- EOF
+							use mysql;
 							CREATE USER 'myuser'@'%' IDENTIFIED BY 'mypass';
 							GRANT ALL PRIVILEGES ON *.* TO 'myuser'@'%'WITH GRANT OPTION;
 							CREATE DATABASE wordpress;
 							CREATE USER 'wpuser'@'%' IDENTIFIED BY 'wppass';
 							GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'%' WITH GRANT OPTION;
 							FLUSH PRIVILEGES;
-							EOF
+							EOF"
 }
 
 if [[ $(minikube version | grep version | tr -d ':-z' | tr -d ' ' | tr -d '.') -lt 1100 ]]
@@ -108,6 +119,7 @@ metallb_manual_enable
 
 eval $(minikube docker-env)
 
+mysql_setup
 pma_setup
 nginx_setup
-mysql_setup
+mysql_initdb
