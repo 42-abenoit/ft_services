@@ -20,8 +20,10 @@ wget http://wordpress.org/latest.tar.gz
 tar -xzvf latest.tar.gz
 rm latest.tar.gz
 mv -f wordpress /home/www
-chown -R www:www /home/www/wordpress
 cp /wordpress_config/wp-config.php /home/www/wordpress/
+cp -f /wordpress_config/index.css /home/www/wordpress
+cp -f /wordpress_config/index.html /home/www/wordpress
+chown -R www:www /home/www/wordpress
 
 PHP_FPM_USER="www"
 PHP_FPM_GROUP="www"
@@ -53,3 +55,5 @@ sed -i "s|;*upload_max_filesize =.*|upload_max_filesize = ${PHP_MAX_UPLOAD}|i" /
 sed -i "s|;*max_file_uploads =.*|max_file_uploads = ${PHP_MAX_FILE_UPLOAD}|i" /etc/php7/php.ini
 sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php7/php.ini
 sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= ${PHP_CGI_FIX_PATHINFO}|i" /etc/php7/php.ini
+
+mkdir /run/php

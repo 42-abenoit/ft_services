@@ -3,14 +3,17 @@ server {
     listen [::]:5050;
 	server_name _;
 	root	/home/www/wordpress;
-	index	index.html;
+	index	index.php index.html;
 
    	location ~ \.php$ {
 
         	fastcgi_pass		unix:/run/php/php-fpm7.sock;
         	fastcgi_index		index.php;
-			fastcgi_param   SCRIPT_FILENAME /home/www/phpmyadmin$fastcgi_script_name;
+			fastcgi_param   SCRIPT_FILENAME /home/www/wordpress$fastcgi_script_name;
 			include fastcgi_params;
 			fastcgi_max_temp_file_size	0;
+		}
+
+	location /	{
 		}
 	}

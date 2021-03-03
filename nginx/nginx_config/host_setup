@@ -3,16 +3,16 @@ server {
     listen [::]:80;
 	server_name _;
 
-	location /phpmyadmin/ {
+	location /phpmyadmin {
 	
 			rewrite ^/phpmyadmin(/.*)$ $1 break;
 			proxy_pass http://192.168.49.3:5000;
 		}
 
-	location /wordpress/ {
+	location /wordpress {
 
-		rewrite ^/wordpress(/.*)$ $1 break;
-   		return 301 http://192.168.49.3:5050;
+			rewrite ^/wordpress(/.*)$ $1 break;
+   			return 301 http://192.168.49.3:5050;
 		}
 
 	location / {
@@ -32,6 +32,19 @@ server	{
 	ssl_certificate		/etc/nginx/ssl/localhost.crt;
 	ssl_certificate_key	/etc/nginx/ssl/localhost.key;
 
+	location /phpmyadmin {
+	
+			rewrite ^/phpmyadmin(/.*)$ $1 break;
+			proxy_pass http://192.168.49.3:5000;
+		}
+
+	location /wordpress {
+
+			rewrite ^/wordpress(/.*)$ $1 break;
+   			return 307 http://192.168.49.3:5050;
+		}
+
     location / {
+
     	}
 	}
