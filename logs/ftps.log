@@ -1,0 +1,3 @@
+service/ftps-svc created
+persistentvolumeclaim/ftps-claim created
+deployment.apps/ftps-deployment created

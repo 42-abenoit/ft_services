@@ -55,11 +55,62 @@ while :; do
 done
 }
 
+print_ftps_anim () {
+echo -e "\e[93m"
+while :; do
+	for (( i=0; i<4; i++ )); do
+		cat ./ascii/ftps/ftps_$i.ascii
+		sleep 0.2
+		echo -en "\033[5A"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -en "\033[5A"
+	done
+done
+}
+
+print_wordpress_anim () {
+echo -e "\e[93m"
+while :; do
+	for (( i=0; i<4; i++ )); do
+		cat ./ascii/wordpress/wp_$i.ascii
+		sleep 0.2
+		echo -en "\033[5A"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -en "\033[5A"
+	done
+done
+}
+
 print_init_anim () {
 echo -e "\e[93m"
 while :; do
 	for (( i=0; i<4; i++ )); do
 		cat ./ascii/initdb/init_$i.ascii
+		sleep 0.2
+		echo -en "\033[5A"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -e "\r\033[K"
+		echo -en "\033[5A"
+	done
+done
+}
+
+print_user_anim () {
+echo -e "\e[93m"
+while :; do
+	for (( i=0; i<4; i++ )); do
+		cat ./ascii/inituser/user_$i.ascii
 		sleep 0.2
 		echo -en "\033[5A"
 		echo -e "\r\033[K"
@@ -151,6 +202,12 @@ kubectl apply -f wordpress/wordpress.yaml > ./logs/wordpress.log 2> ./logs/wordp
 return 0
 }
 
+ftps_setup () {
+docker build -t ftps-local ftps > ./logs/ftps.log 2> ./logs/ftps.err
+kubectl apply -f ftps/ftps.yaml > ./logs/ftps.log 2> ./logs/ftps.err
+return 0
+}
+
 mysql_initdb () {
 run_mysql=$(kubectl get pods | grep mysql-deployment | awk '{print $3}')
 until [[ $rdy_mysql=="Running" ]]
@@ -179,6 +236,31 @@ kubectl exec $mysql_pod -- sh -c "mariadb --user=root <<- EOF
 							EOF"
 kubectl exec $mysql_pod -- sh -c "mariadb wordpress --user=root < mysql/wordpress.sql"
 return 0
+}
+
+ftps_init_user () {
+run_ftps=$(kubectl get pvc | grep ftps-claim | awk '{print $2}')
+until [[ $rdy_ftps=="Bound" ]]
+do
+run_ftps=$(kubectl get pvc | grep ftps-claim | awk '{print $2}')
+done
+
+run_ftps=$(kubectl get pods | grep ftps-deployment | awk '{print $3}')
+until [[ $rdy_ftps=="Running" ]]
+do
+run_ftps=$(kubectl get pods | grep ftps-deployment | awk '{print $3}')
+done
+
+rdy_ftps=$(kubectl get pods | grep ftps-deployment | awk '{print $2}')
+until [[ $rdy_ftps=="1/1" ]]
+do
+rdy_ftps=$(kubectl get pods | grep ftps-deployment | awk '{print $2}')
+done
+
+ftps_pod=$(kubectl get pods | grep ftps-deployment | awk '{print $1}')
+kubectl exec $ftps_pod -- sh -c 'echo "ftppass
+ftppass" | adduser -h /home/ftp/ftpuser ftpuser'
+kubectl exec $ftps_pod -- sh -c 'chmod 755 /home/ftp/ftpuser'
 }
 
 print_title
@@ -262,6 +344,42 @@ cat ascii/print_fail
 echo -e "\e[0m"
 fi
 
+#wordpress pod setup
+wordpress_setup & INIT_PID=$!
+print_wordpress_anim & WP_PID=$!
+wait $INIT_PID
+ret=$?
+kill $WP_PID
+wait $WP_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
+#ftps pod setup
+ftps_setup & INIT_PID=$!
+print_ftps_anim & FTPS_PID=$!
+wait $INIT_PID
+ret=$?
+kill $FTPS_PID
+wait $FTPS_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
 #mysql db init
 mysql_initdb > ./logs/init.log 2> ./logs/init.err & INIT_PID=$!
 print_init_anim & MYDB_PID=$!
@@ -280,4 +398,21 @@ cat ascii/print_fail
 echo -e "\e[0m"
 fi
 
-wordpress_setup
+#ftps user init
+ftps_init_user > ./logs/ftpuser.log 2> ./logs/ftpuser.err & INIT_PID=$!
+print_user_anim & FTPU_PID=$!
+wait $INIT_PID
+ret=$?
+kill $FTPU_PID
+wait $FTPU_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+

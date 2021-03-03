@@ -25,6 +25,7 @@ docker build -t mysql-local mysql
 
 kubectl delete deployment mysql-deployment
 kubectl delete svc mysql-svc
+kubectl delete pvc mysql-claim
 kubectl apply -f mysql/mysql.yaml 
 #kubectl get svc
 elif [[ $pod == "wp" ]]
@@ -35,6 +36,16 @@ docker build -t wordpress-local wordpress
 kubectl delete deployment wordpress-deployment
 kubectl delete svc wordpress-svc
 kubectl apply -f wordpress/wordpress.yaml 
+#kubectl get svc
+elif [[ $pod == "ftps" ]]
+then
+eval $(minikube docker-env)
+docker build -t ftps-local ftps
+
+kubectl delete deployment ftps-deployment
+kubectl delete svc ftps-svc
+kubectl delete pvc ftps-claim
+kubectl apply -f ftps/ftps.yaml 
 #kubectl get svc
 else
 echo nope
