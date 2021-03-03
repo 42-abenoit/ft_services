@@ -177,7 +177,7 @@ kubectl exec $mysql_pod -- sh -c "mariadb --user=root <<- EOF
 							DROP DATABASE test;
 							FLUSH PRIVILEGES;
 							EOF"
-kubectl exec $mysql_pod -- sh -c "mariadb --user=root < mysql/wordpress.sql"
+kubectl exec $mysql_pod -- sh -c "mariadb wordpress --user=root < mysql/wordpress.sql"
 return 0
 }
 
