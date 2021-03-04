@@ -1,2 +1,2 @@
-service/pma-svc created
-deployment.apps/pma-deployment created
+service/pma-svc unchanged
+deployment.apps/pma-deployment unchanged

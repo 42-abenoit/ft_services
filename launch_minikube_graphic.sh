@@ -399,20 +399,19 @@ echo -e "\e[0m"
 fi
 
 #ftps user init
-ftps_init_user > ./logs/ftpuser.log 2> ./logs/ftpuser.err & INIT_PID=$!
-print_user_anim & FTPU_PID=$!
-wait $INIT_PID
-ret=$?
-kill $FTPU_PID
-wait $FTPU_PID 2> /dev/null
-if [ $ret -eq 0 ]
-then
-echo -en "\e[32m"
-cat ascii/print_done
-echo -e "\e[0m"
-else
-echo -en "\e[31m"
-cat ascii/print_fail
-echo -e "\e[0m"
-fi
-
+#ftps_init_user > ./logs/ftpuser.log 2> ./logs/ftpuser.err & INIT_PID=$!
+#print_user_anim & FTPU_PID=$!
+#wait $INIT_PID
+#ret=$?
+#kill $FTPU_PID
+#wait $FTPU_PID 2> /dev/null
+#if [ $ret -eq 0 ]
+#then
+#echo -en "\e[32m"
+#cat ascii/print_done
+#echo -e "\e[0m"
+#else
+#echo -en "\e[31m"
+#cat ascii/print_fail
+#echo -e "\e[0m"
+#fi

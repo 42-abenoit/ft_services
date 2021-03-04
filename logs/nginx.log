@@ -1,2 +1,2 @@
-service/nginx-svc created
-deployment.apps/nginx-deployment created
+service/nginx-svc unchanged
+deployment.apps/nginx-deployment unchanged

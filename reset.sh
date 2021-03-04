@@ -44,7 +44,7 @@ docker build -t ftps-local ftps
 
 kubectl delete deployment ftps-deployment
 kubectl delete svc ftps-svc
-kubectl delete pvc ftps-claim
+#kubectl delete pvc ftps-claim
 kubectl apply -f ftps/ftps.yaml 
 #kubectl get svc
 else
