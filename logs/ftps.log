@@ -1,10 +1,8 @@
 Sending build context to Docker daemon  16.38kB
-Step 1/5 : FROM alpine
+Step 1/6 : FROM alpine
  ---> 28f6e2705743
-Step 2/5 : COPY ftp /ftp
- ---> 3d2d0dc40b41
-Step 3/5 : RUN	sh ftp/ftp_setup.sh
- ---> Running in e79a775261b8
+Step 2/6 : RUN apk update && 	apk add vsftpd && 	apk add openssl && 	apk add telegraf
+ ---> Running in ae03c4974959
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -19,9 +17,19 @@ OK: 7 MiB in 17 packages
 (1/1) Installing openssl (1.1.1j-r0)
 Executing busybox-1.32.1-r3.trigger
 OK: 8 MiB in 18 packages
+(1/1) Installing telegraf (1.17.0-r0)
+Executing telegraf-1.17.0-r0.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 97 MiB in 19 packages
+Removing intermediate container ae03c4974959
+ ---> 28a27f548926
+Step 3/6 : COPY ftp /ftp
+ ---> 4788af890079
+Step 4/6 : RUN	sh ftp/ftp_setup.sh
+ ---> Running in 68c4f55b7184
 [91mGenerating a RSA private key
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
 [0m[91mwriting new private key to '/etc/vsftpd/ssl/vsftpd.key'
 [0m[91m-----
 [0m[91madduser: /home/ftp/ftpuser: No such file or directory
@@ -31,17 +39,17 @@ Bad password: too weak
 Retype password: 
 Passwords don't match
 [91mpasswd: password for ftpuser is unchanged
-[0mRemoving intermediate container e79a775261b8
- ---> db200aac79aa
-Step 4/5 : ENTRYPOINT sh ftp/run.sh
- ---> Running in 7ed8a748b05c
-Removing intermediate container 7ed8a748b05c
- ---> b8e625b35bad
-Step 5/5 : EXPOSE 20 21 21000-21003
- ---> Running in bcc5911cdff8
-Removing intermediate container bcc5911cdff8
- ---> 2d8bb686f3a6
-Successfully built 2d8bb686f3a6
+[0mRemoving intermediate container 68c4f55b7184
+ ---> ef620ba9d0e5
+Step 5/6 : ENTRYPOINT sh ftp/run.sh
+ ---> Running in fe29a3bf9b66
+Removing intermediate container fe29a3bf9b66
+ ---> 37d3d55717c5
+Step 6/6 : EXPOSE 20 21 21000-21003
+ ---> Running in 9e0035960140
+Removing intermediate container 9e0035960140
+ ---> 364270e49ac0
+Successfully built 364270e49ac0
 Successfully tagged ftps-local:latest
 service/ftps-svc created
 persistentvolumeclaim/ftps-claim created

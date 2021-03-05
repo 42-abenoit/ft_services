@@ -1,10 +1,8 @@
 Sending build context to Docker daemon  24.58kB
-Step 1/5 : FROM alpine
+Step 1/6 : FROM alpine
  ---> 28f6e2705743
-Step 2/5 : COPY pma_config /pma_config
- ---> 68ed11831a6f
-Step 3/5 : RUN sh /pma_config/pma_setup.sh
- ---> Running in 1a4b398c8db9
+Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add openssl && 	apk add telegraf
+ ---> Running in b07bdae194d6
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -71,27 +69,37 @@ Executing phpmyadmin-5.0.4-r0.post-install
 * phpmyadmin config file has been installed to:
 *     /etc/phpmyadmin/config.inc.php
 * If you use apache2:
-*     1) Change the ownership of the config directory:
+[0m[91m*     1) Change the ownership of the config directory:
 *            chown -R apache:apache /etc/phpmyadmin
 *     2) See if you need to modify the apache2 config:
 *            /etc/apache2/conf.d/phpmyadmin.conf
-*     3) Restart apache2 when done.
+[0m[91m*     3) Restart apache2 when done.
 *
 [0mOK: 87 MiB in 61 packages
 (1/1) Installing openssl (1.1.1j-r0)
 Executing busybox-1.32.1-r3.trigger
 OK: 88 MiB in 62 packages
-Removing intermediate container 1a4b398c8db9
- ---> 46655cc329fd
-Step 4/5 : ENTRYPOINT sh pma_config/run.sh
- ---> Running in b78ac0595cf1
-Removing intermediate container b78ac0595cf1
- ---> 1e61a3236400
-Step 5/5 : EXPOSE 5000
- ---> Running in a45b44cbbee0
-Removing intermediate container a45b44cbbee0
- ---> 6cbb2ab823db
-Successfully built 6cbb2ab823db
+(1/1) Installing telegraf (1.17.0-r0)
+Executing telegraf-1.17.0-r0.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 177 MiB in 63 packages
+Removing intermediate container b07bdae194d6
+ ---> 8aba8910013e
+Step 3/6 : COPY pma_config /pma_config
+ ---> 40abec2293d2
+Step 4/6 : RUN sh /pma_config/pma_setup.sh
+ ---> Running in 17e627541aaa
+Removing intermediate container 17e627541aaa
+ ---> 7d854e02674c
+Step 5/6 : ENTRYPOINT sh pma_config/run.sh
+ ---> Running in f1585d084eac
+Removing intermediate container f1585d084eac
+ ---> dc42cb03b6fe
+Step 6/6 : EXPOSE 5000
+ ---> Running in 443edc858950
+Removing intermediate container 443edc858950
+ ---> 257feb9642ad
+Successfully built 257feb9642ad
 Successfully tagged pma-local:latest
 service/pma-svc created
 deployment.apps/pma-deployment created

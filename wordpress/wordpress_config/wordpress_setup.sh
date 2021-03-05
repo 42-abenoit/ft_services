@@ -1,8 +1,3 @@
-apk update
-apk add nginx
-apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli \
-    php7-zlib php7-curl php7-mbstring php7-json php7-session
-
 #nginx user setup
 echo "1234\n1234\n" | adduser -D -g 'www' www
 chown -R www:www /var/lib/nginx
@@ -57,3 +52,5 @@ sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php7/php.i
 sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= ${PHP_CGI_FIX_PATHINFO}|i" /etc/php7/php.ini
 
 mkdir /run/php
+
+cp wordpress_config/telegraf.conf /etc/telegraf.conf

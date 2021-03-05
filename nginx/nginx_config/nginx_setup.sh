@@ -1,7 +1,3 @@
-apk update
-apk add nginx
-apk add openssl
-
 #nginx user setup
 echo "1234\n1234\n" | adduser -D -g 'www' www
 chown -R www:www /var/lib/nginx
@@ -19,3 +15,5 @@ cp -f nginx_config/index.html /home/www/
 #ssl key generation
 mkdir /etc/nginx/ssl
 sh /nginx_config/ssl_setup.sh
+
+cp nginx_config/telegraf.conf /etc/telegraf.conf

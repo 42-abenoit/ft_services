@@ -1,10 +1,8 @@
 Sending build context to Docker daemon  24.58kB
-Step 1/5 : FROM alpine
+Step 1/6 : FROM alpine
  ---> 28f6e2705743
-Step 2/5 : COPY wordpress_config /wordpress_config
- ---> d9a780c9e0bb
-Step 3/5 : RUN sh wordpress_config/wordpress_setup.sh
- ---> Running in b94bc829c066
+Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add telegraf
+ ---> Running in 3b41cd0e34cc
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -59,32 +57,33 @@ OK: 7 MiB in 16 packages
 Executing busybox-1.32.1-r3.trigger
 Executing ca-certificates-20191127-r5.trigger
 OK: 32 MiB in 56 packages
+(1/1) Installing telegraf (1.17.0-r0)
+Executing telegraf-1.17.0-r0.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 121 MiB in 57 packages
+Removing intermediate container 3b41cd0e34cc
+ ---> c25be3120391
+Step 3/6 : COPY wordpress_config /wordpress_config
+ ---> 105a072c7ac6
+Step 4/6 : RUN sh wordpress_config/wordpress_setup.sh
+ ---> Running in e6f047a59f96
 [91mConnecting to wordpress.org (198.143.164.252:80)
 [0m[91mConnecting to wordpress.org (198.143.164.252:443)
 [0m[91msaving to 'latest.tar.gz'
-[0m[91mlatest.tar.gz          0% |                                | 48745  0:05:19 ETA
-[0m[91mlatest.tar.gz         38% |************                    | 5823k  0:00:03 ETA
-[0m[91mlatest.tar.gz         38% |************                    | 5871k  0:00:04 ETA
-[0m[91mlatest.tar.gz         38% |************                    | 5887k  0:00:06 ETA
-[0m[91mlatest.tar.gz         38% |************                    | 5935k  0:00:07 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 5951k  0:00:09 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 5967k  0:00:10 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6047k  0:00:12 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6079k  0:00:13 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6079k  0:00:15 ETA
-[0m[91mlatest.tar.gz         40% |************                    | 6095k  0:00:16 ETA
-[0m[91mlatest.tar.gz         66% |*********************           |  9.9M  0:00:05 ETA
-[0m[91mlatest.tar.gz         66% |*********************           |  9.9M  0:00:06 ETA
-[0m[91mlatest.tar.gz         66% |*********************           |  9.9M  0:00:06 ETA
-[0m[91mlatest.tar.gz         66% |*********************           |  9.9M  0:00:07 ETA
-[0m[91mlatest.tar.gz         67% |*********************           |  9.9M  0:00:07 ETA
-[0m[91mlatest.tar.gz         75% |************************        | 11.2M  0:00:05 ETA
-[0m[91mlatest.tar.gz         75% |************************        | 11.2M  0:00:05 ETA
-[0m[91mlatest.tar.gz         75% |************************        | 11.2M  0:00:06 ETA
-[0m[91mlatest.tar.gz         75% |************************        | 11.2M  0:00:06 ETA
-[0m[91mlatest.tar.gz         76% |************************        | 11.3M  0:00:06 ETA
-[0m[91mlatest.tar.gz         76% |************************        | 11.3M  0:00:06 ETA
-[0m[91mlatest.tar.gz         81% |**************************      | 12.1M  0:00:05 ETA
+[0m[91mlatest.tar.gz          0% |                                | 15977  0:16:22 ETA
+[0m[91mlatest.tar.gz         40% |*************                   | 6191k  0:00:02 ETA
+[0m[91mlatest.tar.gz         40% |*************                   | 6207k  0:00:04 ETA
+[0m[91mlatest.tar.gz         41% |*************                   | 6255k  0:00:05 ETA
+[0m[91mlatest.tar.gz         41% |*************                   | 6271k  0:00:07 ETA
+[0m[91mlatest.tar.gz         41% |*************                   | 6287k  0:00:08 ETA
+[0m[91mlatest.tar.gz         42% |*************                   | 6447k  0:00:09 ETA
+[0m[91mlatest.tar.gz         46% |**************                  | 7023k  0:00:09 ETA
+[0m[91mlatest.tar.gz         68% |*********************           | 10.2M  0:00:04 ETA
+[0m[91mlatest.tar.gz         68% |**********************          | 10.2M  0:00:04 ETA
+[0m[91mlatest.tar.gz         69% |**********************          | 10.2M  0:00:04 ETA
+[0m[91mlatest.tar.gz         78% |*************************       | 11.6M  0:00:03 ETA
+[0m[91mlatest.tar.gz         79% |*************************       | 11.8M  0:00:03 ETA
+[0m[91mlatest.tar.gz         85% |***************************     | 12.7M  0:00:02 ETA
 [0m[91mlatest.tar.gz        100% |********************************| 14.8M  0:00:00 ETA
 'latest.tar.gz' saved
 [0mwordpress/
@@ -2556,17 +2555,17 @@ wordpress/wp-admin/themes.php
 wordpress/wp-admin/options-reading.php
 wordpress/wp-trackback.php
 wordpress/wp-comments-post.php
-Removing intermediate container b94bc829c066
- ---> 3025b6ba8769
-Step 4/5 : ENTRYPOINT sh wordpress_config/run.sh
- ---> Running in 8b240c450528
-Removing intermediate container 8b240c450528
- ---> 48356fe9ebb9
-Step 5/5 : EXPOSE 5050
- ---> Running in f571a958fe10
-Removing intermediate container f571a958fe10
- ---> c0b59bbfbf23
-Successfully built c0b59bbfbf23
+Removing intermediate container e6f047a59f96
+ ---> 090c78d50438
+Step 5/6 : ENTRYPOINT sh wordpress_config/run.sh
+ ---> Running in 3342110b2823
+Removing intermediate container 3342110b2823
+ ---> 1895e6247037
+Step 6/6 : EXPOSE 5050
+ ---> Running in 09a6d78bfc87
+Removing intermediate container 09a6d78bfc87
+ ---> 3c0fc546abde
+Successfully built 3c0fc546abde
 Successfully tagged wordpress-local:latest
 service/wordpress-svc created
 deployment.apps/wordpress-deployment created
