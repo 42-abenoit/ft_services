@@ -3,6 +3,9 @@ FROM alpine
 RUN apk update
 RUN apk add influxdb
 
-ENTRYPOINT ["influxd" "run"]
+COPY influxdb /srcs
+RUN sh /srcs/influxdb_setup.sh
+
+ENTRYPOINT influxd
 
 EXPOSE 8086

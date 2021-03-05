@@ -11,4 +11,6 @@ echo "ftppass
 
 #ftp user creation
 ftppass" | adduser -h /home/ftp/ftpuser ftpuser
+mkdir /home/ftp
+mkdir /home/ftp/ftpuser
 chmod 755 /home/ftp/ftpuser

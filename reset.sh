@@ -25,8 +25,9 @@ docker build -t mysql-local mysql
 
 kubectl delete deployment mysql-deployment
 kubectl delete svc mysql-svc
-kubectl delete pvc mysql-claim
+#kubectl delete pvc mysql-claim
 kubectl apply -f mysql/mysql.yaml 
+bash initdb.sh
 #kubectl get svc
 elif [[ $pod == "wp" ]]
 then
@@ -46,6 +47,24 @@ kubectl delete deployment ftps-deployment
 kubectl delete svc ftps-svc
 #kubectl delete pvc ftps-claim
 kubectl apply -f ftps/ftps.yaml 
+#kubectl get svc
+elif [[ $pod == "influxdb" ]]
+then
+eval $(minikube docker-env)
+docker build -t influxdb-local influxdb
+
+kubectl delete deployment influxdb-deployment
+kubectl delete svc influxdb-svc
+kubectl apply -f influxdb/influxdb.yaml 
+elif [[ $pod == "grafana" ]]
+then
+eval $(minikube docker-env)
+docker build -t grafana-local grafana
+
+kubectl delete deployment grafana-deployment
+kubectl delete svc grafana-svc
+#kubectl delete pvc grafana-claim
+kubectl apply -f grafana/grafana.yaml 
 #kubectl get svc
 else
 echo nope

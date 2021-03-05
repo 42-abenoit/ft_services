@@ -1,7 +1,3 @@
-apk update
-apk add influxdb
-apk add telegraf
-
 influxd &
 
 sleep 0.5
@@ -16,10 +12,7 @@ echo -n .
 done
 echo
 
-influx <<- EOF
+influx -host 127.0.0.1 -port 8086 <<- EOF
 create database telegraf;
 create user telegrafuser with password 'telegrafpass';
 EOF
-
-mv /etc/telegraf.conf /etc/telegraf.conf.default
-cp /influxdb/telegraf.conf /etc/telegraf.conf

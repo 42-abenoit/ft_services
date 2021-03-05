@@ -8,7 +8,7 @@ if [ "$(kubectl get secrets --namespace metallb-system | grep memberlist)" = "" 
 	then
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 fi
-set_global_cluster_ip
+#set_global_cluster_ip
 kubectl apply -f metallb/config.yaml
 }
 

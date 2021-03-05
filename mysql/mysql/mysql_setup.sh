@@ -1,10 +1,12 @@
 apk update
 apk add mariadb mariadb-client
+apk add	telegraf
 #sed -i 's/skip-networking/#skip-networking/g' /etc/my.cnf.d/mariadb-server.cnf
 #sed -i "/\[mysqld\]/a skip-grant-tables\n" /etc/my.cnf
 mkdir -p /run/mysqld
 chown -R mysql:mysql /run/mysqld/
 chown -R mysql:mysql /var/lib/mysql
+cp mysql/telegraf.conf /etc/telegraf.conf
 #cp /mysql/my.cnf /etc/my.cnf.d/mariadb-server.cnf
 #cp /mysql/my.cnf /var/lib/my.cnf
 

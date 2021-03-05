@@ -6,8 +6,8 @@ metadata:
     app: influxdb-app
 spec:
   ports:
-    - port: 3306
-      targetPort: 3306
+    - port: 8086
+      targetPort: 8086
       name: influxdb-port
       protocol: TCP
   selector:
@@ -49,7 +49,7 @@ spec:
         imagePullPolicy: Never
         env:
         ports:
-        - containerPort: 3306
+        - containerPort: 8086
           name: influxdb-port
         volumeMounts:
         - name: influxdb-persistent-storage

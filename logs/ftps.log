@@ -1,3 +1,48 @@
+Sending build context to Docker daemon  16.38kB
+Step 1/5 : FROM alpine
+ ---> 28f6e2705743
+Step 2/5 : COPY ftp /ftp
+ ---> 3d2d0dc40b41
+Step 3/5 : RUN	sh ftp/ftp_setup.sh
+ ---> Running in e79a775261b8
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
+v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-57-gb49ace1568 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+OK: 13877 distinct packages available
+(1/3) Installing libcap (2.46-r0)
+(2/3) Installing linux-pam (1.5.1-r0)
+(3/3) Installing vsftpd (3.0.3-r6)
+Executing vsftpd-3.0.3-r6.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 7 MiB in 17 packages
+(1/1) Installing openssl (1.1.1j-r0)
+Executing busybox-1.32.1-r3.trigger
+OK: 8 MiB in 18 packages
+[91mGenerating a RSA private key
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91mwriting new private key to '/etc/vsftpd/ssl/vsftpd.key'
+[0m[91m-----
+[0m[91madduser: /home/ftp/ftpuser: No such file or directory
+[0mChanging password for ftpuser
+New password: 
+Bad password: too weak
+Retype password: 
+Passwords don't match
+[91mpasswd: password for ftpuser is unchanged
+[0mRemoving intermediate container e79a775261b8
+ ---> db200aac79aa
+Step 4/5 : ENTRYPOINT sh ftp/run.sh
+ ---> Running in 7ed8a748b05c
+Removing intermediate container 7ed8a748b05c
+ ---> b8e625b35bad
+Step 5/5 : EXPOSE 20 21 21000-21003
+ ---> Running in bcc5911cdff8
+Removing intermediate container bcc5911cdff8
+ ---> 2d8bb686f3a6
+Successfully built 2d8bb686f3a6
+Successfully tagged ftps-local:latest
 service/ftps-svc created
 persistentvolumeclaim/ftps-claim created
 deployment.apps/ftps-deployment created

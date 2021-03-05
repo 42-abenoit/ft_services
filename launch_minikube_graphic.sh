@@ -180,31 +180,43 @@ rm -rf ~/.minikube
 
 nginx_setup () {
 docker build -t nginx-local nginx > ./logs/nginx.log 2> ./logs/nginx.err
-kubectl apply -f nginx/nginx.yaml > ./logs/nginx.log 2> ./logs/nginx.err
+kubectl apply -f nginx/nginx.yaml >> ./logs/nginx.log 2>> ./logs/nginx.err
 return 0
 }
 
 pma_setup () {
 docker build -t pma-local pma > ./logs/pma.log 2> ./logs/pma.err
-kubectl apply -f pma/pma.yaml > ./logs/pma.log 2> ./logs/pma.err
+kubectl apply -f pma/pma.yaml >> ./logs/pma.log 2>> ./logs/pma.err
 return 0
 }
 
 mysql_setup () {
 docker build -t mysql-local mysql > ./logs/mysql.log 2> ./logs/mysql.err
-kubectl apply -f mysql/mysql.yaml > ./logs/mysql.log 2> ./logs/mysql.err
+kubectl apply -f mysql/mysql.yaml >> ./logs/mysql.log 2>> ./logs/mysql.err
 return 0
 }
 
 wordpress_setup () {
 docker build -t wordpress-local wordpress > ./logs/wordpress.log 2> ./logs/wordpress.err
-kubectl apply -f wordpress/wordpress.yaml > ./logs/wordpress.log 2> ./logs/wordpress.err
+kubectl apply -f wordpress/wordpress.yaml >> ./logs/wordpress.log 2>> ./logs/wordpress.err
 return 0
 }
 
 ftps_setup () {
 docker build -t ftps-local ftps > ./logs/ftps.log 2> ./logs/ftps.err
-kubectl apply -f ftps/ftps.yaml > ./logs/ftps.log 2> ./logs/ftps.err
+kubectl apply -f ftps/ftps.yaml >> ./logs/ftps.log 2>> ./logs/ftps.err
+return 0
+}
+
+influxdb_setup () {
+docker build -t influxdb-local influxdb
+kubectl apply -f influxdb/influxdb.yaml
+return 0
+}
+
+grafana_setup () {
+docker build -t grafana-local grafana
+kubectl apply -f grafana/grafana.yaml
 return 0
 }
 
@@ -289,6 +301,9 @@ metallb_manual_enable
 minikube addons enable dashboard
 
 eval $(minikube docker-env)
+
+influxdb_setup
+grafana_setup
 
 #mysql pod setup
 mysql_setup & INIT_PID=$!
