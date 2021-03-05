@@ -16,3 +16,5 @@ influx -host 127.0.0.1 -port 8086 <<- EOF
 create database telegraf;
 create user telegrafuser with password 'telegrafpass';
 EOF
+
+cp /srcs/telegraf.conf /etc/telegraf.conf

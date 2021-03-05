@@ -2,7 +2,7 @@ Sending build context to Docker daemon  24.58kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add openssl && 	apk add telegraf
- ---> Running in b07bdae194d6
+ ---> Running in f226a7c55ee1
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -69,11 +69,11 @@ Executing phpmyadmin-5.0.4-r0.post-install
 * phpmyadmin config file has been installed to:
 *     /etc/phpmyadmin/config.inc.php
 * If you use apache2:
-[0m[91m*     1) Change the ownership of the config directory:
+*     1) Change the ownership of the config directory:
 *            chown -R apache:apache /etc/phpmyadmin
-*     2) See if you need to modify the apache2 config:
+[0m[91m*     2) See if you need to modify the apache2 config:
 *            /etc/apache2/conf.d/phpmyadmin.conf
-[0m[91m*     3) Restart apache2 when done.
+*     3) Restart apache2 when done.
 *
 [0mOK: 87 MiB in 61 packages
 (1/1) Installing openssl (1.1.1j-r0)
@@ -83,23 +83,23 @@ OK: 88 MiB in 62 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 177 MiB in 63 packages
-Removing intermediate container b07bdae194d6
- ---> 8aba8910013e
+Removing intermediate container f226a7c55ee1
+ ---> e695267b2084
 Step 3/6 : COPY pma_config /pma_config
- ---> 40abec2293d2
+ ---> cd4b4d500ae1
 Step 4/6 : RUN sh /pma_config/pma_setup.sh
- ---> Running in 17e627541aaa
-Removing intermediate container 17e627541aaa
- ---> 7d854e02674c
+ ---> Running in 960f646b586a
+Removing intermediate container 960f646b586a
+ ---> 580a901841b0
 Step 5/6 : ENTRYPOINT sh pma_config/run.sh
- ---> Running in f1585d084eac
-Removing intermediate container f1585d084eac
- ---> dc42cb03b6fe
+ ---> Running in 870680bd4f0b
+Removing intermediate container 870680bd4f0b
+ ---> 217c44377398
 Step 6/6 : EXPOSE 5000
- ---> Running in 443edc858950
-Removing intermediate container 443edc858950
- ---> 257feb9642ad
-Successfully built 257feb9642ad
+ ---> Running in 608ccadcd8c8
+Removing intermediate container 608ccadcd8c8
+ ---> b1819f5b3c32
+Successfully built b1819f5b3c32
 Successfully tagged pma-local:latest
 service/pma-svc created
 deployment.apps/pma-deployment created
