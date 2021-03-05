@@ -2,9 +2,9 @@ Sending build context to Docker daemon  78.34kB
 Step 1/5 : FROM alpine
  ---> 28f6e2705743
 Step 2/5 : COPY mysql /mysql
- ---> db2c5a5d6467
+ ---> 4a983d219943
 Step 3/5 : RUN sh mysql/mysql_setup.sh
- ---> Running in 6a333205f738
+ ---> Running in 44ef8956c9c2
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -34,17 +34,17 @@ OK: 178 MiB in 30 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 267 MiB in 31 packages
-Removing intermediate container 6a333205f738
- ---> ba9d1ee6d64c
+Removing intermediate container 44ef8956c9c2
+ ---> 0b601aba25b1
 Step 4/5 : ENTRYPOINT sh mysql/run.sh
- ---> Running in 062b65240e10
-Removing intermediate container 062b65240e10
- ---> 79a1983ddb74
+ ---> Running in 06e7313100fc
+Removing intermediate container 06e7313100fc
+ ---> 7d6117dabc08
 Step 5/5 : EXPOSE 3306
- ---> Running in c2537dfa2845
-Removing intermediate container c2537dfa2845
- ---> 9134160fec5a
-Successfully built 9134160fec5a
+ ---> Running in 1a8d925fdb73
+Removing intermediate container 1a8d925fdb73
+ ---> d2d8f56b3e46
+Successfully built d2d8f56b3e46
 Successfully tagged mysql-local:latest
 service/mysql-svc created
 persistentvolumeclaim/mysql-claim created

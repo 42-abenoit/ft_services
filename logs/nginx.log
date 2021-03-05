@@ -2,7 +2,7 @@ Sending build context to Docker daemon  24.58kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add openssl && 	apk add telegraf
- ---> Running in 7e1a4615d62e
+ ---> Running in 5bb0b404f8e7
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -21,15 +21,15 @@ OK: 8 MiB in 17 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 97 MiB in 18 packages
-Removing intermediate container 7e1a4615d62e
- ---> b1ccc8468c40
+Removing intermediate container 5bb0b404f8e7
+ ---> 7fdb1ea48594
 Step 3/6 : COPY nginx_config /nginx_config
- ---> 584bdc2aaeb2
+ ---> 4b2fd4fb057d
 Step 4/6 : RUN sh nginx_config/nginx_setup.sh
- ---> Running in 0b68b7cee771
+ ---> Running in c471913c19d5
 [91mGenerating RSA private key, 2048 bit long modulus (2 primes)
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m...[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
 [0m[91me is 65537 (0x010001)
 [0m[91mwriting RSA key
 [0m[91mYou are about to be asked to enter information that will be incorporated
@@ -39,23 +39,23 @@ There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
 If you enter '.', the field will be left blank.
 -----
-Country Name (2 letter code) [AU]:State or Province Name (full name) [Some-State]:[0m[91mLocality Name (eg, city) []:Organization Name (eg, company) [Internet Widgits Pty Ltd]:Organizational Unit Name (eg, section) []:[0m[91mCommon Name (e.g. server FQDN or YOUR name) []:Email Address []:
+Country Name (2 letter code) [AU]:[0m[91mState or Province Name (full name) [Some-State]:Locality Name (eg, city) []:Organization Name (eg, company) [Internet Widgits Pty Ltd]:[0m[91mOrganizational Unit Name (eg, section) []:Common Name (e.g. server FQDN or YOUR name) []:Email Address []:
 Please enter the following 'extra' attributes
 to be sent with your certificate request
-A challenge password []:[0m[91mAn optional company name []:[0m[91mSignature ok
+A challenge password []:An optional company name []:[0m[91mSignature ok
 subject=C = FR, ST = IDF, L = Paris, O = 42, OU = IT, CN = abenoit, emailAddress = abenoit@student.42.fr
 [0m[91mGetting Private key
-[0mRemoving intermediate container 0b68b7cee771
- ---> 2c20e1258ee7
+[0mRemoving intermediate container c471913c19d5
+ ---> b9bec3f7af47
 Step 5/6 : CMD sh nginx_config/run.sh
- ---> Running in 3b76dddd6782
-Removing intermediate container 3b76dddd6782
- ---> 48019e354312
+ ---> Running in d5a7f8d7380f
+Removing intermediate container d5a7f8d7380f
+ ---> 2277e7a3ce65
 Step 6/6 : EXPOSE 80 443
- ---> Running in 24b3b2d347f1
-Removing intermediate container 24b3b2d347f1
- ---> 213344dcd2da
-Successfully built 213344dcd2da
+ ---> Running in 139787acbc58
+Removing intermediate container 139787acbc58
+ ---> bd51962614e1
+Successfully built bd51962614e1
 Successfully tagged nginx-local:latest
 service/nginx-svc created
 deployment.apps/nginx-deployment created
