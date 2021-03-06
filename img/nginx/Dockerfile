@@ -5,9 +5,9 @@ RUN apk update && \
 	apk add openssl && \
 	apk add telegraf
 
-COPY nginx_config /nginx_config
-RUN sh nginx_config/nginx_setup.sh
+COPY srcs /srcs
+RUN sh srcs/setup.sh
 
-CMD sh nginx_config/run.sh
+CMD sh srcs/run.sh
 
 EXPOSE 80 443

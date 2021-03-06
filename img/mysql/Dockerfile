@@ -1,8 +1,12 @@
 FROM alpine
 
-COPY mysql /mysql
-RUN sh mysql/mysql_setup.sh 
+RUN	apk update && \
+	apk add mariadb mariadb-client && \
+	apk add	telegraf
 
-ENTRYPOINT sh mysql/run.sh
+COPY srcs /srcs
+RUN sh srcs/setup.sh 
+
+ENTRYPOINT sh srcs/run.sh
 
 EXPOSE 3306

@@ -8,9 +8,9 @@ RUN apk update && \
 	apk add openssl && \
 	apk add telegraf
 
-COPY pma_config /pma_config
-RUN sh /pma_config/pma_setup.sh
+COPY srcs /srcs
+RUN sh /srcs/setup.sh
 
-ENTRYPOINT sh pma_config/run.sh
+ENTRYPOINT sh srcs/run.sh
 
 EXPOSE 5000

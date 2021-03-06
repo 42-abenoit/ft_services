@@ -6,9 +6,9 @@ RUN apk update && \
     php7-zlib php7-curl php7-mbstring php7-json php7-session && \
 	apk add telegraf
 
-COPY wordpress_config /wordpress_config
-RUN sh wordpress_config/wordpress_setup.sh
+COPY /srcs /srcs
+RUN sh /srcs/setup.sh
 
-ENTRYPOINT sh wordpress_config/run.sh
+ENTRYPOINT sh /srcs/run.sh
 
 EXPOSE 5050

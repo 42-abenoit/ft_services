@@ -4,7 +4,7 @@ echo -e "\e[93m"
 while :; do
 	for (( i=0; i<4; i++ )); do
 		cat lol_$i
-		sleep 0.15
+		sleep 0.3
 		echo -en "\033[12A"
 		for (( j=0; j<12; j++ )); do
 		 echo -e "\r\033[K"

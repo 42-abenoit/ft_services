@@ -17,6 +17,7 @@ rdy_ftps=$(kubectl get pods | grep ftps-deployment | awk '{print $2}')
 done
 
 ftps_pod=$(kubectl get pods | grep ftps-deployment | awk '{print $1}')
+kubectl exec $ftps_pod -- sh -c "mkdir /home/ftp/ftpuser"
 kubectl exec $ftps_pod -- sh -c 'echo "ftppass
 ftppass" | adduser -h /home/ftp/ftpuser ftpuser'
 kubectl exec $ftps_pod -- sh -c 'chmod 755 /home/ftp/ftpuser'
