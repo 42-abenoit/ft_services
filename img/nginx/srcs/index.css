@@ -1,32 +1,40 @@
+.icon-grid
+{
+	display: grid;
+	margin: 0;
+	position: absolute;
+	right: 0px;
+	top: 50%;
+	transform: translate(5%, -50%);
+}
+
+h1
+{
+	text-align: center;
+	color: #FFFFFF;
+}
+
 .Wordpress
 {
-	float: right;
-	z-index: 3;
+	grid-column: 1;
 }
 
 .PhpMyAdmin
 {
-    float: left;
-    width: 66%;
-    margin-right: -100%;
-    padding-top: 15%; // arbitrary
-    position: relative;
-    z-index: 1;
+	grid-column: 2;
 }
-
 .Grafana
 {
-	float: right;
-	z-index: 2;
+	grid-column: 3;
 }
 
 img
 {
-	height: 30%;
-	width: 30%;
+	height: 50%;
+	width: 50%;
 }
 
 body
 {
-	background-color: #FF4444;
+	background-color: #0B1B37;
 }
