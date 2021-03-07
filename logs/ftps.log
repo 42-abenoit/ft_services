@@ -2,7 +2,7 @@ Sending build context to Docker daemon  16.38kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add vsftpd && 	apk add openssl && 	apk add telegraf
- ---> Running in c7a9692ced91
+ ---> Running in 0aba751bc807
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -21,15 +21,15 @@ OK: 8 MiB in 18 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 97 MiB in 19 packages
-Removing intermediate container c7a9692ced91
- ---> 985ea124739e
+Removing intermediate container 0aba751bc807
+ ---> 74796a2fd0b4
 Step 3/6 : COPY srcs /srcs
- ---> 7de3a67b89ed
+ ---> 0fec1e0fb084
 Step 4/6 : RUN	sh srcs/setup.sh
- ---> Running in 7c64b881b88d
+ ---> Running in 59e989916376
 [91mGenerating a RSA private key
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m..[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
 [0m[91mwriting new private key to '/etc/vsftpd/ssl/vsftpd.key'
 [0m[91m-----
 [0mChanging password for ftpuser
@@ -37,17 +37,17 @@ New password:
 Bad password: too weak
 Retype password: 
 [91mpasswd: password for ftpuser changed by root
-[0mRemoving intermediate container 7c64b881b88d
- ---> 1e9f274172ac
+[0mRemoving intermediate container 59e989916376
+ ---> 46279f060147
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in d41cef0c647c
-Removing intermediate container d41cef0c647c
- ---> 4e6e5f32613d
+ ---> Running in 0625f07cdf5f
+Removing intermediate container 0625f07cdf5f
+ ---> f2f54c75be7b
 Step 6/6 : EXPOSE 20 21 21000-21003
- ---> Running in 0d42e6f6e621
-Removing intermediate container 0d42e6f6e621
- ---> 531762eea778
-Successfully built 531762eea778
+ ---> Running in d7554973192b
+Removing intermediate container d7554973192b
+ ---> 451da38ef262
+Successfully built 451da38ef262
 Successfully tagged ftps-local:latest
 service/ftps-svc created
 persistentvolumeclaim/ftps-claim created

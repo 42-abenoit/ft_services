@@ -2,7 +2,7 @@ Sending build context to Docker daemon  24.58kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add openssl && 	apk add telegraf
- ---> Running in 8e8905d19fc3
+ ---> Running in e4b4c9895cff
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -69,9 +69,9 @@ Executing phpmyadmin-5.0.4-r0.post-install
 * phpmyadmin config file has been installed to:
 *     /etc/phpmyadmin/config.inc.php
 * If you use apache2:
-*     1) Change the ownership of the config directory:
+[0m[91m*     1) Change the ownership of the config directory:
 *            chown -R apache:apache /etc/phpmyadmin
-[0m[91m*     2) See if you need to modify the apache2 config:
+*     2) See if you need to modify the apache2 config:
 *            /etc/apache2/conf.d/phpmyadmin.conf
 *     3) Restart apache2 when done.
 *
@@ -83,23 +83,23 @@ OK: 88 MiB in 62 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 177 MiB in 63 packages
-Removing intermediate container 8e8905d19fc3
- ---> fd0d28ead190
+Removing intermediate container e4b4c9895cff
+ ---> 0f910b425775
 Step 3/6 : COPY srcs /srcs
- ---> 97bfd3ccc0f8
+ ---> 8a1a7f027d20
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in 1671274b2c07
-Removing intermediate container 1671274b2c07
- ---> 3492d81b5691
+ ---> Running in 2fe0ddf2a9a9
+Removing intermediate container 2fe0ddf2a9a9
+ ---> 8f4b340f0312
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in 8bacf206d362
-Removing intermediate container 8bacf206d362
- ---> 747e2322b514
+ ---> Running in 911872dec255
+Removing intermediate container 911872dec255
+ ---> 09e268484211
 Step 6/6 : EXPOSE 5000
- ---> Running in 645d48785d51
-Removing intermediate container 645d48785d51
- ---> 4ecd666eed0d
-Successfully built 4ecd666eed0d
+ ---> Running in ecbb20e28cd9
+Removing intermediate container ecbb20e28cd9
+ ---> c028789b427a
+Successfully built c028789b427a
 Successfully tagged pma-local:latest
 service/pma-svc created
 deployment.apps/pma-deployment created

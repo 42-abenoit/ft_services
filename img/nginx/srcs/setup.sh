@@ -11,6 +11,7 @@ mv -f /srcs/nginx.conf /etc/nginx/nginx.conf
 mv -f /srcs/host_setup /etc/nginx/conf.d/default.conf
 cp -f /srcs/index.css /home/www/
 cp -f /srcs/index.html /home/www/
+cp -f /srcs/media /home/www/
 
 #ssl key generation
 mkdir /etc/nginx/ssl

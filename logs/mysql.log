@@ -2,7 +2,7 @@ Sending build context to Docker daemon  77.82kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN	apk update && 	apk add mariadb mariadb-client && 	apk add	telegraf
- ---> Running in 511a4ba83c20
+ ---> Running in f19f60bffb4e
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -32,23 +32,23 @@ OK: 178 MiB in 30 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 267 MiB in 31 packages
-Removing intermediate container 511a4ba83c20
- ---> 348ec5d41293
+Removing intermediate container f19f60bffb4e
+ ---> f124302a302f
 Step 3/6 : COPY srcs /srcs
- ---> bd2cad5d6afc
+ ---> 52fa2cb41b39
 Step 4/6 : RUN sh srcs/setup.sh
- ---> Running in 525baa82e720
-Removing intermediate container 525baa82e720
- ---> 1825d33bb40a
+ ---> Running in 9a9fe2bac2d5
+Removing intermediate container 9a9fe2bac2d5
+ ---> 48a367c5d407
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in ecbaaa2bd4a7
-Removing intermediate container ecbaaa2bd4a7
- ---> 4170040d1227
+ ---> Running in 3a6220607c55
+Removing intermediate container 3a6220607c55
+ ---> d028ecf448f4
 Step 6/6 : EXPOSE 3306
- ---> Running in a894a2684419
-Removing intermediate container a894a2684419
- ---> feda6addb55c
-Successfully built feda6addb55c
+ ---> Running in 78e338218e34
+Removing intermediate container 78e338218e34
+ ---> 337ff8ad536f
+Successfully built 337ff8ad536f
 Successfully tagged mysql-local:latest
 service/mysql-svc created
 persistentvolumeclaim/mysql-claim created

@@ -1,9 +1,29 @@
-p
+.Wordpress
 {
-	margin-top: 25%;
-	font-style: bold;
-	font-size: 72px;
-	text-align: center;
+	float: right;
+	z-index: 3;
+}
+
+.PhpMyAdmin
+{
+    float: left;
+    width: 66%;
+    margin-right: -100%;
+    padding-top: 15%; // arbitrary
+    position: relative;
+    z-index: 1;
+}
+
+.Grafana
+{
+	float: right;
+	z-index: 2;
+}
+
+img
+{
+	height: 30%;
+	width: 30%;
 }
 
 body
