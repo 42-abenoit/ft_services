@@ -1,12 +1,12 @@
-Sending build context to Docker daemon  24.58kB
+Sending build context to Docker daemon  26.11kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
-Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add telegraf
- ---> Running in f67d83f68773
+Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add openssl && 	apk add telegraf
+ ---> Running in 5071d6f0698e
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-60-g6740477673 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+v3.13.2-64-g45953ae9e6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-62-g442b17c3f2 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
 OK: 13877 distinct packages available
 (1/2) Installing pcre (8.44-r0)
 (2/2) Installing nginx (1.18.0-r13)
@@ -57,35 +57,26 @@ OK: 7 MiB in 16 packages
 Executing busybox-1.32.1-r3.trigger
 Executing ca-certificates-20191127-r5.trigger
 OK: 32 MiB in 56 packages
+(1/1) Installing openssl (1.1.1j-r0)
+Executing busybox-1.32.1-r3.trigger
+OK: 32 MiB in 57 packages
 (1/1) Installing telegraf (1.17.0-r0)
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
-OK: 121 MiB in 57 packages
-Removing intermediate container f67d83f68773
- ---> e6ebd62f9d45
+OK: 122 MiB in 58 packages
+Removing intermediate container 5071d6f0698e
+ ---> 9613766a43fc
 Step 3/6 : COPY /srcs /srcs
- ---> 33c774954f2b
+ ---> 43dbdaecc55e
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in a6356496e31f
+ ---> Running in 88ab77213657
 [91mConnecting to wordpress.org (198.143.164.252:80)
 [0m[91mConnecting to wordpress.org (198.143.164.252:443)
 [0m[91msaving to 'latest.tar.gz'
-[0m[91mlatest.tar.gz        [0m[91m 13% [0m[91m|****                            | 1983k  0:00:06 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6079k  0:00:03 ETA
-[0m[91mlatest.tar.gz         40% |************                    | 6111k  0:00:04 ETA
-[0m[91mlatest.tar.gz         40% |************                    | 6127k  0:00:05 ETA
-[0m[91mlatest.tar.gz         40% |************                    | 6159k  0:00:07 ETA
-[0m[91mlatest.tar.gz         40% |************                    | 6175k  0:00:08 ETA
-[0m[91mlatest.tar.gz         40% |*************                   | 6207k  0:00:10 ETA
-[0m[91mlatest.tar.gz         40% |*************                   | 6223k  0:00:11 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6255k  0:00:12 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6271k  0:00:14 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6287k  0:00:15 ETA
-[0m[91mlatest.tar.gz         54% |*****************               | 8367k  0:00:09 ETA
-[0m[91mlatest.tar.gz         64% |********************            | 9871k  0:00:07 ETA
-[0m[91mlatest.tar.gz        [0m[91m 99% [0m[91m|******************************* | [0m[91m14.8M[0m[91m  0:00:00 ETA[0m[91m
-[0m[91mlatest.tar.gz        [0m[91m100% |********************************| 14.8M  0:00:00 ETA
-[0m[91m'latest.tar.gz' saved
+[0m[91mlatest.tar.gz         12% |***                             | 1887k  0:00:07 ETA
+[0m[91mlatest.tar.gz         76% |************************        | 11.3M  0:00:00 ETA
+[0m[91mlatest.tar.gz        100% |********************************| 14.8M  0:00:00 ETA
+'latest.tar.gz' saved
 [0mwordpress/
 wordpress/xmlrpc.php
 wordpress/wp-blog-header.php
@@ -2555,17 +2546,35 @@ wordpress/wp-admin/themes.php
 wordpress/wp-admin/options-reading.php
 wordpress/wp-trackback.php
 wordpress/wp-comments-post.php
-Removing intermediate container a6356496e31f
- ---> 3974517a0015
+[91mGenerating RSA private key, 2048 bit long modulus (2 primes)
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m..[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
+[0m[91me is 65537 (0x010001)
+[0m[91mwriting RSA key
+[0m[91mYou are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----
+Country Name (2 letter code) [AU]:State or Province Name (full name) [Some-State]:Locality Name (eg, city) []:Organization Name (eg, company) [Internet Widgits Pty Ltd]:[0m[91mOrganizational Unit Name (eg, section) []:Common Name (e.g. server FQDN or YOUR name) []:Email Address []:
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:An optional company name []:[0m[91mSignature ok
+subject=C = FR, ST = IDF, L = Paris, O = 42, OU = IT, CN = abenoit, emailAddress = abenoit@st[0m[91mudent.42.fr
+[0m[91mGetting Private key
+[0mRemoving intermediate container 88ab77213657
+ ---> a96539b9ac69
 Step 5/6 : ENTRYPOINT sh /srcs/run.sh
- ---> Running in 2ce0492ace33
-Removing intermediate container 2ce0492ace33
- ---> 8ae21938d402
+ ---> Running in dad7bd022e3a
+Removing intermediate container dad7bd022e3a
+ ---> 796cd60bee38
 Step 6/6 : EXPOSE 5050
- ---> Running in 501138e22d0b
-Removing intermediate container 501138e22d0b
- ---> 6fffb823abe9
-Successfully built 6fffb823abe9
+ ---> Running in 94dc20f745eb
+Removing intermediate container 94dc20f745eb
+ ---> e43e14d5e75d
+Successfully built e43e14d5e75d
 Successfully tagged wordpress-local:latest
 service/wordpress-svc created
 deployment.apps/wordpress-deployment created

@@ -2,11 +2,11 @@ Sending build context to Docker daemon  77.82kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN	apk update && 	apk add mariadb mariadb-client && 	apk add	telegraf
- ---> Running in f19f60bffb4e
+ ---> Running in f5d4699769cb
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-58-ge3f19cedc6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-60-g6740477673 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+v3.13.2-64-g45953ae9e6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-62-g442b17c3f2 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
 OK: 13877 distinct packages available
 (1/16) Installing mariadb-common (10.5.8-r0)
 (2/16) Installing libaio (0.3.112-r1)
@@ -32,23 +32,23 @@ OK: 178 MiB in 30 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 267 MiB in 31 packages
-Removing intermediate container f19f60bffb4e
- ---> f124302a302f
+Removing intermediate container f5d4699769cb
+ ---> 2353a3da6737
 Step 3/6 : COPY srcs /srcs
- ---> 52fa2cb41b39
+ ---> 6f292b2dbdaa
 Step 4/6 : RUN sh srcs/setup.sh
- ---> Running in 9a9fe2bac2d5
-Removing intermediate container 9a9fe2bac2d5
- ---> 48a367c5d407
+ ---> Running in 97e96e14377f
+Removing intermediate container 97e96e14377f
+ ---> e9e8afbb179a
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in 3a6220607c55
-Removing intermediate container 3a6220607c55
- ---> d028ecf448f4
+ ---> Running in c3beeec9c2c5
+Removing intermediate container c3beeec9c2c5
+ ---> b3da02c8a605
 Step 6/6 : EXPOSE 3306
- ---> Running in 78e338218e34
-Removing intermediate container 78e338218e34
- ---> 337ff8ad536f
-Successfully built 337ff8ad536f
+ ---> Running in 7e1c036822fe
+Removing intermediate container 7e1c036822fe
+ ---> ed891c393c78
+Successfully built ed891c393c78
 Successfully tagged mysql-local:latest
 service/mysql-svc created
 persistentvolumeclaim/mysql-claim created
