@@ -39,6 +39,13 @@ spec:
       - name: nginx
         image: nginx-local
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+           command:
+           - sh
+           - /srcs/probe.sh
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 80
           name: http

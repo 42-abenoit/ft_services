@@ -1,0 +1,1 @@
+pgrep telegraf && pgrep mariadbd

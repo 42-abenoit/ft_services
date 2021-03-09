@@ -146,8 +146,8 @@ then
 else
 	MINI_IP=$(minikube ip)
 fi
-cp -f metallb/metallb_config.yaml metallb/config.yaml
-sed -i "s/MINI_IP/$MINI_IP/g" metallb/config.yaml
+cp -f k8s_conf/metallb_config.yaml k8s_conf/config.yaml
+sed -i "s/MINI_IP/$MINI_IP/g" k8s_conf/metallb.yaml
 #alternate method :
 #kubectl get node -o=custom-columns='DATA:status.addresses[0].address'
 }
@@ -157,7 +157,7 @@ if [[ -z $(minikube addons list | grep metallb | grep enabled) ]]
 then
 	echo "Enabling Metallb"
 	minikube addons enable metallb
-	kubectl apply -f metallb/config.yaml
+	kubectl apply -f k8s_conf/metallb.yaml
 #	echo "$MINI_IP\n$MINI_IP\n" | minikube addons configure metallb
 fi
 }
@@ -173,7 +173,7 @@ if [ "$(kubectl get secrets --namespace metallb-system | grep memberlist)" = "" 
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 fi
 set_global_cluster_ip
-kubectl apply -f metallb/config.yaml
+kubectl apply -f k8s_conf/metallb.yaml
 }
 
 clean () {
@@ -183,43 +183,43 @@ rm -rf ~/.minikube
 
 nginx_setup () {
 docker build -t nginx-local img/nginx > ./logs/nginx.log 2> ./logs/nginx.err
-kubectl apply -f img/nginx/nginx.yaml >> ./logs/nginx.log 2>> ./logs/nginx.err
+kubectl apply -f k8s_conf/nginx.yaml >> ./logs/nginx.log 2>> ./logs/nginx.err
 return 0
 }
 
 pma_setup () {
 docker build -t pma-local img/pma > ./logs/pma.log 2> ./logs/pma.err
-kubectl apply -f img/pma/pma.yaml >> ./logs/pma.log 2>> ./logs/pma.err
+kubectl apply -f k8s_conf/pma.yaml >> ./logs/pma.log 2>> ./logs/pma.err
 return 0
 }
 
 mysql_setup () {
 docker build -t mysql-local img/mysql > ./logs/mysql.log 2> ./logs/mysql.err
-kubectl apply -f img/mysql/mysql.yaml >> ./logs/mysql.log 2>> ./logs/mysql.err
+kubectl apply -f k8s_conf/mysql.yaml >> ./logs/mysql.log 2>> ./logs/mysql.err
 return 0
 }
 
 wordpress_setup () {
 docker build -t wordpress-local img/wordpress > ./logs/wordpress.log 2> ./logs/wordpress.err
-kubectl apply -f img/wordpress/wordpress.yaml >> ./logs/wordpress.log 2>> ./logs/wordpress.err
+kubectl apply -f k8s_conf/wordpress.yaml >> ./logs/wordpress.log 2>> ./logs/wordpress.err
 return 0
 }
 
 ftps_setup () {
 docker build -t ftps-local img/ftps > ./logs/ftps.log 2> ./logs/ftps.err
-kubectl apply -f img/ftps/ftps.yaml >> ./logs/ftps.log 2>> ./logs/ftps.err
+kubectl apply -f k8s_conf/ftps.yaml >> ./logs/ftps.log 2>> ./logs/ftps.err
 return 0
 }
 
 influxdb_setup () {
 docker build -t influxdb-local img/influxdb
-kubectl apply -f img/influxdb/influxdb.yaml
+kubectl apply -f k8s_conf/influxdb.yaml
 return 0
 }
 
 grafana_setup () {
 docker build -t grafana-local img/grafana
-kubectl apply -f img/grafana/grafana.yaml
+kubectl apply -f k8s_conf/grafana.yaml
 return 0
 }
 

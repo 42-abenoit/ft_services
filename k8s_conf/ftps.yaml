@@ -62,6 +62,13 @@ spec:
       - name: ftps-container
         image: ftps-local
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+           command:
+           - sh
+           - /srcs/probe.sh
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 21
           name: ftps-port

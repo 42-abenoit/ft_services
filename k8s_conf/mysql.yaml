@@ -47,7 +47,13 @@ spec:
       - image: mysql-local
         name: mysql-container
         imagePullPolicy: Never
-        env:
+        livenessProbe:
+          exec:
+           command:
+           - sh
+           - /srcs/probe.sh
+          initialDelaySeconds: 30
+          periodSeconds: 5
         ports:
         - containerPort: 3306
           name: mysql-port

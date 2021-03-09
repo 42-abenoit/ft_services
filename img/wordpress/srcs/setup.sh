@@ -6,14 +6,18 @@ mkdir /run/nginx
 touch /run/nginx/nginx.pid
 touch /var/log/nginx/access.log
 
+#wordpress install
+wget http://wordpress.org/latest.tar.gz
+tar -xzvf latest.tar.gz wordpress
+rm latest.tar.gz
+mv -f wordpress /home/www/wordpress
+
 #nginx configuration
 mv -f /srcs/nginx.conf /etc/nginx/nginx.conf
 mv -f /srcs/host_setup /etc/nginx/conf.d/default.conf
 
 #wordpress setup
-cp /srcs/wp-config.php /home/www/wordpress/
-cp -f /srcs/index.css /home/www/wordpress
-cp -f /srcs/index.html /home/www/wordpress
+cp -f /srcs/wp-config.php /home/www/wordpress
 chown -R www:www /home/www/wordpress
 
 PHP_FPM_USER="www"
@@ -48,9 +52,5 @@ sed -i "s|;*post_max_size =.*|post_max_size = ${PHP_MAX_POST}|i" /etc/php7/php.i
 sed -i "s|;*cgi.fix_pathinfo=.*|cgi.fix_pathinfo= ${PHP_CGI_FIX_PATHINFO}|i" /etc/php7/php.ini
 
 mkdir /run/php
-
-#ssl key generation
-mkdir /etc/nginx/ssl
-sh /srcs/ssl_setup.sh
 
 cp srcs/telegraf.conf /etc/telegraf.conf

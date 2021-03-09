@@ -54,8 +54,4 @@ mkdir /run/php
 cp /srcs/config.inc.php /home/www/phpmyadmin/config.inc.php
 chown -R www:www /home/www/phpmyadmin
 
-#ssl key generation
-mkdir /etc/nginx/ssl
-sh /srcs/ssl_setup.sh
-
 cp /srcs/telegraf.conf /etc/telegraf.conf

@@ -35,6 +35,13 @@ spec:
       - name: grafana-container
         image: grafana-local
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+           command:
+           - sh
+           - /srcs/probe.sh
+          initialDelaySeconds: 10
+          periodSeconds: 5
         ports:
         - containerPort: 3000
           name: grafana-port
