@@ -2,7 +2,7 @@ Sending build context to Docker daemon  22.53kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add telegraf
- ---> Running in bc0b2af6ff3f
+ ---> Running in db9e971e41fd
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-66-g3837863e5e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -66,12 +66,12 @@ Executing phpmyadmin-5.0.4-r0.post-install
 [91m*
 * phpmyadmin has been installed to:
 *     /usr/share/webapps/phpmyadmin
-* phpmyadmin config file has been installed to:
+[0m[91m* phpmyadmin config file has been installed to:
 *     /etc/phpmyadmin/config.inc.php
 * If you use apache2:
 *     1) Change the ownership of the config directory:
 *            chown -R apache:apache /etc/phpmyadmin
-[0m[91m*     2) See if you need to modify the apache2 config:
+*     2) See if you need to modify the apache2 config:
 *            /etc/apache2/conf.d/phpmyadmin.conf
 *     3) Restart apache2 when done.
 *
@@ -80,23 +80,23 @@ Executing phpmyadmin-5.0.4-r0.post-install
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 176 MiB in 62 packages
-Removing intermediate container bc0b2af6ff3f
- ---> 55e0829530ca
+Removing intermediate container db9e971e41fd
+ ---> 7da3f314834b
 Step 3/6 : COPY srcs /srcs
- ---> 73fcdd50ff37
+ ---> 5c3ae3dc91b2
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in 94868fbd4ade
-Removing intermediate container 94868fbd4ade
- ---> ad9755aa4573
+ ---> Running in 9ad1b6fc4bec
+Removing intermediate container 9ad1b6fc4bec
+ ---> 525a9853f6f4
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in 65de65a6fb34
-Removing intermediate container 65de65a6fb34
- ---> 6c78dff5a500
+ ---> Running in 5f417b711176
+Removing intermediate container 5f417b711176
+ ---> eeb6b19906d2
 Step 6/6 : EXPOSE 5000
- ---> Running in cf4a136e868c
-Removing intermediate container cf4a136e868c
- ---> 4ca6f3af4b46
-Successfully built 4ca6f3af4b46
+ ---> Running in 9f4b7245ba6e
+Removing intermediate container 9f4b7245ba6e
+ ---> 81fe5920056e
+Successfully built 81fe5920056e
 Successfully tagged pma-local:latest
 service/pma-svc created
-deployment.apps/pma-deployment created
+deployment.apps/pma created

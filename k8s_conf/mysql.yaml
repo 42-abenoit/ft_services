@@ -29,7 +29,7 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-deployment
+  name: mysql
   labels:
     app: mysql-app
 spec:
@@ -45,22 +45,22 @@ spec:
     spec:
       containers:
       - image: mysql-local
-        name: mysql-container
+        name: mysql
         imagePullPolicy: Never
         livenessProbe:
           exec:
            command:
            - sh
            - /srcs/probe.sh
-          initialDelaySeconds: 30
+          initialDelaySeconds: 10
           periodSeconds: 5
-        startupProbe:
+        readinessProbe:
           exec:
            command:
            - /bin/stat
            - /var/lib/mysql/init.beacon
-          initialDelaySeconds: 30
-          periodSeconds: 10
+          initialDelaySeconds: 5
+          periodSeconds: 3
         ports:
         - containerPort: 3306
           name: mysql-port

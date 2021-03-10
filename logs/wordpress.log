@@ -2,7 +2,7 @@ Sending build context to Docker daemon   21.5kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add telegraf
- ---> Running in dc5e52ce38ea
+ ---> Running in 35f7356f83f6
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-66-g3837863e5e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -61,22 +61,34 @@ OK: 32 MiB in 56 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 121 MiB in 57 packages
-Removing intermediate container dc5e52ce38ea
- ---> ae9b9f6a0acd
+Removing intermediate container 35f7356f83f6
+ ---> 41afb8b600d9
 Step 3/6 : COPY /srcs /srcs
- ---> 7a3bcb89d778
+ ---> 9cf5595bda04
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in 6eea60eb1b0b
+ ---> Running in b7ee236fce02
 [91mConnecting to wordpress.org (198.143.164.252:80)
 [0m[91mConnecting to wordpress.org (198.143.164.252:443)
 [0m[91msaving to 'latest.tar.gz'
-[0m[91mlatest.tar.gz          0% |                                | 15979  0:16:31 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6015k  0:00:03 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6063k  0:00:04 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6079k  0:00:06 ETA
-[0m[91mlatest.tar.gz         85% [0m[91m|***************************     | 12.9M  0:00:00 ETA
+[0m[91mlatest.tar.gz          0% |                                | 32363  0:08:07 ETA[0m[91m
+[0m[91mlatest.tar.gz         39% |************                    | 6095k  0:00:03 ETA
+[0m[91mlatest.tar.gz         39% |************                    | 6127k  0:00:04 ETA
+[0m[91mlatest.tar.gz         39% |************                    | 6143k  0:00:06 ETA
+[0m[91mlatest.tar.gz         40% |************                    | 6175k  0:00:07 ETA
+[0m[91mlatest.tar.gz         40% |************                    | 6175k  0:00:08 ETA
+[0m[91mlatest.tar.gz         40% |************                    | 6191k  0:00:10 ETA
+[0m[91mlatest.tar.gz         40% |************                    | 6239k  0:00:11 ETA
+[0m[91mlatest.tar.gz         40% |*************                   | 6255k  0:00:13 ETA
+[0m[91mlatest.tar.gz         40% |*************                   | 6271k  0:00:14 ETA
+[0m[91mlatest.tar.gz         41% |*************                   | 6319k  0:00:15 ETA
+[0m[91mlatest.tar.gz         41% |*************                   | 6319k  0:00:17 ETA
+[0m[91mlatest.tar.gz         44% |**************                  | 6879k  0:00:16 ETA
+[0m[91mlatest.tar.gz         44% |**************                  | 6895k  0:00:17 ETA
+[0m[91mlatest.tar.gz         47% |***************                 | 7311k  0:00:16 ETA
+[0m[91mlatest.tar.gz         59% |*******************             | 9167k  0:00:10 ETA
+[0m[91mlatest.tar.gz         73% |***********************         | 11.0M  0:00:06 ETA
 [0m[91mlatest.tar.gz        100% |********************************| 15.0M  0:00:00 ETA
-'latest.tar.gz' saved
+[0m[91m'latest.tar.gz' saved
 [0mwordpress/
 wordpress/xmlrpc.php
 wordpress/wp-blog-header.php
@@ -2559,17 +2571,17 @@ wordpress/wp-admin/themes.php
 wordpress/wp-admin/options-reading.php
 wordpress/wp-trackback.php
 wordpress/wp-comments-post.php
-Removing intermediate container 6eea60eb1b0b
- ---> 57a6ebe8db07
+Removing intermediate container b7ee236fce02
+ ---> 459e6e4ffdbf
 Step 5/6 : ENTRYPOINT sh /srcs/run.sh
- ---> Running in 2347eac371fe
-Removing intermediate container 2347eac371fe
- ---> 1a704dc07ff1
+ ---> Running in 199b21aebc93
+Removing intermediate container 199b21aebc93
+ ---> 6e67a96a9a39
 Step 6/6 : EXPOSE 5050
- ---> Running in 1a2581cd875c
-Removing intermediate container 1a2581cd875c
- ---> c1c1d78cbf1a
-Successfully built c1c1d78cbf1a
+ ---> Running in bd305fb8f844
+Removing intermediate container bd305fb8f844
+ ---> a8db2a737a10
+Successfully built a8db2a737a10
 Successfully tagged wordpress-local:latest
 service/wordpress-svc created
-deployment.apps/wordpress-deployment created
+deployment.apps/wordpress created

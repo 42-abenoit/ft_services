@@ -1,11 +1,7 @@
-. ./scripts/prints.fn
-. ./scripts/metallb.fn
-. ./scripts/pods_setup.fn
-. ./scripts/minikube_utils.fn
-
-dir=$(dirname $(realpath $0))
-echo $dir
-
+. ./install_scripts/prints.fn
+. ./install_scripts/metallb.fn
+. ./install_scripts/pods_setup.fn
+. ./install_scripts/minikube_utils.fn
 
 print_title
 
