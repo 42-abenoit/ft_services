@@ -54,6 +54,13 @@ spec:
            - /srcs/probe.sh
           initialDelaySeconds: 30
           periodSeconds: 5
+        startupProbe:
+          exec:
+           command:
+           - /bin/stat
+           - /var/lib/mysql/init.beacon
+          initialDelaySeconds: 30
+          periodSeconds: 10
         ports:
         - containerPort: 3306
           name: mysql-port

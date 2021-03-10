@@ -1,0 +1,126 @@
+
+#mysql pod setup
+mysql_setup & INIT_PID=$!
+print_mysql_anim & MYSQL_PID=$!
+wait $INIT_PID
+ret=$?
+kill $MYSQL_PID
+wait $MYSQL_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
+#pma pod setup
+pma_setup & INIT_PID=$!
+print_pma_anim & PMA_PID=$!
+wait $INIT_PID
+ret=$?
+kill $PMA_PID
+wait $PMA_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
+#nginx pod setup
+nginx_setup & INIT_PID=$!
+print_nginx_anim & NGINX_PID=$!
+wait $INIT_PID
+ret=$?
+kill $NGINX_PID
+wait $NGINX_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
+#wordpress pod setup
+wordpress_setup & INIT_PID=$!
+print_wordpress_anim & WP_PID=$!
+wait $INIT_PID
+ret=$?
+kill $WP_PID
+wait $WP_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
+#ftps pod setup
+ftps_setup & INIT_PID=$!
+print_ftps_anim & FTPS_PID=$!
+wait $INIT_PID
+ret=$?
+kill $FTPS_PID
+wait $FTPS_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
+#mysql db init
+mysql_initdb > ./logs/init.log 2> ./logs/init.err & INIT_PID=$!
+print_init_anim & MYDB_PID=$!
+wait $INIT_PID
+ret=$?
+kill $MYDB_PID
+wait $MYDB_PID 2> /dev/null
+if [ $ret -eq 0 ]
+then
+echo -en "\e[32m"
+cat ascii/print_done
+echo -e "\e[0m"
+else
+echo -en "\e[31m"
+cat ascii/print_fail
+echo -e "\e[0m"
+fi
+
+#ftps user init ===> done in Dockerfile
+#ftps_init_user > ./logs/ftpuser.log 2> ./logs/ftpuser.err & INIT_PID=$!
+#print_user_anim & FTPU_PID=$!
+#wait $INIT_PID
+#ret=$?
+#kill $FTPU_PID
+#wait $FTPU_PID 2> /dev/null
+#if [ $ret -eq 0 ]
+#then
+#echo -en "\e[32m"
+#cat ascii/print_done
+#echo -e "\e[0m"
+#else
+#echo -en "\e[31m"
+#cat ascii/print_fail
+#echo -e "\e[0m"
+#fi

@@ -1,0 +1,16 @@
+dl_mini_bin () {
+curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo mkdir -p /usr/local/bin/
+sudo install minikube /usr/local/bin/
+rm minikube
+}
+
+kubectl_latest () {
+curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+}
+
+clean () {
+minikube delete
+rm -rf ~/.minikube
+}
+

@@ -1,13 +1,13 @@
-Sending build context to Docker daemon  24.06kB
+Sending build context to Docker daemon  22.53kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add telegraf
- ---> Running in 3ebe1b90488e
+ ---> Running in bc0b2af6ff3f
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-64-g45953ae9e6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-65-g71dd266990 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
-OK: 13877 distinct packages available
+v3.13.2-66-g3837863e5e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-67-gff294de1d2 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+OK: 13878 distinct packages available
 (1/2) Installing pcre (8.44-r0)
 (2/2) Installing nginx (1.18.0-r13)
 Executing nginx-1.18.0-r13.pre-install
@@ -80,23 +80,23 @@ Executing phpmyadmin-5.0.4-r0.post-install
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 176 MiB in 62 packages
-Removing intermediate container 3ebe1b90488e
- ---> 0757a4b63807
+Removing intermediate container bc0b2af6ff3f
+ ---> 55e0829530ca
 Step 3/6 : COPY srcs /srcs
- ---> 270278915340
+ ---> 73fcdd50ff37
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in 66651eb52c34
-Removing intermediate container 66651eb52c34
- ---> 63c07483f485
+ ---> Running in 94868fbd4ade
+Removing intermediate container 94868fbd4ade
+ ---> ad9755aa4573
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in 4fdb846fb7f6
-Removing intermediate container 4fdb846fb7f6
- ---> 0efd489315d5
+ ---> Running in 65de65a6fb34
+Removing intermediate container 65de65a6fb34
+ ---> 6c78dff5a500
 Step 6/6 : EXPOSE 5000
- ---> Running in 4725ab38f04b
-Removing intermediate container 4725ab38f04b
- ---> 7f429a2fcf0f
-Successfully built 7f429a2fcf0f
+ ---> Running in cf4a136e868c
+Removing intermediate container cf4a136e868c
+ ---> 4ca6f3af4b46
+Successfully built 4ca6f3af4b46
 Successfully tagged pma-local:latest
 service/pma-svc created
 deployment.apps/pma-deployment created

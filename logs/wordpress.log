@@ -1,13 +1,13 @@
-Sending build context to Docker daemon  23.04kB
+Sending build context to Docker daemon   21.5kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add telegraf
- ---> Running in 58bafad79538
+ ---> Running in dc5e52ce38ea
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-64-g45953ae9e6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-65-g71dd266990 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
-OK: 13877 distinct packages available
+v3.13.2-66-g3837863e5e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-67-gff294de1d2 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+OK: 13878 distinct packages available
 (1/2) Installing pcre (8.44-r0)
 (2/2) Installing nginx (1.18.0-r13)
 Executing nginx-1.18.0-r13.pre-install
@@ -61,24 +61,21 @@ OK: 32 MiB in 56 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 121 MiB in 57 packages
-Removing intermediate container 58bafad79538
- ---> 2f700ab129dd
+Removing intermediate container dc5e52ce38ea
+ ---> ae9b9f6a0acd
 Step 3/6 : COPY /srcs /srcs
- ---> eac7c63613f1
+ ---> 7a3bcb89d778
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in 19156ad5fad9
+ ---> Running in 6eea60eb1b0b
 [91mConnecting to wordpress.org (198.143.164.252:80)
 [0m[91mConnecting to wordpress.org (198.143.164.252:443)
 [0m[91msaving to 'latest.tar.gz'
-[0m[91mlatest.tar.gz          1% |                                |  207k  0:01:12 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6335k  0:00:02 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6351k  0:00:04 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6351k  0:00:05 ETA
-[0m[91mlatest.tar.gz         42% |*************                   | 6479k  0:00:06 ETA
-[0m[91mlatest.tar.gz         43% |*************                   | 6655k  0:00:07 ETA
-[0m[91mlatest.tar.gz         45% |**************                  | 6879k  0:00:08 ETA
-[0m[91mlatest.tar.gz         61% |*******************             | 9423k  0:00:04 ETA
-[0m[91mlatest.tar.gz        100% |********************************| 14.8M  0:00:00 ETA
+[0m[91mlatest.tar.gz          0% |                                | 15979  0:16:31 ETA
+[0m[91mlatest.tar.gz         39% |************                    | 6015k  0:00:03 ETA
+[0m[91mlatest.tar.gz         39% |************                    | 6063k  0:00:04 ETA
+[0m[91mlatest.tar.gz         39% |************                    | 6079k  0:00:06 ETA
+[0m[91mlatest.tar.gz         85% [0m[91m|***************************     | 12.9M  0:00:00 ETA
+[0m[91mlatest.tar.gz        100% |********************************| 15.0M  0:00:00 ETA
 'latest.tar.gz' saved
 [0mwordpress/
 wordpress/xmlrpc.php
@@ -812,13 +809,17 @@ wordpress/wp-includes/css/dist/block-library/editor.min.css
 wordpress/wp-includes/css/dist/block-library/style-rtl.min.css
 wordpress/wp-includes/css/dist/block-library/theme.css
 wordpress/wp-includes/css/dist/block-library/theme-rtl.min.css
+wordpress/wp-includes/css/dist/block-library/common-rtl.min.css
 wordpress/wp-includes/css/dist/block-library/editor.css
+wordpress/wp-includes/css/dist/block-library/common.css
 wordpress/wp-includes/css/dist/block-library/theme.min.css
 wordpress/wp-includes/css/dist/block-library/style.min.css
 wordpress/wp-includes/css/dist/block-library/theme-rtl.css
 wordpress/wp-includes/css/dist/block-library/editor-rtl.css
 wordpress/wp-includes/css/dist/block-library/editor-rtl.min.css
 wordpress/wp-includes/css/dist/block-library/style-rtl.css
+wordpress/wp-includes/css/dist/block-library/common.min.css
+wordpress/wp-includes/css/dist/block-library/common-rtl.css
 wordpress/wp-includes/css/dist/block-library/style.css
 wordpress/wp-includes/css/dist/format-library/
 wordpress/wp-includes/css/dist/format-library/style-rtl.min.css
@@ -1025,6 +1026,8 @@ wordpress/wp-includes/blocks/separator/block.json
 wordpress/wp-includes/blocks/html/
 wordpress/wp-includes/blocks/html/block.json
 wordpress/wp-includes/blocks/social-link.php
+wordpress/wp-includes/blocks/freeform/
+wordpress/wp-includes/blocks/freeform/block.json
 wordpress/wp-includes/blocks/audio/
 wordpress/wp-includes/blocks/audio/block.json
 wordpress/wp-includes/blocks/verse/
@@ -1080,8 +1083,6 @@ wordpress/wp-includes/blocks/latest-posts/
 wordpress/wp-includes/blocks/latest-posts/block.json
 wordpress/wp-includes/blocks/group/
 wordpress/wp-includes/blocks/group/block.json
-wordpress/wp-includes/blocks/classic/
-wordpress/wp-includes/blocks/classic/block.json
 wordpress/wp-includes/blocks/table/
 wordpress/wp-includes/blocks/table/block.json
 wordpress/wp-includes/blocks/list/
@@ -1178,6 +1179,7 @@ wordpress/wp-includes/class-walker-category-dropdown.php
 wordpress/wp-includes/link-template.php
 wordpress/wp-includes/comment.php
 wordpress/wp-includes/class-wp-network-query.php
+wordpress/wp-includes/https-detection.php
 wordpress/wp-includes/registration.php
 wordpress/wp-includes/PHPMailer/
 wordpress/wp-includes/PHPMailer/SMTP.php
@@ -1336,6 +1338,7 @@ wordpress/wp-includes/sodium_compat/lib/php72compat_const.php
 wordpress/wp-includes/sodium_compat/lib/sodium_compat.php
 wordpress/wp-includes/sodium_compat/LICENSE
 wordpress/wp-includes/sodium_compat/autoload.php
+wordpress/wp-includes/robots-template.php
 wordpress/wp-includes/sitemaps/
 wordpress/wp-includes/sitemaps/class-wp-sitemaps-renderer.php
 wordpress/wp-includes/sitemaps/class-wp-sitemaps-provider.php
@@ -1388,6 +1391,7 @@ wordpress/wp-includes/rest-api/class-wp-rest-request.php
 wordpress/wp-includes/class-wp-admin-bar.php
 wordpress/wp-includes/class-wp-hook.php
 wordpress/wp-includes/class-wp-block-patterns-registry.php
+wordpress/wp-includes/https-migration.php
 wordpress/wp-includes/post.php
 wordpress/wp-includes/class-wp-object-cache.php
 wordpress/wp-includes/class-wp-walker.php
@@ -1483,6 +1487,8 @@ wordpress/wp-includes/js/dist/url.min.js
 wordpress/wp-includes/js/dist/components.js
 wordpress/wp-includes/js/dist/wordcount.js
 wordpress/wp-includes/js/dist/vendor/
+wordpress/wp-includes/js/dist/vendor/wp-polyfill-object-fit.min.js
+wordpress/wp-includes/js/dist/vendor/wp-polyfill-object-fit.js
 wordpress/wp-includes/js/dist/vendor/lodash.js
 wordpress/wp-includes/js/dist/vendor/wp-polyfill-fetch.min.js
 wordpress/wp-includes/js/dist/vendor/wp-polyfill-dom-rect.min.js
@@ -2018,9 +2024,12 @@ wordpress/wp-admin/images/comment-grey-bubble-2x.png
 wordpress/wp-admin/images/wordpress-logo.svg
 wordpress/wp-admin/images/bubble_bg-2x.gif
 wordpress/wp-admin/images/align-right.png
+wordpress/wp-admin/images/about-header-brushes.svg
 wordpress/wp-admin/images/wordpress-logo-white.svg
 wordpress/wp-admin/images/media-button-image.gif
 wordpress/wp-admin/images/imgedit-icons.png
+wordpress/wp-admin/images/about-color-palette.svg
+wordpress/wp-admin/images/about-badge.svg
 wordpress/wp-admin/images/stars.png
 wordpress/wp-admin/images/wpspin_light.gif
 wordpress/wp-admin/images/align-none-2x.png
@@ -2039,6 +2048,7 @@ wordpress/wp-admin/images/icons32-vs.png
 wordpress/wp-admin/images/align-left-2x.png
 wordpress/wp-admin/images/media-button-2x.png
 wordpress/wp-admin/images/yes.png
+wordpress/wp-admin/images/about-color-palette-vert.svg
 wordpress/wp-admin/images/resize-rtl-2x.gif
 wordpress/wp-admin/images/media-button-video.gif
 wordpress/wp-admin/images/mask.png
@@ -2549,17 +2559,17 @@ wordpress/wp-admin/themes.php
 wordpress/wp-admin/options-reading.php
 wordpress/wp-trackback.php
 wordpress/wp-comments-post.php
-Removing intermediate container 19156ad5fad9
- ---> 9d0424111dfa
+Removing intermediate container 6eea60eb1b0b
+ ---> 57a6ebe8db07
 Step 5/6 : ENTRYPOINT sh /srcs/run.sh
- ---> Running in dcd1a559d4bb
-Removing intermediate container dcd1a559d4bb
- ---> 39189caf8248
+ ---> Running in 2347eac371fe
+Removing intermediate container 2347eac371fe
+ ---> 1a704dc07ff1
 Step 6/6 : EXPOSE 5050
- ---> Running in 3bcb8ff9da7d
-Removing intermediate container 3bcb8ff9da7d
- ---> e2b18c2eec85
-Successfully built e2b18c2eec85
+ ---> Running in 1a2581cd875c
+Removing intermediate container 1a2581cd875c
+ ---> c1c1d78cbf1a
+Successfully built c1c1d78cbf1a
 Successfully tagged wordpress-local:latest
 service/wordpress-svc created
 deployment.apps/wordpress-deployment created

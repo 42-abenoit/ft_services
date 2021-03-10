@@ -47,6 +47,13 @@ spec:
       - image: influxdb-local
         name: influxdb-container
         imagePullPolicy: Never
+        livenessProbe:
+          exec:
+           command:
+           - sh
+           - /srcs/probe.sh
+          initialDelaySeconds: 30
+          periodSeconds: 5
         env:
         ports:
         - containerPort: 8086
