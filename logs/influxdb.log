@@ -9,71 +9,71 @@ Digest: sha256:a75afd8b57e7f34e4dad8d65e2c7ba2e1975c795ce1ee22fa34f8cf46f96a3be
 Status: Downloaded newer image for alpine:latest
  ---> 28f6e2705743
 Step 2/8 : RUN apk update
- ---> Running in 4c242ea8ed0a
+ ---> Running in ae5cc3d2c40c
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-66-g3837863e5e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-69-g05c74c5ce3 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
 v3.13.2-67-gff294de1d2 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
 OK: 13878 distinct packages available
-Removing intermediate container 4c242ea8ed0a
- ---> 5b9704f2bc38
+Removing intermediate container ae5cc3d2c40c
+ ---> 5e4638f4f3e6
 Step 3/8 : RUN apk add influxdb
- ---> Running in a9ff309c452a
+ ---> Running in 18df6c90ab72
 (1/1) Installing influxdb (1.8.3-r2)
 Executing influxdb-1.8.3-r2.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 206 MiB in 15 packages
-Removing intermediate container a9ff309c452a
- ---> 5fa1e7d91802
+Removing intermediate container 18df6c90ab72
+ ---> a515f40e1463
 Step 4/8 : RUN apk add telegraf
- ---> Running in f99f1ab6cadf
+ ---> Running in 9b0ceff3d79c
 (1/1) Installing telegraf (1.17.0-r0)
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 295 MiB in 16 packages
-Removing intermediate container f99f1ab6cadf
- ---> 615ceb57677a
+Removing intermediate container 9b0ceff3d79c
+ ---> 80353ec7c1c1
 Step 5/8 : COPY srcs /srcs
- ---> ef5ab051ba95
+ ---> 311ae274d21c
 Step 6/8 : RUN sh /srcs/setup.sh
- ---> Running in eba34ff82e6f
-[91mts=2021-03-10T19:14:09.249273Z lvl=info msg="InfluxDB starting" log_id=0SoOohtG000 version=1.8.3 branch=1.8 commit=563e6c3d1a
-ts=2021-03-10T19:14:09.249305Z lvl=info msg="Go runtime" log_id=0SoOohtG000 version=go1.15.6 maxprocs=4
-[0m[91mts=2021-03-10T19:14:09.300773Z lvl=info msg="Using data dir" log_id=0SoOohtG000 service=store path=/root/.influxdb/data
-ts=2021-03-10T19:14:09.300926Z lvl=info msg="Compaction settings" log_id=0SoOohtG000 service=store max_concurrent_compactions=2 throughput_bytes_per_second=50331648 throughput_bytes_per_second_burst=50331648
-[0m[91mts=2021-03-10T19:14:09.301005Z lvl=info msg="Open store (start)" log_id=0SoOohtG000 service=store trace_id=0SoOoi50000 op_name=tsdb_open op_event=start
-[0m[91mts=2021-03-10T19:14:09.301100Z lvl=info msg="Open store (end)" log_id=0SoOohtG000 service=store trace_id=0SoOoi50000 op_name=tsdb_open op_event=end op_elapsed=0.097ms
-ts=2021-03-10T19:14:09.301247Z lvl=info msg="Opened service" log_id=0SoOohtG000 service=subscriber
-ts=2021-03-10T19:14:09.301259Z lvl=info msg="Starting monitor service" log_id=0SoOohtG000 service=monitor
-ts=2021-03-10T19:14:09.301270Z lvl=info msg="Registered diagnostics client" log_id=0SoOohtG000 service=monitor name=build
-ts=2021-03-10T19:14:09.301277Z lvl=info msg="Registered diagnostics client" log_id=0SoOohtG000 service=monitor name=runtime
-ts=2021-03-10T19:14:09.301283Z lvl=info msg="Registered diagnostics client" log_id=0SoOohtG000 service=monitor name=network
-ts=2021-03-10T19:14:09.301294Z lvl=info msg="Registered diagnostics client" log_id=0SoOohtG000 service=monitor name=system
-ts=2021-03-10T19:14:09.301317Z lvl=info msg="Starting precreation service" log_id=0SoOohtG000 service=shard-precreation check_interval=10m advance_period=30m
-ts=2021-03-10T19:14:09.301327Z lvl=info msg="Starting snapshot service" log_id=0SoOohtG000 service=snapshot
-ts=2021-03-10T19:14:09.301335Z lvl=info msg="Starting continuous query service" log_id=0SoOohtG000 service=continuous_querier
-ts=2021-03-10T19:14:09.301357Z lvl=info msg="Starting HTTP service" log_id=0SoOohtG000 service=httpd authentication=false
-ts=2021-03-10T19:14:09.301366Z lvl=info msg="opened HTTP access log" log_id=0SoOohtG000 service=httpd path=stderr
-ts=2021-03-10T19:14:09.301370Z lvl=info msg="Storing statistics" log_id=0SoOohtG000 service=monitor db_instance=_internal db_rp=monitor interval=10s
-[0m[91mts=2021-03-10T19:14:09.301794Z lvl=info msg="Listening on HTTP" log_id=0SoOohtG000 service=httpd addr=[::]:8086 https=false
-ts=2021-03-10T19:14:09.301831Z lvl=info msg="Starting retention policy enforcement service" log_id=0SoOohtG000 service=retention check_interval=30m
-ts=2021-03-10T19:14:09.302018Z lvl=info msg="Sending usage statistics to usage.influxdata.com" log_id=0SoOohtG000
-ts=2021-03-10T19:14:09.302153Z lvl=info msg="Listening for signals" log_id=0SoOohtG000
-[0m[91m[httpd] 127.0.0.1 - - [10/Mar/2021:19:14:09 +0000] "GET /ping HTTP/1.1" 204 0 "-" "InfluxDBShell/1.8.3" caa5f51f-81d4-11eb-8001-0242ac110006 87
-[0m[91m[httpd] 127.0.0.1 - - [10/Mar/2021:19:14:09 +0000] "GET /ping HTTP/1.1" 204 0 "-" "InfluxDBShell/1.8.3" caaa301c-81d4-11eb-8002-0242ac110006 48
-[0m[91mts=2021-03-10T19:14:09.814146Z lvl=info msg="Executing query" log_id=0SoOohtG000 service=query query="CREATE DATABASE telegraf"
-[0m[91mts=2021-03-10T19:14:09.857139Z lvl=info msg="Executing query" log_id=0SoOohtG000 service=query query="CREATE USER telegrafuser WITH PASSWORD [REDACTED]"
-[0m[91m[httpd] 127.0.0.1 - - [10/Mar/2021:19:14:09 +0000] "POST /query?chunked=true&db=&epoch=ns&q=create+database+telegraf%3B%0Acreate+user+telegrafuser+with+password+%5BREDACTED%5D%0A HTTP/1.1" 200 62 "-" "InfluxDBShell/1.8.3" caaa453e-81d4-11eb-8003-0242ac110006 166018
+ ---> Running in 7e31d1219383
+[91mts=2021-03-12T10:24:59.436807Z lvl=info msg="InfluxDB starting" log_id=0SqVKjB0000 version=1.8.3 branch=1.8 commit=563e6c3d1a
+ts=2021-03-12T10:24:59.436851Z lvl=info msg="Go runtime" log_id=0SqVKjB0000 version=go1.15.6 maxprocs=4
+[0m[91mts=2021-03-12T10:24:59.506509Z lvl=info msg="Using data dir" log_id=0SqVKjB0000 service=store path=/root/.influxdb/data
+[0m[91mts=2021-03-12T10:24:59.506758Z lvl=info msg="Compaction settings" log_id=0SqVKjB0000 service=store max_concurrent_compactions=2 throughput_bytes_per_second=50331648 throughput_bytes_per_second_burst=50331648
+ts=2021-03-12T10:24:59.506874Z lvl=info msg="Open store (start)" log_id=0SqVKjB0000 service=store trace_id=0SqVKjSW000 op_name=tsdb_open op_event=start
+[0m[91mts=2021-03-12T10:24:59.507009Z lvl=info msg="Open store (end)" log_id=0SqVKjB0000 service=store trace_id=0SqVKjSW000 op_name=tsdb_open op_event=end op_elapsed=0.138ms
+[0m[91mts=2021-03-12T10:24:59.507074Z lvl=info msg="Opened service" log_id=0SqVKjB0000 service=subscriber
+ts=2021-03-12T10:24:59.507133Z lvl=info msg="Starting monitor service" log_id=0SqVKjB0000 service=monitor
+ts=2021-03-12T10:24:59.507175Z lvl=info msg="Registered diagnostics client" log_id=0SqVKjB0000 service=monitor name=build
+ts=2021-03-12T10:24:59.507218Z lvl=info msg="Registered diagnostics client" log_id=0SqVKjB0000 service=monitor name=runtime
+ts=2021-03-12T10:24:59.507260Z lvl=info msg="Registered diagnostics client" log_id=0SqVKjB0000 service=monitor name=network
+ts=2021-03-12T10:24:59.507310Z lvl=info msg="Registered diagnostics client" log_id=0SqVKjB0000 service=monitor name=system
+ts=2021-03-12T10:24:59.507365Z lvl=info msg="Starting precreation service" log_id=0SqVKjB0000 service=shard-precreation check_interval=10m advance_period=30m
+ts=2021-03-12T10:24:59.507410Z lvl=info msg="Starting snapshot service" log_id=0SqVKjB0000 service=snapshot
+ts=2021-03-12T10:24:59.507456Z lvl=info msg="Starting continuous query service" log_id=0SqVKjB0000 service=continuous_querier
+[0m[91mts=2021-03-12T10:24:59.507551Z lvl=info msg="Starting HTTP service" log_id=0SqVKjB0000 service=httpd authentication=false
+ts=2021-03-12T10:24:59.507596Z lvl=info msg="opened HTTP access log" log_id=0SqVKjB0000 service=httpd path=stderr
+ts=2021-03-12T10:24:59.507757Z lvl=info msg="Storing statistics" log_id=0SqVKjB0000 service=monitor db_instance=_internal db_rp=monitor interval=10s
+ts=2021-03-12T10:24:59.507962Z lvl=info msg="Listening on HTTP" log_id=0SqVKjB0000 service=httpd addr=[::]:8086 https=false
+ts=2021-03-12T10:24:59.508007Z lvl=info msg="Starting retention policy enforcement service" log_id=0SqVKjB0000 service=retention check_interval=30m
+[0m[91mts=2021-03-12T10:24:59.508175Z lvl=info msg="Sending usage statistics to usage.influxdata.com" log_id=0SqVKjB0000
+ts=2021-03-12T10:24:59.509497Z lvl=info msg="Listening for signals" log_id=0SqVKjB0000
+[0m[91m[httpd] 127.0.0.1 - - [12/Mar/2021:10:24:59 +0000] "GET /ping HTTP/1.1" 204 0 "-" "InfluxDBShell/1.8.3" 331771b6-831d-11eb-8001-0242ac110006 114
+[0m[91m[httpd] 127.0.0.1 - - [12/Mar/2021:10:24:59 +0000] "GET /ping HTTP/1.1" 204 0 "-" "InfluxDBShell/1.8.3" 331b6164-831d-11eb-8002-0242ac110006 75
+[0m[91mts=2021-03-12T10:24:59.971534Z lvl=info msg="Executing query" log_id=0SqVKjB0000 service=query query="CREATE DATABASE telegraf"
+[0m[91mts=2021-03-12T10:25:00.040417Z lvl=info msg="Executing query" log_id=0SqVKjB0000 service=query query="CREATE USER telegrafuser WITH PASSWORD [REDACTED]"
+[0m[91m[httpd] 127.0.0.1 - - [12/Mar/2021:10:24:59 +0000] "POST /query?chunked=true&db=&epoch=ns&q=create+database+telegraf%3B%0Acreate+user+telegrafuser+with+password+%5BREDACTED%5D%0A HTTP/1.1" 200 62 "-" "InfluxDBShell/1.8.3" 331c4185-831d-11eb-8003-0242ac110006 203734
 [0m
-Removing intermediate container eba34ff82e6f
- ---> 02455a60c0bd
+Removing intermediate container 7e31d1219383
+ ---> 2420b238ab94
 Step 7/8 : CMD sh /srcs/run.sh
- ---> Running in ae554fbf3200
-Removing intermediate container ae554fbf3200
- ---> ad86cf57c2b7
+ ---> Running in 06296cb93885
+Removing intermediate container 06296cb93885
+ ---> 9ebe1c6776ff
 Step 8/8 : EXPOSE 8086
- ---> Running in d5da98f344ae
-Removing intermediate container d5da98f344ae
- ---> 58dafa3b82c7
-Successfully built 58dafa3b82c7
+ ---> Running in d33794685415
+Removing intermediate container d33794685415
+ ---> 1e9d26597521
+Successfully built 1e9d26597521
 Successfully tagged influxdb-local:latest

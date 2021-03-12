@@ -2,10 +2,10 @@ Sending build context to Docker daemon  22.53kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add telegraf
- ---> Running in db9e971e41fd
+ ---> Running in c9979b343865
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-66-g3837863e5e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-69-g05c74c5ce3 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
 v3.13.2-67-gff294de1d2 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
 OK: 13878 distinct packages available
 (1/2) Installing pcre (8.44-r0)
@@ -66,10 +66,10 @@ Executing phpmyadmin-5.0.4-r0.post-install
 [91m*
 * phpmyadmin has been installed to:
 *     /usr/share/webapps/phpmyadmin
-[0m[91m* phpmyadmin config file has been installed to:
+* phpmyadmin config file has been installed to:
 *     /etc/phpmyadmin/config.inc.php
 * If you use apache2:
-*     1) Change the ownership of the config directory:
+[0m[91m*     1) Change the ownership of the config directory:
 *            chown -R apache:apache /etc/phpmyadmin
 *     2) See if you need to modify the apache2 config:
 *            /etc/apache2/conf.d/phpmyadmin.conf
@@ -80,23 +80,23 @@ Executing phpmyadmin-5.0.4-r0.post-install
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 176 MiB in 62 packages
-Removing intermediate container db9e971e41fd
- ---> 7da3f314834b
+Removing intermediate container c9979b343865
+ ---> 878c1f939454
 Step 3/6 : COPY srcs /srcs
- ---> 5c3ae3dc91b2
+ ---> 280504a842fe
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in 9ad1b6fc4bec
-Removing intermediate container 9ad1b6fc4bec
- ---> 525a9853f6f4
+ ---> Running in e4c2f5cc46fb
+Removing intermediate container e4c2f5cc46fb
+ ---> d5399f806266
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in 5f417b711176
-Removing intermediate container 5f417b711176
- ---> eeb6b19906d2
+ ---> Running in ac9400ecfe36
+Removing intermediate container ac9400ecfe36
+ ---> 66f7199944a1
 Step 6/6 : EXPOSE 5000
- ---> Running in 9f4b7245ba6e
-Removing intermediate container 9f4b7245ba6e
- ---> 81fe5920056e
-Successfully built 81fe5920056e
+ ---> Running in 2c8ed75b56a9
+Removing intermediate container 2c8ed75b56a9
+ ---> af36445ee240
+Successfully built af36445ee240
 Successfully tagged pma-local:latest
 service/pma-svc created
 deployment.apps/pma created

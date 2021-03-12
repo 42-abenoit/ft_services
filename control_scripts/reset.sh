@@ -22,7 +22,7 @@ eval $(minikube docker-env)
 docker build -t mysql-local $dir/img/mysql
 kubectl delete deployment mysql
 kubectl delete svc mysql-svc
-	if [ $2 == "claim" ]
+	if [[ $2 == "claim" ]]
 	then
 	kubectl delete pvc mysql-claim
 	fi
@@ -40,7 +40,7 @@ eval $(minikube docker-env)
 docker build -t ftps-local $dir/img/ftps
 kubectl delete deployment ftps
 kubectl delete svc ftps-svc
-	if [ $2 == "claim" ]
+	if [[ $2 == "claim" ]]
 	then
 	kubectl delete pvc ftps-claim
 	fi
@@ -51,7 +51,7 @@ eval $(minikube docker-env)
 docker build -t influxdb-local $dir/img/influxdb
 kubectl delete deployment influxdb
 kubectl delete svc influxdb-svc
-	if [ $2 == "claim" ]
+	if [[ $2 == "claim" ]]
 	then
 	kubectl delete pvc influxdb-claim
 	fi
