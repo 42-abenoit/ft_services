@@ -8,6 +8,8 @@ stty echo
 tput cnorm
 kill $CAPT >/dev/null 2>/dev/null
 wait $CAPT >/dev/null 2>/dev/null
+kill $DPID >/dev/null 2>/dev/null
+wait $DPID >/dev/null 2>/dev/null
 }
 
 trap reset_term EXIT
@@ -46,5 +48,21 @@ nginx_setup
 wordpress_setup
 ftps_setup
 
+echo -e "$STYLE""\nSuccess !!!\e[0m"
 print_passwords
-echo -e "$STYLE""http://$MINI_IP"
+echo -e "$STYLE""     ACCESS PORTAL\e[0m"
+echo -e "$STYLE""==> http://$MINI_IP <==\e[0m"
+
+echo -en "$STYLE""\nLaunching Dashboard\e[0m"
+progress_anim & WPID=$!
+minikube dashboard --url >./logs/dashboard.log 2>./logs/dashboard.err & DPID=$!
+echo $DPID > ./logs/dashboard.pid
+while [ -z $(cat ./logs/dashboard.log) ]
+do
+sleep 1
+done
+kill $WPID >/dev/null 2>/dev/null
+wait $WPID >/dev/null 2>/dev/null
+print_success
+echo -en "$STYLE""\nDashboard address is: $(cat ./logs/dashboard.log)\e[0m"
+echo -e "$STYLE""Dashboard pid is: $DPID"

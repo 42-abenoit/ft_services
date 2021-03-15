@@ -1,0 +1,102 @@
+Sending build context to Docker daemon  22.53kB
+Step 1/6 : FROM alpine
+ ---> 28f6e2705743
+Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add telegraf
+ ---> Running in b089612139ed
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
+v3.13.2-83-g73a7825440 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-84-g27aaf862b6 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+OK: 13878 distinct packages available
+(1/2) Installing pcre (8.44-r0)
+(2/2) Installing nginx (1.18.0-r13)
+Executing nginx-1.18.0-r13.pre-install
+Executing nginx-1.18.0-r13.post-install
+Executing busybox-1.32.1-r3.trigger
+OK: 7 MiB in 16 packages
+(1/40) Installing php7-common (7.4.15-r0)
+(2/40) Installing argon2-libs (20190702-r1)
+(3/40) Installing ncurses-terminfo-base (6.2_p20210109-r0)
+(4/40) Installing ncurses-libs (6.2_p20210109-r0)
+(5/40) Installing libedit (20191231.3.1-r1)
+(6/40) Installing pcre2 (10.36-r0)
+(7/40) Installing xz-libs (5.2.5-r0)
+(8/40) Installing libxml2 (2.9.10-r6)
+(9/40) Installing php7 (7.4.15-r0)
+(10/40) Installing ca-certificates (20191127-r5)
+(11/40) Installing brotli-libs (1.0.9-r3)
+(12/40) Installing nghttp2-libs (1.42.0-r1)
+(13/40) Installing libcurl (7.74.0-r1)
+(14/40) Installing php7-curl (7.4.15-r0)
+(15/40) Installing php7-fpm (7.4.15-r0)
+(16/40) Installing libxau (1.0.9-r0)
+(17/40) Installing libbsd (0.10.0-r0)
+(18/40) Installing libxdmcp (1.1.3-r0)
+(19/40) Installing libxcb (1.14-r1)
+(20/40) Installing libx11 (1.7.0-r0)
+(21/40) Installing libxext (1.3.4-r0)
+(22/40) Installing libice (1.0.10-r0)
+(23/40) Installing libuuid (2.36.1-r1)
+(24/40) Installing libsm (1.2.3-r0)
+(25/40) Installing libxt (1.2.1-r0)
+(26/40) Installing libxpm (3.5.13-r0)
+(27/40) Installing libbz2 (1.0.8-r1)
+(28/40) Installing libpng (1.6.37-r1)
+(29/40) Installing freetype (2.10.4-r1)
+(30/40) Installing libjpeg-turbo (2.0.6-r0)
+(31/40) Installing libwebp (1.1.0-r0)
+(32/40) Installing php7-gd (7.4.15-r0)
+(33/40) Installing php7-json (7.4.15-r0)
+(34/40) Installing oniguruma (6.9.6-r0)
+(35/40) Installing php7-mbstring (7.4.15-r0)
+(36/40) Installing php7-openssl (7.4.15-r0)
+(37/40) Installing php7-mysqlnd (7.4.15-r0)
+(38/40) Installing php7-mysqli (7.4.15-r0)
+(39/40) Installing php7-opcache (7.4.15-r0)
+(40/40) Installing php7-session (7.4.15-r0)
+Executing busybox-1.32.1-r3.trigger
+Executing ca-certificates-20191127-r5.trigger
+OK: 32 MiB in 56 packages
+(1/5) Installing php7-bz2 (7.4.15-r0)
+(2/5) Installing php7-ctype (7.4.15-r0)
+(3/5) Installing libzip (1.7.3-r2)
+(4/5) Installing php7-zip (7.4.15-r0)
+(5/5) Installing phpmyadmin (5.0.4-r0)
+Executing phpmyadmin-5.0.4-r0.post-install
+[91m*
+* phpmyadmin has been installed to:
+*     /usr/share/webapps/phpmyadmin
+* phpmyadmin config file has been installed to:
+*     /etc/phpmyadmin/config.inc.php
+* If you use apache2:
+*     1) Change the ownership of the config directory:
+*            chown -R apache:apache /etc/phpmyadmin
+*     2) See if you need to modify the apache2 config:
+*            /etc/apache2/conf.d/phpmyadmin.conf
+*     3) Restart apache2 when done.
+*
+[0mOK: 87 MiB in 61 packages
+(1/1) Installing telegraf (1.17.0-r0)
+Executing telegraf-1.17.0-r0.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 176 MiB in 62 packages
+Removing intermediate container b089612139ed
+ ---> 51b4d5e0748f
+Step 3/6 : COPY srcs /srcs
+ ---> 5970eae63d68
+Step 4/6 : RUN sh /srcs/setup.sh
+ ---> Running in 080549e73706
+Removing intermediate container 080549e73706
+ ---> 4904ddf2fe80
+Step 5/6 : ENTRYPOINT sh srcs/run.sh
+ ---> Running in 1e9581f12d7d
+Removing intermediate container 1e9581f12d7d
+ ---> 23bd3fd8c6c0
+Step 6/6 : EXPOSE 5000
+ ---> Running in b47084b4b347
+Removing intermediate container b47084b4b347
+ ---> def27ac48df9
+Successfully built def27ac48df9
+Successfully tagged pma-local:latest
+service/pma-svc created
+deployment.apps/pma created

@@ -18,11 +18,11 @@ fi
 print_passwords () {
 if [ $g_mode -eq 1 ]
 then
-echo -en "\e[36m"
+echo -en "\e[1m\e[36m"
 cat ./ascii/passwords.ascii
 echo -e "\e[0m"
 else
-echo -en "\e[36m"
+echo -en "\e[1m\e[36m"
 cat ./ascii/passwords_vertical.ascii
 echo -e "\e[0m"
 fi

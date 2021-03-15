@@ -1,0 +1,52 @@
+Sending build context to Docker daemon  1.508MB
+Step 1/11 : FROM alpine
+ ---> 28f6e2705743
+Step 2/11 : RUN apk update
+ ---> Using cache
+ ---> 185c51925847
+Step 3/11 : RUN apk add grafana
+ ---> Running in 76d84d1f58bc
+(1/1) Installing grafana (7.3.6-r0)
+Executing grafana-7.3.6-r0.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 171 MiB in 15 packages
+Removing intermediate container 76d84d1f58bc
+ ---> d439f0c9122d
+Step 4/11 : RUN apk add telegraf
+ ---> Running in 3a96623f91f3
+(1/1) Installing telegraf (1.17.0-r0)
+Executing telegraf-1.17.0-r0.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 260 MiB in 16 packages
+Removing intermediate container 3a96623f91f3
+ ---> 0181eebf98f8
+Step 5/11 : COPY /srcs /srcs
+ ---> 8bf866eb9bf2
+Step 6/11 : RUN mkdir /usr/share/grafana/data
+ ---> Running in 7149ece12f08
+Removing intermediate container 7149ece12f08
+ ---> c7b824ea8f5f
+Step 7/11 : RUN cp /srcs/telegraf.conf /etc/telegraf.conf
+ ---> Running in 2d4e6d57dd89
+Removing intermediate container 2d4e6d57dd89
+ ---> 5f5353faf466
+Step 8/11 : RUN cp /srcs/grafana.db /usr/share/grafana/data
+ ---> Running in a41d266af052
+Removing intermediate container a41d266af052
+ ---> 6dccad217057
+Step 9/11 : RUN cp /srcs/defaults.ini /usr/share/grafana/conf
+ ---> Running in 5a037067a7b1
+Removing intermediate container 5a037067a7b1
+ ---> 8c883afab4e3
+Step 10/11 : CMD sh srcs/run.sh
+ ---> Running in b9500bddad69
+Removing intermediate container b9500bddad69
+ ---> d9d6dac6a49d
+Step 11/11 : EXPOSE 3000
+ ---> Running in 739a40004a4a
+Removing intermediate container 739a40004a4a
+ ---> 0948fa2f9ed4
+Successfully built 0948fa2f9ed4
+Successfully tagged grafana-local:latest
+service/grafana-svc created
+deployment.apps/grafana created

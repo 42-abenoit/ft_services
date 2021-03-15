@@ -59,7 +59,7 @@ MINI_IP=$(minikube ip)
 sed -e "s/MINI_IP/$MINI_IP/g" "./img/nginx/srcs/index.html.template" >"./img/nginx/srcs/index.html"
 sed -e "s/MINI_IP/$MINI_IP/g" "./img/nginx/srcs/host_setup.template" >"./img/nginx/srcs/host_setup"
 sed -e "s/MINI_IP/$MINI_IP/g" "./img/ftps/srcs/vsftpd.conf.template" >"./img/ftps/srcs/vsftpd.conf"
-sed -e "s/MINI_IP/$MINI_IP/g" "./img/mysql/srcs/wordpress.sql.template" >"./img/mysql/wordpress.sql"
+sed -e "s/MINI_IP/$MINI_IP/g" "./img/mysql/srcs/wordpress.sql.template" >"./img/mysql/srcs/wordpress.sql"
 sed -e "s/MINI_IP/$MINI_IP/g" "./k8s_conf/metallb.yaml.template" >"./k8s_conf/metallb.yaml"
 }
 
