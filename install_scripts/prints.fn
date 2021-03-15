@@ -1,8 +1,38 @@
 
 print_title () {
+if [ $g_mode -eq 1 ]
+then
 echo -en "\e[36m"
 cat ./ascii/title/title.ascii
 echo -e "\e[0m"
+else
+cat ./ascii/title/title_mini.ascii
+fi
+}
+
+print_passwords () {
+if [ $g_mode -eq 1 ]
+then
+echo -en "\e[36m"
+cat ./ascii/passwords.ascii
+echo -e "\e[0m"
+else
+cat ./ascii/passwords_vertical.ascii
+fi
+}
+
+progress_anim () {
+progress=("[  ]" "[. ]" "[..]")
+while :; do
+	for (( i=0; i<3; i++ )); do
+		echo -en "\e[1m${progress[$i]}\e[0m" "\b\b\b\b\b"
+		sleep 0.5
+	done
+done
+}
+
+print_success () {
+echo -e "\e[1m[\e[32mOK\e[97m]\e[0m"
 }
 
 print_mysql_anim () {
