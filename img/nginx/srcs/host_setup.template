@@ -5,12 +5,12 @@ server {
 
 	location /phpmyadmin/ {
 	
-			proxy_pass http://192.168.49.2:5000/;
+			proxy_pass http://MINI_IP:5000/;
 		}
 
 	location /wordpress {
 
-   			return 307 http://192.168.49.2:5050;
+   			return 307 http://MINI_IP:5050;
 		}
 
 	location / {
@@ -32,12 +32,12 @@ server	{
 
 	location /phpmyadmin/ {
 	
-			proxy_pass http://192.168.49.2:5000/;
+			proxy_pass http://MINI_IP:5000/;
 		}
 
 	location /wordpress {
 
-   			return 307 http://192.168.49.2:5050;
+   			return 307 http://MINI_IP:5050;
 		}
 
     location / {

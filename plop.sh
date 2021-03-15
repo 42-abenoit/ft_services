@@ -19,7 +19,7 @@ echo -en "\033[036m\U1f142\033[0m "
 #kill $WPID >/dev/null 2>/dev/null
 #wait $WPID >/dev/null 2>/dev/null
 
-echo "http://192.168.49.3"
+echo "http://192.168.49.2"
 
 MINI_raw=$(minikube ip | awk -F  '{print $1,$2,$3}')
 echo $MINI_raw

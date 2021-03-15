@@ -13,13 +13,21 @@ fi
 if [[ -z $(service nginx status | grep Active | grep inactive) ]]
 then
 	echo -e "$STYLE""Stopping nginx\e[0m"
+	progress_anim & WPID=$!
 	service nginx stop
+	kill $WPID >/dev/null 2>/dev/null
+	wait $WPID >/dev/null 2>/dev/null
+	print_success
 fi
 
 if [[ ! -z $(service docker status | grep Active | grep inactive) ]]
 then
 	echo -e "$STYLE""Launching Docker\e[0m"
+	progress_anim & WPID=$!
 	service docker start
+	kill $WPID >/dev/null 2>/dev/null
+	wait $WPID >/dev/null 2>/dev/null
+	print_success
 fi
 }
 
@@ -27,7 +35,19 @@ launch_minikube () {
 echo -en "$STYLE""Starting Minikube \e[0m"
 progress_anim & WPID=$!
 minikube start --vm-driver=docker > ./logs/minikube.log 2> ./logs/minikube.err
+kill $WPID >/dev/null 2>/dev/null
+wait $WPID >/dev/null 2>/dev/null
+print_success
+
+echo -en "$STYLE""Enabling dashboard addon \e[0m"
+progress_anim & WPID=$!
 minikube addons enable dashboard >> ./logs/minikube.log 2>> ./logs/minikube.err
+kill $WPID >/dev/null 2>/dev/null
+wait $WPID >/dev/null 2>/dev/null
+print_success
+
+echo -en "$STYLE""Configuring Metallb \e[0m"
+progress_anim & WPID=$!
 metallb_manual_enable >> ./logs/minikube.log 2>> ./logs/minikube.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
@@ -35,11 +55,12 @@ print_success
 }
 
 set_global_cluster_ip () {
-
-MINI_raw=$(minikube ip | awk -F . '{print $1.$2.$3')
-MINI_last=192.168.49.3
-cp -f k8s_conf/metallb_config.yaml k8s_conf/config.yaml
-sed -i "s/MINI_IP/$MINI_IP/g" k8s_conf/metallb.yaml
+MINI_IP=$(minikube ip)
+sed "s/MINI_IP/$MINI_IP/g" ./img/nginx/srcs/index.html.template >./img/nginx/srcs/index.html
+sed "s/MINI_IP/$MINI_IP/g" ./img/nginx/srcs/host_setup.template >./img/nginx/srcs/host_setup
+sed "s/MINI_IP/$MINI_IP/g" ./img/ftps/srcs/vsftpd.conf >./img/ftps/srcs/vsftpd.conf
+sed "s/MINI_IP/$MINI_IP/g" ./img/mysql/srcs/wordpress.sql.template >./img/mysql/wordpress.sql
+sed "s/MINI_IP/$MINI_IP/g" ./k8s_conf/metallb.yaml.template >./k8s_conf/metallb.yaml
 }
 
 metallb_manual_enable () {
