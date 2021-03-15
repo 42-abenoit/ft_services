@@ -141,4 +141,4 @@ pasv_enable=Yes
 pasv_addr_resolve=YES
 pasv_max_port=21003
 pasv_min_port=21000
-pasv_address=$MINI_IP
+pasv_address=MINI_IP

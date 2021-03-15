@@ -1,3 +1,17 @@
+reset_term () {
+rm -f "./img/nginx/srcs/index.html"
+rm -f "./img/nginx/srcs/host_setup"
+rm -f "./img/ftps/srcs/vsftpd.conf"
+rm -f "./img/mysql/wordpress.sql"
+rm -f "./k8s_conf/metallb.yaml"
+stty echo
+tput cnorm
+kill $CAPT >/dev/null 2>/dev/null
+wait $CAPT >/dev/null 2>/dev/null
+}
+
+trap reset_term EXIT
+
 . ./install_scripts/prints.fn
 . ./install_scripts/pods_setup.fn
 . ./install_scripts/minikube_utils.fn
@@ -34,7 +48,3 @@ ftps_setup
 
 print_passwords
 echo -e "$STYLE""http://$MINI_IP"
-stty echo
-tput cnorm
-kill $CAPT >/dev/null 2>/dev/null
-wait $CAPT >/dev/null 2>/dev/null
