@@ -1,12 +1,17 @@
 
 print_title () {
+title_mini=$(cat ./ascii/title/title_mini.ascii)
 if [ $g_mode -eq 1 ]
 then
-echo -en "\e[36m"
+echo -en "\e[1m\e[36m"
 cat ./ascii/title/title.ascii
 echo -e "\e[0m"
 else
-cat ./ascii/title/title_mini.ascii
+echo -en "\e[1m\e[36m"
+echo "=========================="
+echo -e $title_mini
+echo "=========================="
+echo -e "\e[0m"
 fi
 }
 
@@ -17,7 +22,9 @@ echo -en "\e[36m"
 cat ./ascii/passwords.ascii
 echo -e "\e[0m"
 else
+echo -en "\e[36m"
 cat ./ascii/passwords_vertical.ascii
+echo -e "\e[0m"
 fi
 }
 

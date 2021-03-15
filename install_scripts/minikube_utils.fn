@@ -1,3 +1,61 @@
+initial_checks () {
+if [[ $(minikube version | grep version | tr -d ':-z' | tr -d ' ' | tr -d '.') -lt 1100 ]]
+then
+	echo -e "$STYLE""Current minikube version doesn't support metallb.\e[0m"
+	echo -e "$STYLE""Updating:\e0m"
+	progress_anim & WPID=$!
+	dl_mini_bin
+	kill $WPID >/dev/null 2>/dev/null
+	wait $WPID >/dev/null 2>/dev/null
+	print_success
+fi
+
+if [[ -z $(service nginx status | grep Active | grep inactive) ]]
+then
+	echo -e "$STYLE""Stopping nginx\e[0m"
+	service nginx stop
+fi
+
+if [[ ! -z $(service docker status | grep Active | grep inactive) ]]
+then
+	echo -e "$STYLE""Launching Docker\e[0m"
+	service docker start
+fi
+}
+
+launch_minikube () {
+echo -en "$STYLE""Starting Minikube \e[0m"
+progress_anim & WPID=$!
+minikube start --vm-driver=docker > ./logs/minikube.log 2> ./logs/minikube.err
+minikube addons enable dashboard >> ./logs/minikube.log 2>> ./logs/minikube.err
+metallb_manual_enable >> ./logs/minikube.log 2>> ./logs/minikube.err
+kill $WPID >/dev/null 2>/dev/null
+wait $WPID >/dev/null 2>/dev/null
+print_success
+}
+
+set_global_cluster_ip () {
+
+MINI_raw=$(minikube ip | awk -F . '{print $1.$2.$3')
+MINI_last=192.168.49.3
+cp -f k8s_conf/metallb_config.yaml k8s_conf/config.yaml
+sed -i "s/MINI_IP/$MINI_IP/g" k8s_conf/metallb.yaml
+}
+
+metallb_manual_enable () {
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl apply -f - -n kube-system
+if [ "$(kubectl get secrets --namespace metallb-system | grep memberlist)" = "" ]
+	then
+	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+fi
+set_global_cluster_ip
+kubectl apply -f k8s_conf/metallb.yaml
+}
+
 dl_mini_bin () {
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo mkdir -p /usr/local/bin/
@@ -13,4 +71,3 @@ clean () {
 minikube delete
 rm -rf ~/.minikube
 }
-
