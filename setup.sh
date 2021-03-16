@@ -1,3 +1,5 @@
+#!/bin/bash
+
 reset_term () {
 rm -f "./img/nginx/srcs/index.html"
 rm -f "./img/nginx/srcs/host_setup"
@@ -64,5 +66,5 @@ done
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
-echo -en "$STYLE""\nDashboard address is: $(cat ./logs/dashboard.log)\e[0m"
+echo -e "$STYLE""\nDashboard address is: $(cat ./logs/dashboard.log)\e[0m"
 echo -e "$STYLE""Dashboard pid is: $DPID"
