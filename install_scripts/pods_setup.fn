@@ -76,41 +76,41 @@ return 0
 }
 
 pods_checkup () {
+STYLE="\e[1m\e[36m"
 echo -e "$STYLE""\nWaiting for all pods to run\e[0m"
 pnum=0
 tries=0
-while [ $pnum -lt 7 -o $tries -lt 90 ]
+while [ $pnum -lt 7 -a $tries -lt 90 ]
 do
 echo -en "\r"
 pnum=0
-pods=$(kubectl get pods | cat)
-if [[ $($pods | grep nginx | awk '{print $2}')=="1/1" ]]
+if [[ $(kubectl get pods | grep nginx | awk '{print $2}')=="1/1" ]]
 then
-	pnum+=1
+	pnum=$((pnum + 1))
 fi
-if [[ $($pods | grep phpmyadmin | awk '{print $2}')=="1/1" ]]
+if [[ $(kubectl get pods | grep phpmyadmin | awk '{print $2}')=="1/1" ]]
 then
-	pnum+=1
+	pnum=$((pnum + 1))
 fi
-if [[ $($pods | grep mysql | awk '{print $2}')=="1/1" ]]
+if [[ $(kubectl get pods | grep mysql | awk '{print $2}')=="1/1" ]]
 then
-	pnum+=1
+	pnum=$((pnum + 1))
 fi
-if [[ $($pods | grep wordpress | awk '{print $2}')=="1/1" ]]
+if [[ $(kubectl get pods | grep wordpress | awk '{print $2}')=="1/1" ]]
 then
-	pnum+=1
+	pnum=$((pnum + 1))
 fi
-if [[ $($pods | grep ftps | awk '{print $2}')=="1/1" ]]
+if [[ $(kubectl get pods | grep ftps | awk '{print $2}')=="1/1" ]]
 then
-	pnum+=1
+	pnum=$((pnum + 1))
 fi
-if [[ $($pods | grep grafana | awk '{print $2}')=="1/1" ]]
+if [[ $(kubectl get pods | grep grafana | awk '{print $2}')=="1/1" ]]
 then
-	pnum+=1
+	pnum=$((pnum + 1))
 fi
-if [[ $($pods | grep influxdb | awk '{print $1}')=="1/1" ]]
+if [[ $(kubectl get pods | grep influxdb | awk '{print $1}')=="1/1" ]]
 then
-	pnum+=1
+	pnum=$((pnum + 1))
 fi
 echo -en "$STYLE""\nPods running: $pnum/7\e[0m"
 sleep 2
@@ -118,9 +118,9 @@ num+=1
 done
 if [ $pnum -eq 7 ]
 then
-	echo -e "$STYLE""All pods are running !"
+	echo -e "$STYLE""\nAll pods are running !"
 else
-	echo -e "$STYLE""There was an error during minikube setup."
+	echo -e "$STYLE""\nThere was an error during minikube setup."
 	echo -e "$STYLE""Clean minikube cluster and run the install script again !"
 	exit 1
 fi
