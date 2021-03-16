@@ -1,8 +1,8 @@
 nginx_setup () {
 echo -en "$STYLE""Setting up Nginx \e[0m"
 progress_anim & WPID=$!
-docker build -t nginx-local img/nginx > ./logs/nginx.log 2> ./logs/nginx.err
-kubectl apply -f k8s_conf/nginx.yaml >> ./logs/nginx.log 2>> ./logs/nginx.err
+docker build -t nginx-local $dir/img/nginx > $dir/logs/nginx.log 2> $dir/logs/nginx.err
+kubectl apply -f $dir/conf/nginx.yaml >> $dir/logs/nginx.log 2>> $dir/logs/nginx.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
@@ -12,8 +12,8 @@ return 0
 pma_setup () {
 echo -en "$STYLE""Setting up PhpMyAdmin \e[0m"
 progress_anim & WPID=$!
-docker build -t pma-local img/pma > ./logs/pma.log 2> ./logs/pma.err
-kubectl apply -f k8s_conf/pma.yaml >> ./logs/pma.log 2>> ./logs/pma.err
+docker build -t pma-local img/pma > $dir/logs/pma.log 2> $dir/logs/pma.err
+kubectl apply -f conf/pma.yaml >> $dir/logs/pma.log 2>> $dir/logs/pma.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
@@ -23,8 +23,8 @@ return 0
 mysql_setup () {
 echo -en "$STYLE""Setting up Mysql \e[0m"
 progress_anim & WPID=$!
-docker build -t mysql-local img/mysql > ./logs/mysql.log 2> ./logs/mysql.err
-kubectl apply -f k8s_conf/mysql.yaml >> ./logs/mysql.log 2>> ./logs/mysql.err
+docker build -t mysql-local img/mysql > $dir/logs/mysql.log 2> $dir/logs/mysql.err
+kubectl apply -f conf/mysql.yaml >> $dir/logs/mysql.log 2>> $dir/logs/mysql.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
@@ -34,8 +34,8 @@ return 0
 wordpress_setup () {
 echo -en "$STYLE""Setting up Wordpress \e[0m"
 progress_anim & WPID=$!
-docker build -t wordpress-local img/wordpress > ./logs/wordpress.log 2> ./logs/wordpress.err
-kubectl apply -f k8s_conf/wordpress.yaml >> ./logs/wordpress.log 2>> ./logs/wordpress.err
+docker build -t wordpress-local img/wordpress > $dir/logs/wordpress.log 2> $dir/logs/wordpress.err
+kubectl apply -f conf/wordpress.yaml >> $dir/logs/wordpress.log 2>> $dir/logs/wordpress.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
@@ -45,8 +45,8 @@ return 0
 ftps_setup () {
 echo -en "$STYLE""Setting up Ftps \e[0m"
 progress_anim & WPID=$!
-docker build -t ftps-local img/ftps > ./logs/ftps.log 2> ./logs/ftps.err
-kubectl apply -f k8s_conf/ftps.yaml >> ./logs/ftps.log 2>> ./logs/ftps.err
+docker build -t ftps-local img/ftps > $dir/logs/ftps.log 2> $dir/logs/ftps.err
+kubectl apply -f conf/ftps.yaml >> $dir/logs/ftps.log 2>> $dir/logs/ftps.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
@@ -56,8 +56,8 @@ return 0
 influxdb_setup () {
 echo -en "$STYLE""Setting up Influxdb \e[0m"
 progress_anim & WPID=$!
-docker build -t influxdb-local img/influxdb > ./logs/influxdb.log 2> ./logs/influxdb.err
-kubectl apply -f k8s_conf/influxdb.yaml >> ./logs/influxdb.err 2>> ./logs/influxdb.err
+docker build -t influxdb-local img/influxdb > $dir/logs/influxdb.log 2> $dir/logs/influxdb.err
+kubectl apply -f conf/influxdb.yaml >> $dir/logs/influxdb.err 2>> $dir/logs/influxdb.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
@@ -67,8 +67,8 @@ return 0
 grafana_setup () {
 echo -en "$STYLE""Setting up Grafana \e[0m"
 progress_anim & WPID=$!
-docker build -t grafana-local img/grafana > ./logs/grafana.logs 2> ./logs/grafana.err
-kubectl apply -f k8s_conf/grafana.yaml >> ./logs/grafana.logs 2> ./logs/grafana.err
+docker build -t grafana-local img/grafana > $dir/logs/grafana.logs 2> $dir/logs/grafana.err
+kubectl apply -f conf/grafana.yaml >> $dir/logs/grafana.logs 2> $dir/logs/grafana.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success

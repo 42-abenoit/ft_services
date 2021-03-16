@@ -1,5 +1,4 @@
-dir=$(dirname $(realpath $0))
-dir=$(dirname $dir)
+#!/bin/bash
 
 pod=$1
 if [[ $pod == "nginx" ]]
@@ -8,7 +7,7 @@ kubectl delete deployment nginx
 kubectl delete svc nginx-svc
 elif [[ $pod == "pma" ]]
 then
-kubectl delete deployment pma
+kubectl delete deployment phpmyadmin
 kubectl delete svc pma-svc
 elif [[ $pod == "mysql" ]]
 then

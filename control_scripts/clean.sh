@@ -1,3 +1,5 @@
+#!/bin/bash
+
 minikube delete
 rm -rf ~/.minikube
 img=$(docker images | grep gcr.io | awk '{print $3g}')

@@ -1,3 +1,5 @@
+#!/bin/bash
+
 dir=$(dirname $(realpath $0))
 dir=$(dirname $dir)
 
@@ -8,14 +10,14 @@ eval $(minikube docker-env)
 docker build -t nginx-local $dir/img/nginx
 kubectl delete deployment nginx
 kubectl delete svc nginx-svc
-kubectl apply -f $dir/k8s_conf/nginx.yaml 
+kubectl apply -f $dir/conf/nginx.yaml 
 elif [[ $pod == "pma" ]]
 then
 eval $(minikube docker-env)
 docker build -t pma-local $dir/img/pma
-kubectl delete deployment pma
+kubectl delete deployment phpmyadmin
 kubectl delete svc pma-svc
-kubectl apply -f $dir/k8s_conf/pma.yaml 
+kubectl apply -f $dir/conf/pma.yaml 
 elif [[ $pod == "mysql" ]]
 then
 eval $(minikube docker-env)
@@ -26,14 +28,14 @@ kubectl delete svc mysql-svc
 	then
 	kubectl delete pvc mysql-claim
 	fi
-kubectl apply -f $dir/k8s_conf/mysql.yaml 
+kubectl apply -f $dir/conf/mysql.yaml 
 elif [[ $pod == "wp" ]]
 then
 eval $(minikube docker-env)
 docker build -t wordpress-local $dir/img/wordpress
 kubectl delete deployment wordpress
 kubectl delete svc wordpress-svc
-kubectl apply -f $dir/k8s_conf/wordpress.yaml 
+kubectl apply -f $dir/conf/wordpress.yaml 
 elif [[ $pod == "ftps" ]]
 then
 eval $(minikube docker-env)
@@ -44,7 +46,7 @@ kubectl delete svc ftps-svc
 	then
 	kubectl delete pvc ftps-claim
 	fi
-kubectl apply -f $dir/k8s_conf/ftps.yaml 
+kubectl apply -f $dir/conf/ftps.yaml 
 elif [[ $pod == "influxdb" ]]
 then
 eval $(minikube docker-env)
@@ -55,14 +57,14 @@ kubectl delete svc influxdb-svc
 	then
 	kubectl delete pvc influxdb-claim
 	fi
-kubectl apply -f $dir/k8s_conf/influxdb.yaml 
+kubectl apply -f $dir/conf/influxdb.yaml 
 elif [[ $pod == "grafana" ]]
 then
 eval $(minikube docker-env)
 docker build -t grafana-local $dir/img/grafana
 kubectl delete deployment grafana
 kubectl delete svc grafana-svc
-kubectl apply -f $dir/k8s_conf/grafana.yaml 
+kubectl apply -f $dir/conf/grafana.yaml 
 else
 echo nope
 fi

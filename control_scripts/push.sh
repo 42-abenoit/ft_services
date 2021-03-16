@@ -23,6 +23,7 @@ elif [[ $pod == "influxdb" ]]
 then
 pod=$(kubectl get pods | grep influxdb | awk '{print $1}')
 else
-echo nope
+echo "pod doesn\'t exist"
+return 0
 fi
-kubectl exec -it $pod -- sh
+kubectl cp $2 "$pod:$3"

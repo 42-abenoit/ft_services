@@ -1,10 +1,9 @@
-
 print_title () {
-title_mini=$(cat ./ascii/title/title_mini.ascii)
+title_mini=$(cat $dir/ascii/title_mini.ascii)
 if [ $g_mode -eq 1 ]
 then
 echo -en "\e[1m\e[36m"
-cat ./ascii/title/title.ascii
+cat $dir/ascii/title.ascii
 echo -e "\e[0m"
 else
 echo -en "\e[1m\e[36m"
@@ -19,11 +18,11 @@ print_passwords () {
 if [ $g_mode -eq 1 ]
 then
 echo -en "\e[1m\e[36m"
-cat ./ascii/passwords.ascii
+cat $dir/ascii/passwords.ascii
 echo -e "\e[0m"
 else
 echo -en "\e[1m\e[36m"
-cat ./ascii/passwords_vertical.ascii
+cat $dir/ascii/passwords_vertical.ascii
 echo -e "\e[0m"
 fi
 }
@@ -40,123 +39,4 @@ done
 
 print_success () {
 echo -e "\e[1m[\e[32mOK\e[97m]\e[0m"
-}
-
-print_mysql_anim () {
-echo -e "\e[93m"
-while :; do
-	for (( i=0; i<4; i++ )); do
-		cat ./ascii/mysql/mysql_$i.ascii
-		sleep 0.2
-		echo -en "\033[5A"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -en "\033[5A"
-	done
-done
-}
-
-print_pma_anim () {
-echo -e "\e[93m"
-while :; do
-	for (( i=0; i<4; i++ )); do
-		cat ./ascii/pma/pma_$i.ascii
-		sleep 0.2
-		echo -en "\033[5A"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -en "\033[5A"
-	done
-done
-}
-
-print_nginx_anim () {
-echo -e "\e[93m"
-while :; do
-	for (( i=0; i<4; i++ )); do
-		cat ./ascii/nginx/nginx_$i.ascii
-		sleep 0.2
-		echo -en "\033[5A"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -en "\033[5A"
-	done
-done
-}
-
-print_ftps_anim () {
-echo -e "\e[93m"
-while :; do
-	for (( i=0; i<4; i++ )); do
-		cat ./ascii/ftps/ftps_$i.ascii
-		sleep 0.2
-		echo -en "\033[5A"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -en "\033[5A"
-	done
-done
-}
-
-print_wordpress_anim () {
-echo -e "\e[93m"
-while :; do
-	for (( i=0; i<4; i++ )); do
-		cat ./ascii/wordpress/wp_$i.ascii
-		sleep 0.2
-		echo -en "\033[5A"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -en "\033[5A"
-	done
-done
-}
-
-print_init_anim () {
-echo -e "\e[93m"
-while :; do
-	for (( i=0; i<4; i++ )); do
-		cat ./ascii/initdb/init_$i.ascii
-		sleep 0.2
-		echo -en "\033[5A"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -en "\033[5A"
-	done
-done
-}
-
-print_user_anim () {
-echo -e "\e[93m"
-while :; do
-	for (( i=0; i<4; i++ )); do
-		cat ./ascii/inituser/user_$i.ascii
-		sleep 0.2
-		echo -en "\033[5A"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -e "\r\033[K"
-		echo -en "\033[5A"
-	done
-done
 }

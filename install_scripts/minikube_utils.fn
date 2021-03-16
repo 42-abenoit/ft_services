@@ -34,21 +34,21 @@ fi
 launch_minikube () {
 echo -en "$STYLE""Starting Minikube \e[0m"
 progress_anim & WPID=$!
-minikube start --vm-driver=docker > ./logs/minikube.log 2> ./logs/minikube.err
+minikube start --vm-driver=docker > $dir/logs/minikube.log 2> $dir/logs/minikube.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
 
 echo -en "$STYLE""Enabling dashboard addon \e[0m"
 progress_anim & WPID=$!
-minikube addons enable dashboard >> ./logs/minikube.log 2>> ./logs/minikube.err
+minikube addons enable dashboard >> $dir/logs/minikube.log 2>> $dir/logs/minikube.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
 
 echo -en "$STYLE""Configuring Metallb \e[0m"
 progress_anim & WPID=$!
-metallb_manual_enable >> ./logs/minikube.log 2>> ./logs/minikube.err
+metallb_manual_enable >> $dir/logs/minikube.log 2>> $dir/logs/minikube.err
 kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
@@ -56,11 +56,11 @@ print_success
 
 set_global_cluster_ip () {
 MINI_IP=$(minikube ip)
-sed -e "s/MINI_IP/$MINI_IP/g" "./img/nginx/srcs/index.html.template" >"./img/nginx/srcs/index.html"
-sed -e "s/MINI_IP/$MINI_IP/g" "./img/nginx/srcs/host_setup.template" >"./img/nginx/srcs/host_setup"
-sed -e "s/MINI_IP/$MINI_IP/g" "./img/ftps/srcs/vsftpd.conf.template" >"./img/ftps/srcs/vsftpd.conf"
-sed -e "s/MINI_IP/$MINI_IP/g" "./img/mysql/srcs/wordpress.sql.template" >"./img/mysql/srcs/wordpress.sql"
-sed -e "s/MINI_IP/$MINI_IP/g" "./k8s_conf/metallb.yaml.template" >"./k8s_conf/metallb.yaml"
+sed -e "s/MINI_IP/$MINI_IP/g" "$dir/img/nginx/srcs/index.html.template" >"$dir/img/nginx/srcs/index.html"
+sed -e "s/MINI_IP/$MINI_IP/g" "$dir/img/nginx/srcs/host_setup.template" >"$dir/img/nginx/srcs/host_setup"
+sed -e "s/MINI_IP/$MINI_IP/g" "$dir/img/ftps/srcs/vsftpd.conf.template" >"$dir/img/ftps/srcs/vsftpd.conf"
+sed -e "s/MINI_IP/$MINI_IP/g" "$dir/img/mysql/srcs/wordpress.sql.template" >"$dir/img/mysql/srcs/wordpress.sql"
+sed -e "s/MINI_IP/$MINI_IP/g" "$dir/conf/metallb.yaml.template" >"$dir/conf/metallb.yaml"
 }
 
 metallb_manual_enable () {
@@ -74,7 +74,7 @@ if [ "$(kubectl get secrets --namespace metallb-system | grep memberlist)" = "" 
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 fi
 set_global_cluster_ip
-kubectl apply -f k8s_conf/metallb.yaml
+kubectl apply -f conf/metallb.yaml
 }
 
 dl_mini_bin () {

@@ -1,10 +1,12 @@
+#!/bin/bash
+
 pod=$1
 if [[ $pod == "nginx" ]]
 then
 pod=$(kubectl get pods | grep nginx | awk '{print $1}')
 elif [[ $pod == "pma" ]]
 then
-pod=$(kubectl get pods | grep pma | awk '{print $1}')
+pod=$(kubectl get pods | grep phpmyadmin | awk '{print $1}')
 elif [[ $pod == "mysql" ]]
 then
 pod=$(kubectl get pods | grep mysql | awk '{print $1}')

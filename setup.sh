@@ -1,11 +1,13 @@
 #!/bin/bash
 
+dir=$(dirname $(realpath $0))
+
 reset_term () {
-rm -f "./img/nginx/srcs/index.html"
-rm -f "./img/nginx/srcs/host_setup"
-rm -f "./img/ftps/srcs/vsftpd.conf"
-rm -f "./img/mysql/wordpress.sql"
-rm -f "./k8s_conf/metallb.yaml"
+rm -f "$dir/img/nginx/srcs/index.html"
+rm -f "$dir/img/nginx/srcs/host_setup"
+rm -f "$dir/img/ftps/srcs/vsftpd.conf"
+rm -f "$dir/img/mysql/wordpress.sql"
+rm -f "$dir/conf/metallb.yaml"
 if [ -t 0 ]; then
 stty sane
 tput cnorm
@@ -17,9 +19,9 @@ wait $INSTALL >/dev/null 2>/dev/null
 }
 
 services_setup () {
-. ./install_scripts/prints.fn
-. ./install_scripts/pods_setup.fn
-. ./install_scripts/minikube_utils.fn
+. $dir/install_scripts/prints.fn
+. $dir/install_scripts/pods_setup.fn
+. $dir/install_scripts/minikube_utils.fn
 
 cl=$(tput cols)
 if [ $cl -lt 105 ]
@@ -31,6 +33,7 @@ fi
 
 STYLE="\e[1m\e[36m"
 
+clear
 print_title
 
 echo -e "$STYLE""\nInitialising Minikube\e[0m"
@@ -56,6 +59,9 @@ echo -e "$STYLE""PhpMyAdmin: http://$MINI_IP:5000\e[0m"
 echo -e "$STYLE""Grafana   :http://$MINI_IP:3000\e[0m"
 echo -e "$STYLE""\nUse these credentials to access services:\e[0m"
 print_passwords
+echo -e "$STYLE""\n"'Launch "minikube dashboard" to start kubernetes web interface.'"\e[0m"
+echo -e "$STYLE""You can also use the scripts in control_scripts folders to interact\e[0m"
+echo -e "$STYLE""with kubernetes. Call help.sh to learn how to use them !\e[0m"
 }
 
 trap reset_term EXIT

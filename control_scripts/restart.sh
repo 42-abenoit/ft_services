@@ -1,3 +1,5 @@
+#!/bin/bash
+
 dir=$(dirname $(realpath $0))
 dir=$(dirname $dir)
 
