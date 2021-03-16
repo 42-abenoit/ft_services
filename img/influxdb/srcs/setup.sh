@@ -1,4 +1,4 @@
-influxd &
+influxd -config /etc/influxdb.conf &
 
 sleep 0.5
 

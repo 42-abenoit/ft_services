@@ -12,7 +12,7 @@ fi
 
 if [[ -z $(service nginx status | grep Active | grep inactive) ]]
 then
-	echo -en "$STYLE""Stopping nginx\e[0m"
+	echo -en "$STYLE""Stopping Nginx on host\e[0m"
 	progress_anim & WPID=$!
 	service nginx stop
 	kill $WPID >/dev/null 2>/dev/null
@@ -39,7 +39,7 @@ kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
 
-echo -en "$STYLE""Enabling dashboard addon \e[0m"
+echo -en "$STYLE""Enabling Dashboard addon \e[0m"
 progress_anim & WPID=$!
 minikube addons enable dashboard >> $dir/logs/minikube.log 2>> $dir/logs/minikube.err
 kill $WPID >/dev/null 2>/dev/null
