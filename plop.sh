@@ -22,16 +22,16 @@ STYLE="\e[1m\e[36m"
 
 echo "http://192.168.49.2"
 
-#$dash_url=$(minikube dashboard --url)
+kubectl get pods --namespace default
+kubectl get pods --namespace kube-node-lease
+kubectl get pods --namespace kube-public
+kubectl get pods --namespace kube-system
+kubectl get pods --namespace kubernetes-dashboard
+kubectl get pods --namespace metallb-system 
 
-minikube dashboard --url >./logs/dashboard.log 2>./logs/dashboard.err & DPID=$!
-echo $DPID > ./logs/dashboard.pid
-#echo -e "$STYLE""$dash_url""\e[0m" & DPID=$!
-while [ -z $(cat ./logs/dashboard.log) ]
-do
-sleep 1
-done
-echo -e "$STYLE""$(cat ./logs/dashboard.log)\e[0m"
-echo -e "$STYLE""Dashboard pid is: $DPID"
-#kill $DPID >/dev/null 2>/dev/null
-#wait $DPID >/dev/null 2>/dev/null
+kubectl get svc --namespace default
+kubectl get svc --namespace kube-node-lease
+kubectl get svc --namespace kube-public
+kubectl get svc --namespace kube-system
+kubectl get svc --namespace kubernetes-dashboard
+kubectl get svc --namespace metallb-system 

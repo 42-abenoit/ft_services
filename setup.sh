@@ -6,16 +6,17 @@ rm -f "./img/nginx/srcs/host_setup"
 rm -f "./img/ftps/srcs/vsftpd.conf"
 rm -f "./img/mysql/wordpress.sql"
 rm -f "./k8s_conf/metallb.yaml"
-stty echo
+if [ -t 0 ]; then
+stty sane
 tput cnorm
-kill $CAPT >/dev/null 2>/dev/null
-wait $CAPT >/dev/null 2>/dev/null
+fi
 kill $DPID >/dev/null 2>/dev/null
 wait $DPID >/dev/null 2>/dev/null
+kill $INSTALL >/dev/null 2>/dev/null
+wait $INSTALL >/dev/null 2>/dev/null
 }
 
-trap reset_term EXIT
-
+services_setup () {
 . ./install_scripts/prints.fn
 . ./install_scripts/pods_setup.fn
 . ./install_scripts/minikube_utils.fn
@@ -29,10 +30,6 @@ g_mode=1
 fi
 
 STYLE="\e[1m\e[36m"
-
-read capture & CAPT=$!
-stty -echo
-tput civis
 
 print_title
 
@@ -51,20 +48,24 @@ wordpress_setup
 ftps_setup
 
 echo -e "$STYLE""\nSuccess !!!\e[0m"
-print_passwords
-echo -e "$STYLE""     ACCESS PORTAL\e[0m"
+echo -e "$STYLE""\n        ACCESS PORTAL\e[0m"
 echo -e "$STYLE""==> http://$MINI_IP <==\e[0m"
+echo -e "$STYLE""\nQuick access\e[0m"
+echo -e "$STYLE""Wordpress : http://$MINI_IP:5050\e[0m"
+echo -e "$STYLE""PhpMyAdmin: http://$MINI_IP:5000\e[0m"
+echo -e "$STYLE""Grafana   :http://$MINI_IP:3000\e[0m"
+echo -e "$STYLE""\nUse these credentials to access services:\e[0m"
+print_passwords
+}
 
-echo -en "$STYLE""\nLaunching Dashboard\e[0m"
-progress_anim & WPID=$!
-minikube dashboard --url >./logs/dashboard.log 2>./logs/dashboard.err & DPID=$!
-echo $DPID > ./logs/dashboard.pid
-while [ -z $(cat ./logs/dashboard.log) ]
-do
+trap reset_term EXIT
+
+if [ -t 0 ]; then
+stty -echo -icanon time 0 min 0
+tput civis
+fi
+services_setup & INSTALL=$!
+while kill -0 "$INSTALL" >/dev/null 2>&1; do
+read capture
 sleep 1
 done
-kill $WPID >/dev/null 2>/dev/null
-wait $WPID >/dev/null 2>/dev/null
-print_success
-echo -e "$STYLE""\nDashboard address is: $(cat ./logs/dashboard.log)\e[0m"
-echo -e "$STYLE""Dashboard pid is: $DPID"
