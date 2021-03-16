@@ -39,6 +39,15 @@ print_title
 echo -e "$STYLE""\nInitialising Minikube\e[0m"
 initial_checks
 launch_minikube
+echo -en "$STYLE""\nChecking Minikube \e[0m"
+minikube ip >/dev/null 2>/dev/null
+if [ $? -eq 0 ]
+then
+	print_success
+else
+	print_failure
+	exit 1
+fi
 
 echo -e "$STYLE""\nCreating Services\e[0m"
 eval $(minikube docker-env)
@@ -51,6 +60,9 @@ wordpress_setup
 ftps_setup
 
 echo -e "$STYLE""\nSuccess !!!\e[0m"
+
+pods_checkup
+
 echo -e "$STYLE""\n        ACCESS PORTAL\e[0m"
 echo -e "$STYLE""==> http://$MINI_IP <==\e[0m"
 echo -e "$STYLE""\nQuick access\e[0m"
@@ -62,6 +74,7 @@ print_passwords
 echo -e "$STYLE""\n"'Launch "minikube dashboard" to start kubernetes web interface.'"\e[0m"
 echo -e "$STYLE""You can also use the scripts in control_scripts folders to interact\e[0m"
 echo -e "$STYLE""with kubernetes. Call help.sh to learn how to use them !\e[0m"
+return 0
 }
 
 trap reset_term EXIT

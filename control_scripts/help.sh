@@ -20,6 +20,9 @@ echo -e "\n./control_scripts/build.sh POD"
 echo -e "Build image and apply selected pod config files."
 
 echo -e "\n./control_scripts/delete.sh POD [claim]"
+echo -e "Delete selected pod."
+
+echo -e "\n./control_scripts/remove.sh POD [claim]"
 echo -e "Delete selected pod's deployment and service."
 echo -e "If provided, claim option removes persistent"
 echo -e "volume claim as well."
@@ -37,10 +40,16 @@ echo -e "\n./control_scripts/restart.sh"
 echo -e "Delete minikube cluster and temporary files"
 echo -e "and restart project installation."
 
+echo -e ".\n/control_scripts/links.sh"
+echo -e "Display services links."
+
 echo -e ".\n/control_scripts/passwords.sh"
 echo -e "Display services credentials."
 
 echo -e "\n./control_scripts/help.sh"
 echo -e "Display this help message."
+
+echo -e "Note: Wordpress and PhpMyAdmin are accessed"
+echo -e "with "wp" and "pma" abbreviations"
 
 echo -e "\e[0m"

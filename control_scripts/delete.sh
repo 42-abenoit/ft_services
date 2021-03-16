@@ -3,44 +3,26 @@
 pod=$1
 if [[ $pod == "nginx" ]]
 then
-kubectl delete deployment nginx
-kubectl delete svc nginx-svc
+pod=$(kubectl get pods | grep nginx | awk '{print $1}')
 elif [[ $pod == "pma" ]]
 then
-kubectl delete deployment phpmyadmin
-kubectl delete svc pma-svc
+pod=$(kubectl get pods | grep phpmyadmin | awk '{print $1}')
 elif [[ $pod == "mysql" ]]
 then
-kubectl delete deployment mysql
-kubectl delete svc mysql-svc
-	if [[ $2 == "claim" ]]
-	then
-	kubectl delete pvc mysql-claim
-	fi
+pod=$(kubectl get pods | grep mysql | awk '{print $1}')
 elif [[ $pod == "wp" ]]
 then
-kubectl delete deployment wordpress
-kubectl delete svc wordpress-svc
+pod=$(kubectl get pods | grep wordpress | awk '{print $1}')
 elif [[ $pod == "ftps" ]]
 then
-kubectl delete deployment ftps
-kubectl delete svc ftps-svc
-	if [[ $2 == "claim" ]]
-	then
-	kubectl delete pvc ftps-claim
-	fi
-elif [[ $pod == "influxdb" ]]
-then
-kubectl delete deployment influxdb
-kubectl delete svc influxdb-svc
-	if [[ $2 == "claim" ]]
-	then
-	kubectl delete pvc influxdb-claim
-	fi
+pod=$(kubectl get pods | grep ftps | awk '{print $1}')
 elif [[ $pod == "grafana" ]]
 then
-kubectl delete deployment grafana
-kubectl delete svc grafana-svc
+pod=$(kubectl get pods | grep grafana | awk '{print $1}')
+elif [[ $pod == "influxdb" ]]
+then
+pod=$(kubectl get pods | grep influxdb | awk '{print $1}')
 else
 echo nope
 fi
+kubectl delete pod $pod

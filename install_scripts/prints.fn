@@ -40,3 +40,7 @@ done
 print_success () {
 echo -e "\e[1m[\e[32mOK\e[97m]\e[0m"
 }
+
+print_failure () {
+echo -e "\e[1m[\e[33mKO\e[97m]\e[0m"
+}

@@ -17,7 +17,14 @@ then
 	service nginx stop
 	kill $WPID >/dev/null 2>/dev/null
 	wait $WPID >/dev/null 2>/dev/null
-	print_success
+
+	if [[ -z $(service nginx status | grep Active | grep inactive) ]]
+	then
+		print_failure
+		exit 1
+	else
+		print_success
+	fi
 fi
 
 if [[ ! -z $(service docker status | grep Active | grep inactive) ]]
@@ -27,7 +34,13 @@ then
 	service docker start
 	kill $WPID >/dev/null 2>/dev/null
 	wait $WPID >/dev/null 2>/dev/null
-	print_success
+	if [[ ! -z $(service docker status | grep Active | grep inactive) ]]
+	then
+		print_failure
+		exit 1
+	else
+		print_success
+	fi
 fi
 }
 
