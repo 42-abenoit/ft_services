@@ -34,6 +34,7 @@ then
 	service docker start
 	kill $WPID >/dev/null 2>/dev/null
 	wait $WPID >/dev/null 2>/dev/null
+	sleep 5
 	if [[ ! -z $(service docker status | grep Active | grep inactive) ]]
 	then
 		print_failure
@@ -87,7 +88,7 @@ if [ "$(kubectl get secrets --namespace metallb-system | grep memberlist)" = "" 
 	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 fi
 set_global_cluster_ip
-kubectl apply -f conf/metallb.yaml
+kubectl apply -f $dir/conf/metallb.yaml
 }
 
 dl_mini_bin () {

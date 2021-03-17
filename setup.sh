@@ -1,6 +1,6 @@
 #!/bin/bash
 
-dir=$(dirname $(realpath $0))
+dir=$(dirname $(realpath $0))/srcs
 
 reset_term () {
 rm -f "$dir/img/nginx/srcs/index.html"
