@@ -18,6 +18,8 @@ mv -f /srcs/host_setup /etc/nginx/conf.d/default.conf
 
 #wordpress setup
 cp -f /srcs/wp-config.php /home/www/wordpress
+cp -rf /srcs/twentytwentyonechild /home/www/wordpress/wp-content/themes/twentytwentyonechild
+cp -rf /srcs/uploads /home/www/wordpress/wp-content/uploads
 chown -R www:www /home/www/wordpress
 
 PHP_FPM_USER="www"

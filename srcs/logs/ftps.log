@@ -1,0 +1,49 @@
+Sending build context to Docker daemon  19.46kB
+Step 1/6 : FROM alpine
+ ---> 28f6e2705743
+Step 2/6 : RUN apk update && 	apk add vsftpd && 	apk add openssl && 	apk add telegraf
+ ---> Running in 05d8c176a809
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
+fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
+v3.13.2-103-gb3fbe92d7e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-103-gb3fbe92d7e [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+OK: 13878 distinct packages available
+(1/3) Installing libcap (2.46-r0)
+(2/3) Installing linux-pam (1.5.1-r0)
+(3/3) Installing vsftpd (3.0.3-r6)
+Executing vsftpd-3.0.3-r6.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 7 MiB in 17 packages
+(1/1) Installing openssl (1.1.1j-r0)
+Executing busybox-1.32.1-r3.trigger
+OK: 8 MiB in 18 packages
+(1/1) Installing telegraf (1.17.0-r0)
+Executing telegraf-1.17.0-r0.pre-install
+Executing busybox-1.32.1-r3.trigger
+OK: 97 MiB in 19 packages
+Removing intermediate container 05d8c176a809
+ ---> 78bba65dfd73
+Step 3/6 : COPY srcs /srcs
+ ---> a32a09a33f14
+Step 4/6 : RUN	sh srcs/setup.sh
+ ---> Running in 2391563efcb6
+[91mGenerating a RSA private key
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91mwriting new private key to '/etc/vsftpd/ssl/vsftpd.key'
+[0m[91m-----
+[0mRemoving intermediate container 2391563efcb6
+ ---> a3debadcd3e4
+Step 5/6 : ENTRYPOINT sh srcs/run.sh
+ ---> Running in 5d9b829f199f
+Removing intermediate container 5d9b829f199f
+ ---> 381435d4f228
+Step 6/6 : EXPOSE 20 21 21000-21003
+ ---> Running in 5b1dc0973584
+Removing intermediate container 5b1dc0973584
+ ---> d6748a2e718a
+Successfully built d6748a2e718a
+Successfully tagged ftps-local:latest
+service/ftps-svc created
+persistentvolumeclaim/ftps-claim created
+deployment.apps/ftps created
