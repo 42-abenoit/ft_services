@@ -2,11 +2,11 @@ Sending build context to Docker daemon  22.53kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add telegraf
- ---> Running in c5680fa5d905
+ ---> Running in 6b4cde70a35b
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-103-gb3fbe92d7e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-103-gb3fbe92d7e [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+v3.13.2-105-g4e9e4fc875 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-106-g54cefe59f4 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
 OK: 13878 distinct packages available
 (1/2) Installing pcre (8.44-r0)
 (2/2) Installing nginx (1.18.0-r13)
@@ -65,13 +65,13 @@ OK: 32 MiB in 56 packages
 Executing phpmyadmin-5.0.4-r0.post-install
 [91m*
 * phpmyadmin has been installed to:
-*     /usr/share/webapps/phpmyadmin
+[0m[91m*     /usr/share/webapps/phpmyadmin
 * phpmyadmin config file has been installed to:
 *     /etc/phpmyadmin/config.inc.php
-* If you use apache2:
+[0m[91m* If you use apache2:
 *     1) Change the ownership of the config directory:
 *            chown -R apache:apache /etc/phpmyadmin
-[0m[91m*     2) See if you need to modify the apache2 config:
+*     2) See if you need to modify the apache2 config:
 *            /etc/apache2/conf.d/phpmyadmin.conf
 *     3) Restart apache2 when done.
 *
@@ -80,23 +80,23 @@ Executing phpmyadmin-5.0.4-r0.post-install
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 176 MiB in 62 packages
-Removing intermediate container c5680fa5d905
- ---> 6371d1c007b6
+Removing intermediate container 6b4cde70a35b
+ ---> a14d116be92e
 Step 3/6 : COPY srcs /srcs
- ---> 9a56f53b9bc6
+ ---> 263ec8c11cce
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in 1a00840caede
-Removing intermediate container 1a00840caede
- ---> 1488caf209c3
+ ---> Running in 28680e1a2de7
+Removing intermediate container 28680e1a2de7
+ ---> a5247d720d2f
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in 8691636034a3
-Removing intermediate container 8691636034a3
- ---> be6db1a83c6d
+ ---> Running in 0464c33231df
+Removing intermediate container 0464c33231df
+ ---> 3aa5d6734ee0
 Step 6/6 : EXPOSE 5000
- ---> Running in 32c35b2a5e4e
-Removing intermediate container 32c35b2a5e4e
- ---> 1467f03278d1
-Successfully built 1467f03278d1
+ ---> Running in 2f5f45ef2555
+Removing intermediate container 2f5f45ef2555
+ ---> 1c9448d123f3
+Successfully built 1c9448d123f3
 Successfully tagged pma-local:latest
 service/pma-svc created
 deployment.apps/phpmyadmin created

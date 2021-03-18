@@ -2,11 +2,11 @@ Sending build context to Docker daemon  120.8kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add openssl && 	apk add telegraf
- ---> Running in 9178fe4585b3
+ ---> Running in e39248c13a52
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-103-gb3fbe92d7e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-103-gb3fbe92d7e [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+v3.13.2-105-g4e9e4fc875 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-106-g54cefe59f4 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
 OK: 13878 distinct packages available
 (1/2) Installing pcre (8.44-r0)
 (2/2) Installing nginx (1.18.0-r13)
@@ -21,15 +21,15 @@ OK: 8 MiB in 17 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 97 MiB in 18 packages
-Removing intermediate container 9178fe4585b3
- ---> 0224ba9df21c
+Removing intermediate container e39248c13a52
+ ---> 4c19d702a068
 Step 3/6 : COPY srcs /srcs
- ---> 02dd55757e22
+ ---> 6ff13e69615c
 Step 4/6 : RUN sh srcs/setup.sh
- ---> Running in 31251faac8de
+ ---> Running in 16d01f5ef323
 [91mGenerating RSA private key, 2048 bit long modulus (2 primes)
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
 [0m[91me is 65537 (0x010001)
 [0m[91mwriting RSA key
 [0m[91mYou are about to be asked to enter information that will be incorporated
@@ -39,23 +39,23 @@ There are quite a few fields but you can leave some blank
 For some fields there will be a default value,
 If you enter '.', the field will be left blank.
 -----
-Country Name (2 letter code) [AU]:[0m[91mState or Province Name (full name) [Some-State]:Locality Name (eg, city) []:Organization Name (eg, company) [Internet Widgits Pty Ltd]:[0m[91mOrganizational Unit Name (eg, section) []:Common Name (e.g. server FQDN or YOUR name) []:[0m[91mEmail Address []:
+Country Name (2 letter code) [AU]:[0m[91mState or Province Name (full name) [Some-State]:Locality Name (eg, city) []:Organization Name (eg, company) [Internet Widgits Pty Ltd]:Organizational Unit Name (eg, section) []:Common Name (e.g. server FQDN or YOUR name) []:Email Address []:
 Please enter the following 'extra' attributes
 to be sent with your certificate request
-[0m[91mA challenge password []:[0m[91mAn optional company name []:[0m[91mSignature ok
+A challenge password []:An optional company name []:[0m[91mSignature ok
 subject=C = FR, ST = IDF, L = Paris, O = 42, OU = IT, CN = abenoit, emailAddress = abenoit@student.42.fr
 [0m[91mGetting Private key
-[0mRemoving intermediate container 31251faac8de
- ---> d4702dfdb902
+[0mRemoving intermediate container 16d01f5ef323
+ ---> 893db67db788
 Step 5/6 : CMD sh srcs/run.sh
- ---> Running in 937adb2e602a
-Removing intermediate container 937adb2e602a
- ---> 410977caadd9
+ ---> Running in 992ecd6b5094
+Removing intermediate container 992ecd6b5094
+ ---> 1c2f62c46bbf
 Step 6/6 : EXPOSE 80 443
- ---> Running in 6158951d1248
-Removing intermediate container 6158951d1248
- ---> f3e7e5018ac2
-Successfully built f3e7e5018ac2
+ ---> Running in 231640d2ac46
+Removing intermediate container 231640d2ac46
+ ---> 4b5b6fc31f6a
+Successfully built 4b5b6fc31f6a
 Successfully tagged nginx-local:latest
 service/nginx-svc created
 deployment.apps/nginx created

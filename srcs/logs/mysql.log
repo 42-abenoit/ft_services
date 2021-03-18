@@ -1,12 +1,12 @@
-Sending build context to Docker daemon  145.4kB
+Sending build context to Docker daemon  264.7kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN	apk update && 	apk add mariadb mariadb-client && 	apk add	telegraf
- ---> Running in 9411ebd1c8a6
+ ---> Running in 25d4d4c557d1
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-103-gb3fbe92d7e [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-103-gb3fbe92d7e [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+v3.13.2-105-g4e9e4fc875 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-106-g54cefe59f4 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
 OK: 13878 distinct packages available
 (1/16) Installing mariadb-common (10.5.8-r0)
 (2/16) Installing libaio (0.3.112-r1)
@@ -32,23 +32,23 @@ OK: 178 MiB in 30 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 267 MiB in 31 packages
-Removing intermediate container 9411ebd1c8a6
- ---> 9eefc6e113f9
+Removing intermediate container 25d4d4c557d1
+ ---> a648c39ab8eb
 Step 3/6 : COPY srcs /srcs
- ---> a16d90b4c793
+ ---> 08ecb20ab594
 Step 4/6 : RUN sh srcs/setup.sh
- ---> Running in c97d34736296
-Removing intermediate container c97d34736296
- ---> 744c1dae75f8
+ ---> Running in f9bbb3d1bf9f
+Removing intermediate container f9bbb3d1bf9f
+ ---> 8d8dd41d0416
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in af2cd0d15368
-Removing intermediate container af2cd0d15368
- ---> 63bc2d891800
+ ---> Running in 862eb53d5038
+Removing intermediate container 862eb53d5038
+ ---> 6d50879b2b89
 Step 6/6 : EXPOSE 3306
- ---> Running in ae18ec5fa167
-Removing intermediate container ae18ec5fa167
- ---> 45bbbb5b60ab
-Successfully built 45bbbb5b60ab
+ ---> Running in 1cce20114e1c
+Removing intermediate container 1cce20114e1c
+ ---> 68a38f5f274c
+Successfully built 68a38f5f274c
 Successfully tagged mysql-local:latest
 service/mysql-svc created
 persistentvolumeclaim/mysql-claim created
