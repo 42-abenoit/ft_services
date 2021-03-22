@@ -39,15 +39,6 @@ print_title
 echo -e "$STYLE""\nInitialising Minikube\e[0m"
 initial_checks
 launch_minikube
-echo -en "$STYLE""\nChecking Minikube \e[0m"
-minikube ip >/dev/null 2>/dev/null
-if [ $? -eq 0 ]
-then
-	print_success
-else
-	print_failure
-	exit 1
-fi
 
 echo -e "$STYLE""\nCreating Services\e[0m"
 eval $(minikube docker-env)

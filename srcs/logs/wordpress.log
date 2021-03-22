@@ -2,12 +2,12 @@ Sending build context to Docker daemon  5.409MB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli php7-ctype    php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add telegraf
- ---> Running in 4147d8fe3f50
+ ---> Running in 40a99a90d613
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
-v3.13.2-105-g4e9e4fc875 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
-v3.13.2-106-g54cefe59f4 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
-OK: 13878 distinct packages available
+v3.13.2-113-g0d00fc9b29 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
+v3.13.2-114-g9f9694e5f4 [https://dl-cdn.alpinelinux.org/alpine/v3.13/community]
+OK: 13883 distinct packages available
 (1/2) Installing pcre (8.44-r0)
 (2/2) Installing nginx (1.18.0-r13)
 Executing nginx-1.18.0-r13.pre-install
@@ -62,23 +62,17 @@ OK: 32 MiB in 57 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 121 MiB in 58 packages
-Removing intermediate container 4147d8fe3f50
- ---> 4f157a4f14c6
+Removing intermediate container 40a99a90d613
+ ---> 199ecfbcd2d5
 Step 3/6 : COPY /srcs /srcs
- ---> 7972e1d169eb
+ ---> 37350cb858b9
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in 637221c6c1af
+ ---> Running in 45a00a3d0a6e
 [91mConnecting to wordpress.org (198.143.164.252:80)
 [0m[91mConnecting to wordpress.org (198.143.164.252:443)
 [0m[91msaving to 'latest.tar.gz'
-[0m[91mlatest.tar.gz         32% |**********                      | 4975k  0:00:02 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6031k  0:00:03 ETA
-[0m[91mlatest.tar.gz         39% |************                    | 6047k  0:00:04 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6415k  0:00:05 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6415k  0:00:06 ETA
-[0m[91mlatest.tar.gz         41% |*************                   | 6431k  0:00:08 ETA
-[0m[91mlatest.tar.gz         61% |*******************             | 9439k  0:00:04 ETA
-[0m[91mlatest.tar.gz         87% |****************************    | 13.1M  0:00:01 ETA
+[0m[91mlatest.tar.gz         12% |***                             | 1903k  0:00:07 ETA
+[0m[91mlatest.tar.gz         60% |*******************             | 9279k  0:00:01 ETA
 [0m[91mlatest.tar.gz        100% |********************************| 15.0M  0:00:00 ETA
 'latest.tar.gz' saved
 [0mwordpress/
@@ -2563,17 +2557,17 @@ wordpress/wp-admin/themes.php
 wordpress/wp-admin/options-reading.php
 wordpress/wp-trackback.php
 wordpress/wp-comments-post.php
-Removing intermediate container 637221c6c1af
- ---> 7c2e390ebd4e
+Removing intermediate container 45a00a3d0a6e
+ ---> 72f03c0458ed
 Step 5/6 : ENTRYPOINT sh /srcs/run.sh
- ---> Running in 0b4f1bd92a8f
-Removing intermediate container 0b4f1bd92a8f
- ---> 097ab2094ee9
+ ---> Running in 757eba913f74
+Removing intermediate container 757eba913f74
+ ---> baacc9d7c256
 Step 6/6 : EXPOSE 5050
- ---> Running in f05e90b0ae1a
-Removing intermediate container f05e90b0ae1a
- ---> 48a6638dc4f4
-Successfully built 48a6638dc4f4
+ ---> Running in 75a514ea9967
+Removing intermediate container 75a514ea9967
+ ---> a67b97cd355b
+Successfully built a67b97cd355b
 Successfully tagged wordpress-local:latest
 service/wordpress-svc created
 deployment.apps/wordpress created
