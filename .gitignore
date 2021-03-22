@@ -4,4 +4,4 @@
 *.swo
 *.vim
 
-logs/*
+srcs/logs/*

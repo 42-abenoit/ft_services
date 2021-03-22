@@ -1,3 +1,0 @@
-service/influxdb-svc created
-persistentvolumeclaim/influxdb-claim created
-deployment.apps/influxdb created
