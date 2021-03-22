@@ -81,12 +81,14 @@ kill $WPID >/dev/null 2>/dev/null
 wait $WPID >/dev/null 2>/dev/null
 print_success
 
-sleep 1
-
 echo -en "$STYLE""\nChecking Addons \e[0m"
+progress_anim & WPID=$!
+sleep 5
 DASH_STAT=$(minikube addons list | grep dashboard | grep enabled)
-LB_STAT_1=$(kubectl get pods --namespace metallb-system | grep controller | awk '{print $2}')
-LB_STAT_2=$(kubectl get pods --namespace metallb-system | grep speaker | awk '{print $2}')
+LB_STAT_1=$(kubectl get pods --namespace metallb-system | grep controller | awk '{print $2}' 2>/dev/null)
+LB_STAT_2=$(kubectl get pods --namespace metallb-system | grep speaker | awk '{print $2}' 2>/dev/null)
+kill $WPID >/dev/null 2>/dev/null
+wait $WPID >/dev/null 2>/dev/null
 if [ ! -z "$DASH_STAT" ] && [ "$LB_STAT_1"=='1/1' ] && [ "$LB_STAT_2"=='1/1' ]
 then
 	print_success

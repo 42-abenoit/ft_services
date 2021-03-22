@@ -58,8 +58,8 @@ let "res= $end_time - $start_time"
 echo -en "$STYLE""\nInitialisation took only \e[0m"
 let "minutes=res / 60"
 let "seconds=res % 60"
-echo -en "$STYLE""$minutes"".\e[0m"
-echo -e "$STYLE""$seconds""m !\e[0m"
+echo -en "$STYLE""$minutes""m\e[0m"
+echo -e "$STYLE""$seconds""s !\e[0m"
 
 pods_checkup
 
