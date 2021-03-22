@@ -2,7 +2,7 @@ Sending build context to Docker daemon  22.53kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add nginx && 	apk add php7 php7-fpm php7-opcache php7-gd php7-mysqli     	php7-zlib php7-curl php7-mbstring php7-json php7-session && 	apk add phpmyadmin && 	apk add telegraf
- ---> Running in 8abf426293b1
+ ---> Running in 081ed698295c
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-113-g0d00fc9b29 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -80,23 +80,23 @@ Executing phpmyadmin-5.0.4-r0.post-install
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 176 MiB in 62 packages
-Removing intermediate container 8abf426293b1
- ---> 50b7b248f6e3
+Removing intermediate container 081ed698295c
+ ---> 8fd925fc1589
 Step 3/6 : COPY srcs /srcs
- ---> a6ffa0fad47c
+ ---> 2e0913b8f4fc
 Step 4/6 : RUN sh /srcs/setup.sh
- ---> Running in e70fb5a02d07
-Removing intermediate container e70fb5a02d07
- ---> b148c2bd0090
+ ---> Running in 5ad0d8ce51cb
+Removing intermediate container 5ad0d8ce51cb
+ ---> f536ffce8fa6
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in 0f36a34d803b
-Removing intermediate container 0f36a34d803b
- ---> fb00867e481c
+ ---> Running in 2344437005e7
+Removing intermediate container 2344437005e7
+ ---> 696d26588aa0
 Step 6/6 : EXPOSE 5000
- ---> Running in 8043230c8ef6
-Removing intermediate container 8043230c8ef6
- ---> 698ced611b69
-Successfully built 698ced611b69
+ ---> Running in 2b8acdda8979
+Removing intermediate container 2b8acdda8979
+ ---> c09ca9511815
+Successfully built c09ca9511815
 Successfully tagged pma-local:latest
 service/pma-svc created
 deployment.apps/phpmyadmin created

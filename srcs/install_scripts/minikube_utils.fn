@@ -34,7 +34,11 @@ then
 	service docker start
 	kill $WPID >/dev/null 2>/dev/null
 	wait $WPID >/dev/null 2>/dev/null
-	sleep 5
+	tries=0
+	while [ $tries -lt 30 ] && [[ ! -z $(service docker status | grep Active | grep inactive) ]]
+	do 
+	sleep 1
+	done
 	if [[ ! -z $(service docker status | grep Active | grep inactive) ]]
 	then
 		print_failure

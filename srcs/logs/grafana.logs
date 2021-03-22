@@ -3,50 +3,50 @@ Step 1/11 : FROM alpine
  ---> 28f6e2705743
 Step 2/11 : RUN apk update
  ---> Using cache
- ---> bb8f93f2a164
+ ---> 95eb5c6cb899
 Step 3/11 : RUN apk add grafana
- ---> Running in b7dd89637927
+ ---> Running in c0c408609777
 (1/1) Installing grafana (7.3.6-r0)
 Executing grafana-7.3.6-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 171 MiB in 15 packages
-Removing intermediate container b7dd89637927
- ---> 03c507a44182
+Removing intermediate container c0c408609777
+ ---> e1aaaa8b85ba
 Step 4/11 : RUN apk add telegraf
- ---> Running in 48ad7036f580
+ ---> Running in 4468a70ebc73
 (1/1) Installing telegraf (1.17.0-r0)
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 260 MiB in 16 packages
-Removing intermediate container 48ad7036f580
- ---> dcfaafa0b908
+Removing intermediate container 4468a70ebc73
+ ---> 9dba8833dfe4
 Step 5/11 : COPY /srcs /srcs
- ---> 53906ed1aed4
+ ---> f361f6456fc9
 Step 6/11 : RUN mkdir /usr/share/grafana/data
- ---> Running in f0d181a0bade
-Removing intermediate container f0d181a0bade
- ---> 6b4e1e0ef9cb
+ ---> Running in c1dc6c595da1
+Removing intermediate container c1dc6c595da1
+ ---> e0d4eca35854
 Step 7/11 : RUN cp /srcs/telegraf.conf /etc/telegraf.conf
- ---> Running in 2396c880bb66
-Removing intermediate container 2396c880bb66
- ---> 11d3fad1c70c
+ ---> Running in 1477cd4e4643
+Removing intermediate container 1477cd4e4643
+ ---> 0c46a9736a97
 Step 8/11 : RUN cp /srcs/grafana.db /usr/share/grafana/data
- ---> Running in 2b2dec336636
-Removing intermediate container 2b2dec336636
- ---> 77bbd93add3c
+ ---> Running in 22e09529fdc7
+Removing intermediate container 22e09529fdc7
+ ---> 64511c751a0a
 Step 9/11 : RUN cp /srcs/defaults.ini /usr/share/grafana/conf
- ---> Running in 0a497d78d9e6
-Removing intermediate container 0a497d78d9e6
- ---> f9efd4fc85a5
+ ---> Running in cdd7ff15f8ba
+Removing intermediate container cdd7ff15f8ba
+ ---> d29767b0e3fa
 Step 10/11 : CMD sh srcs/run.sh
- ---> Running in d31fd058a455
-Removing intermediate container d31fd058a455
- ---> d23abbb2b1f1
+ ---> Running in 51afca90c385
+Removing intermediate container 51afca90c385
+ ---> 89678edf2449
 Step 11/11 : EXPOSE 3000
- ---> Running in feb16f18c105
-Removing intermediate container feb16f18c105
- ---> d36e5ae043a7
-Successfully built d36e5ae043a7
+ ---> Running in db7f5ab50bd5
+Removing intermediate container db7f5ab50bd5
+ ---> b6dd4a5e254b
+Successfully built b6dd4a5e254b
 Successfully tagged grafana-local:latest
 service/grafana-svc created
 deployment.apps/grafana created

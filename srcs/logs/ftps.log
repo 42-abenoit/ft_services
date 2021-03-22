@@ -2,7 +2,7 @@ Sending build context to Docker daemon  19.46kB
 Step 1/6 : FROM alpine
  ---> 28f6e2705743
 Step 2/6 : RUN apk update && 	apk add vsftpd && 	apk add openssl && 	apk add telegraf
- ---> Running in 3c2dafba723b
+ ---> Running in 723c07db8ce9
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/main/x86_64/APKINDEX.tar.gz
 fetch https://dl-cdn.alpinelinux.org/alpine/v3.13/community/x86_64/APKINDEX.tar.gz
 v3.13.2-113-g0d00fc9b29 [https://dl-cdn.alpinelinux.org/alpine/v3.13/main]
@@ -21,28 +21,28 @@ OK: 8 MiB in 18 packages
 Executing telegraf-1.17.0-r0.pre-install
 Executing busybox-1.32.1-r3.trigger
 OK: 97 MiB in 19 packages
-Removing intermediate container 3c2dafba723b
- ---> ee48c5e8ffe8
+Removing intermediate container 723c07db8ce9
+ ---> 55addf2c2db6
 Step 3/6 : COPY srcs /srcs
- ---> 18c042e47245
+ ---> 04560d6c0c55
 Step 4/6 : RUN	sh srcs/setup.sh
- ---> Running in 6775eec25f18
+ ---> Running in 0bdba4522d3c
 [91mGenerating a RSA private key
-....[0m[91m..[0m[91m.[0m[91m.[0m[91m....[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m..[0m[91m.[0m[91m..[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m
-[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m...[0m[91m..[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
+[0m[91m...[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
+[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m.[0m[91m+[0m[91m+[0m[91m+[0m[91m+[0m[91m+
 [0m[91mwriting new private key to '/etc/vsftpd/ssl/vsftpd.key'
 [0m[91m-----
-[0mRemoving intermediate container 6775eec25f18
- ---> 8c132d7767f0
+[0mRemoving intermediate container 0bdba4522d3c
+ ---> 242701262406
 Step 5/6 : ENTRYPOINT sh srcs/run.sh
- ---> Running in 6269caca8421
-Removing intermediate container 6269caca8421
- ---> 9563025f0bf5
+ ---> Running in 7eb714d6812e
+Removing intermediate container 7eb714d6812e
+ ---> 684fdf0fabaf
 Step 6/6 : EXPOSE 20 21 21000-21003
- ---> Running in e6689eb51e4e
-Removing intermediate container e6689eb51e4e
- ---> d49452aee980
-Successfully built d49452aee980
+ ---> Running in 74cd00ef7aef
+Removing intermediate container 74cd00ef7aef
+ ---> 9a19013e63f8
+Successfully built 9a19013e63f8
 Successfully tagged ftps-local:latest
 service/ftps-svc created
 persistentvolumeclaim/ftps-claim created

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+start_time=$(date +%s)
+
 dir=$(dirname $(realpath $0))/srcs
 
 reset_term () {
@@ -51,8 +53,16 @@ wordpress_setup
 ftps_setup
 
 echo -e "$STYLE""\nSuccess !!!\e[0m"
+end_time=$(date +%s)
+let "res= $end_time - $start_time"
+echo -en "$STYLE""\nInitialisation took only \e[0m"
+let "minutes=res / 60"
+let "seconds=res % 60"
+echo -en "$STYLE""$minutes"".\e[0m"
+echo -e "$STYLE""$seconds""m !\e[0m"
 
 pods_checkup
+
 
 echo -e "$STYLE""\n        ACCESS PORTAL\e[0m"
 echo -e "$STYLE""==> http://$MINI_IP <==\e[0m"
